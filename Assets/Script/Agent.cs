@@ -12,6 +12,7 @@ public class Agent : MonoBehaviour
     public bool isPlayer = false;
     public bool isEnemy = false;
 
+    public float moveSpeed = 4;
     public float angularSpeed = 20f;   
     
     
@@ -36,7 +37,7 @@ public class Agent : MonoBehaviour
 
     public void MoveForward()
     {            
-        agent.Move(transform.forward * Time.deltaTime);
+        agent.Move(transform.forward * moveSpeed * Time.deltaTime);
     } 
 
     public void RotationOnTarget(Vector3 target)

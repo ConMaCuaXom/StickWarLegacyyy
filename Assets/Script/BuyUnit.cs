@@ -48,9 +48,7 @@ public class BuyUnit : MonoBehaviour
         buyMagicMan.onClick.AddListener(BuyMagicMan);
         buyTitanMan.onClick.AddListener(BuyTitan);
         basePlayer = GameManager.Instance.basePlayer;        
-        baseEnemy = GameManager.Instance.baseEnemy;
-        meeleeLimit = 0;
-        rangeLimit = 0;
+        baseEnemy = GameManager.Instance.baseEnemy;       
     }
 
     private void Update()
@@ -74,10 +72,10 @@ public class BuyUnit : MonoBehaviour
         Miner mn = miner.GetComponent<Miner>();
         mn.agent.isPlayer = true;
         GameManager.Instance.player.Add(mn);
-        totalMiner.Add(miner);
-        if (totalMiner.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
+        rally.miners.Add(mn);
+        if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        Miner.transform.position = basePlayer.transform.position;
+        miner.transform.position = basePlayer.transform.position;
         limitUnitCurrent++;
     }
 

@@ -12,6 +12,7 @@ public class Rally : MonoBehaviour
     public List<SpearMan> spears = null;
     public List<MagicMan> magics = null;
     public List<Titan> titans = null;
+    public List<Miner> miners = null;
     public Dictionary<int, BaseSoldier> dic;
 
     public Transform[,] arrayRally = new Transform[4,12];
@@ -63,6 +64,7 @@ public class Rally : MonoBehaviour
                 int mgPos = (magics.Count - 1) / 4 - (i / 4);
                 if (magics[i].onAttack == true)
                     return;
+                magics[i].agent.agent.isStopped = false;
                 magics[i].agent.SetDestination(arrayRally[i % 4, mgPos].position);
                 distanceMagic = Vector3.Distance(magics[i].transform.position, arrayRally[i % 4, mgPos].position);
                 if (distanceMagic > 0.2)
@@ -89,9 +91,7 @@ public class Rally : MonoBehaviour
                     else
                         archers[i].StopRallyPoint();
                 } else
-                    archers[i].agent.agent.isStopped = true;
-                                          
-                
+                    archers[i].agent.agent.isStopped = true;                                                         
             }
         }
 
@@ -99,15 +99,21 @@ public class Rally : MonoBehaviour
         {
             for (int i = 0; i < swords.Count; i++)
             {
-                int swPos = (swords.Count - 1) / 4 - (i / 4);
-                if (swords[i].onAttack == true)
-                    return;
-                swords[i].agent.SetDestination(arrayRally[i % 4, swPos + mgPoint + arPoint].position);
-                distanceS = Vector3.Distance(swords[i].transform.position, arrayRally[i % 4, swPos + mgPoint + arPoint].position);                                
-                if (distanceS > 0.2)
-                    swords[i].GoToRallyPoint();
-                else
-                    swords[i].StopRallyPoint();
+                int swPos = (swords.Count - 1) / 4 - (i / 4);                               
+                distanceS = Vector3.Distance(swords[i].transform.position, arrayRally[i % 4, swPos + mgPoint + arPoint].position);
+                if (swords[i].onAttack == false)
+                {
+                    swords[i].agent.agent.isStopped = false;
+                    if (distanceS > 0.2)
+                    {
+                        swords[i].GoToRallyPoint();
+                        swords[i].agent.SetDestination(arrayRally[i % 4, swPos + mgPoint + arPoint].position);                       
+                    }
+                    else
+                    {
+                        swords[i].StopRallyPoint();                       
+                    }                       
+                }                
             }
         }
                   
@@ -118,6 +124,7 @@ public class Rally : MonoBehaviour
                 int spPos = (spears.Count - 1) / 4 - (i / 4);
                 if (spears[i].onAttack == true)
                     return;
+                spears[i].agent.agent.isStopped = false;
                 spears[i].agent.SetDestination(arrayRally[i % 4, spPos + mgPoint + arPoint + swPoint].position);
                 distanceSpear = Vector3.Distance(spears[i].transform.position, arrayRally[i % 4, spPos + mgPoint + arPoint + swPoint].position);                                   
                 if (distanceSpear > 0.2)
@@ -135,6 +142,7 @@ public class Rally : MonoBehaviour
                 int ttPos = (titans.Count - 1) / 2 - (i / 2);
                 if (titans[i].onAttack == true)
                     return;
+                titans[i].agent.agent.isStopped = false;
                 if (i%2 == 0)
                 {
                     titans[i].agent.SetDestination(arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint].position + add);
@@ -150,13 +158,5 @@ public class Rally : MonoBehaviour
                     titans[i].StopRallyPoint();
             }
         }
-
-
-
-
     }
-
-
-
-
 }

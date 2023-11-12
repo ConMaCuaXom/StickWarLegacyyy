@@ -130,8 +130,29 @@ public class Miner : BaseSoldier
             
         }       
     }
-    
-   
 
+    public override void TakeDamage(float dmg)
+    {
+        base.TakeDamage(dmg);
+        if (currentHP <= 0 && isDead == false)
+        {
+            isDead = true;
+            animator.SetTrigger("Death");
+            agent.agent.enabled = false;
+            if (agent.isEnemy)
+            {
+                GameManager.Instance.enemy.Remove(this);
+            }
+            if (agent.isPlayer)
+            {
+                GameManager.Instance.player.Remove(this);
+                buyUnit.rally.miners.Remove(this);
+            }
+            this.DelayCall(timeToDestroy, () =>
+            {
+                Destroy(gameObject);
 
+            });
+        }
+    }
 }

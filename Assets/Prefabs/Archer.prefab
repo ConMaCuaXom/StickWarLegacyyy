@@ -6476,7 +6476,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 65e368e198aad3745bc98b8f8ca2dc51, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -6501,6 +6501,7 @@ MonoBehaviour:
   basePlayer: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
+  buyUnit: {fileID: 0}
   dangerRange: 0
   attackRange: 10
   damage: 0
@@ -6508,6 +6509,7 @@ MonoBehaviour:
   currentHP: 0
   distanceE: 0
   distanceP: 0
+  timeToDestroy: 3
   isDead: 0
   onAttack: 0
 --- !u!195 &9046797320025282186
@@ -6549,9 +6551,8 @@ MonoBehaviour:
   BasePlayer: {fileID: 0}
   isPlayer: 0
   isEnemy: 0
+  moveSpeed: 3
   angularSpeed: 20
-  speed: 3
-  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &686867530368026051
 GameObject:
   m_ObjectHideFlags: 0

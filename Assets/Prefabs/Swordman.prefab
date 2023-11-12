@@ -9671,7 +9671,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c4deb1a49438f3c44bc4e7449068ec4f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -9694,6 +9694,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
+  targetE: {fileID: 0}
+  targetP: {fileID: 0}
+  buyUnit: {fileID: 0}
+  dangerRange: 0
+  attackRange: 0
+  damage: 0
+  hp: 0
+  currentHP: 0
+  distanceE: 0
+  distanceP: 0
+  timeToDestroy: 3
+  isDead: 0
+  onAttack: 0
 --- !u!195 &8467719959654111954
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9733,9 +9746,8 @@ MonoBehaviour:
   BasePlayer: {fileID: 0}
   isPlayer: 0
   isEnemy: 0
-  angularSpeed: 5
-  speed: 3
-  offset: {x: 1.5, y: 0, z: 0}
+  moveSpeed: 3
+  angularSpeed: 20
 --- !u!1 &7591037309784729758
 GameObject:
   m_ObjectHideFlags: 0

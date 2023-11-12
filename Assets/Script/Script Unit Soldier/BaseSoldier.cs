@@ -11,6 +11,7 @@ public class BaseSoldier : MonoBehaviour
     public BasePlayer basePlayer;
     public BaseSoldier targetE;
     public BaseSoldier targetP;
+    public BuyUnit buyUnit;
 
     public float dangerRange;
     public float attackRange;
@@ -19,6 +20,7 @@ public class BaseSoldier : MonoBehaviour
     public float currentHP;
     public float distanceE;
     public float distanceP;
+    public float timeToDestroy = 3f;
 
     public bool isDead = false;
     public bool onAttack = false;
@@ -31,13 +33,14 @@ public class BaseSoldier : MonoBehaviour
             agent.RotationOnTarget(targetE.transform.position - transform.position);
             if (distanceE > attackRange)
             {
-                agent.MoveForward();
+                agent.agent.isStopped = true;
+                agent.MoveForward();                
                 animator.SetBool("Run", true);
                 animator.SetBool("Attack", false);
             }                       
             else
             {               
-                onAttack = true;
+                agent.agent.isStopped = true;
                 animator.SetBool("Run", false);
                 animator.SetBool("Attack", true);
             }                     
@@ -73,22 +76,16 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void AttackOnTarget()
     {
-        if (agent.isPlayer)                           
+        if (agent.isPlayer && targetE != null)                           
             targetE.TakeDamage(damage);               
-        if (agent.isEnemy)                  
+        if (agent.isEnemy && targetP != null)                  
             targetP.TakeDamage(damage);        
     }
 
     public virtual void TakeDamage(float dmg)
     {        
         currentHP -= dmg;
-        onAttack = true;
-        if (currentHP <= 0 && isDead == false)
-        {
-            isDead = true;
-            animator.SetTrigger("Death");
-            agent.agent.enabled = false;
-        }
+        onAttack = true;       
     }
 
     public void GoToRallyPoint()
@@ -103,5 +100,12 @@ public class BaseSoldier : MonoBehaviour
     }
 
 
-
+    private void OnDrawGizmos()
+    {
+        if (agent != null && agent.isPlayer && targetE != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(targetE.transform.position, transform.position);
+        }
+    }
 }

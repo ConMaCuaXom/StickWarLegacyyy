@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public BasePlayer basePlayer;
     public BaseEnemy baseEnemy;
     public Rally rally;
+    public BuyUnit buyUnit;
 
     private void Awake()
     {
