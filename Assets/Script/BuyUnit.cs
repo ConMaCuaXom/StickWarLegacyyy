@@ -20,19 +20,11 @@ public class BuyUnit : MonoBehaviour
     public GameObject Magicman;
     public BaseEnemy baseEnemy = null;
     public BasePlayer basePlayer = null;
-    public Rally rally = null;
-    public List<GameObject> totalMiner = new List<GameObject>(); 
-    
-    public int totalUnitSoldier = 0;
-
-
+    public Rally rally = null;   
+        
     public int limitUnit = 50;
     public int limitUnitCurrent = 2;
-    
-    public int meeleeLimit;
-    public int rangeLimit;
-    
-
+       
     public bool checkMiner = false;
     public bool checkLimit = false;
 
@@ -62,6 +54,7 @@ public class BuyUnit : MonoBehaviour
         buySwordMan.onClick.RemoveAllListeners();
         buySpearMan.onClick.RemoveAllListeners();
         buyMagicMan.onClick.RemoveAllListeners();
+        buyTitanMan.onClick.RemoveAllListeners();
     }
 
     public void BuyMiner()
@@ -87,8 +80,7 @@ public class BuyUnit : MonoBehaviour
         SwordMan sw = swordMan.GetComponent<SwordMan>();
         sw.agent.isPlayer = true;
         swordMan.transform.position = basePlayer.transform.position;
-        limitUnitCurrent++;        
-        meeleeLimit++;        
+        limitUnitCurrent++;                      
         rally.swords.Add(sw);
         GameManager.Instance.player.Add(sw);
     }
@@ -102,8 +94,7 @@ public class BuyUnit : MonoBehaviour
         GameManager.Instance.player.Add(ar);
         ar.agent.isPlayer = true;
         archer.transform.position = basePlayer.transform.position;
-        limitUnitCurrent++;
-        rangeLimit++;
+        limitUnitCurrent++;        
         rally.archers.Add(ar);                
     }
 
@@ -111,14 +102,12 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject spearMan = Instantiate(Spearman);
-        
+        GameObject spearMan = Instantiate(Spearman);       
         SpearMan sp = spearMan.GetComponent<SpearMan>();
         GameManager.Instance.player.Add(sp);
         sp.agent.isPlayer = true;
         spearMan.transform.position = basePlayer.transform.position;
-        limitUnitCurrent += 3;      
-        meeleeLimit++;       
+        limitUnitCurrent += 3;                   
         rally.spears.Add(sp);
     }
 
@@ -126,14 +115,12 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject magicman = Instantiate(Magicman);
-        
+        GameObject magicman = Instantiate(Magicman);       
         MagicMan mg = magicman.GetComponent<MagicMan>();
         GameManager.Instance.player.Add(mg);
         mg.agent.isPlayer = true;
         magicman.transform.position = basePlayer.transform.position;
-        limitUnitCurrent += 3;
-        rangeLimit++;
+        limitUnitCurrent += 3;       
         rally.magics.Add(mg);        
     }
 
@@ -141,8 +128,7 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject titan = Instantiate(TitanMan);
-        
+        GameObject titan = Instantiate(TitanMan);       
         Titan tt = titan.GetComponent<Titan>();
         GameManager.Instance.player.Add(tt);
         tt.agent.isPlayer = true;

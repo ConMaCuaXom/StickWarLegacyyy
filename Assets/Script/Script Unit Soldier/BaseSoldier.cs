@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using UnityEngine;
 
 public class BaseSoldier : MonoBehaviour
 {
-    public Agent agent;
-    public Animator animator;
+    public Agent agent;    
     public BaseEnemy baseEnemy;
     public BasePlayer basePlayer;
     public BaseSoldier targetE;
@@ -24,54 +24,50 @@ public class BaseSoldier : MonoBehaviour
 
     public bool isDead = false;
     public bool onAttack = false;
+    public bool onDef = false;
 
-    public virtual void InDangerZone()
+    public void GoToEnemy(BaseSoldier target,float distanceToEnemy)
     {
-        NoTargetAlive();
-        if (agent.isPlayer && targetE.isDead == false)
+        if (target.isDead == false)
         {
-            agent.RotationOnTarget(targetE.transform.position - transform.position);
-            if (distanceE > attackRange)
+            agent.RotationOnTarget(target.transform.position - transform.position);
+            if (distanceToEnemy > attackRange)
             {
-                agent.agent.isStopped = true;
-                agent.MoveForward();                
-                animator.SetBool("Run", true);
-                animator.SetBool("Attack", false);
-            }                       
-            else
-            {               
-                agent.agent.isStopped = true;
-                animator.SetBool("Run", false);
-                animator.SetBool("Attack", true);
-            }                     
-        }
-        if (agent.isEnemy && targetP.isDead == false)
-        {
-            agent.RotationOnTarget(targetP.transform.position - transform.position);
-            if (distanceP > attackRange)
-            {
-                agent.MoveForward();
-                animator.SetBool("Run", true);
-                animator.SetBool("Attack", false);
+                agent.obstacle.enabled = false;
+                agent.agent.enabled = true;
+                agent.agent.isStopped = false;
+                agent.SetDestination(target.transform.position);
+                agent.animator.SetBool("Attack", false);
             }
             else
             {
-                onAttack = true;
-                animator.SetBool("Run", false);
-                animator.SetBool("Attack", true);
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
+                agent.agent.enabled = false;
+                agent.obstacle.enabled = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("Attack", true);
             }
-        }
-
+        } 
+        else
+            TargetIsDead();
 
     }
 
-    public void NoTargetAlive()
-    {
-        if ((agent.isPlayer && targetE.isDead == true) || (agent.isEnemy && targetP.isDead == true))
-        {
-            onAttack = false;
-            animator.SetBool("Attack", false);
-        }
+    public virtual void InDangerZone()
+    {       
+        if (agent.isPlayer)                   
+            GoToEnemy(targetE, distanceE);                                  
+        if (agent.isEnemy)       
+            GoToEnemy(targetP, distanceP);                  
+    }
+
+    public void TargetIsDead()
+    {        
+        onAttack = false;
+        agent.animator.SetBool("Attack", false);
+        agent.obstacle.enabled = false;
+        agent.agent.enabled = true;
     }
 
     public virtual void AttackOnTarget()
@@ -84,19 +80,38 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {        
-        currentHP -= dmg;
-        onAttack = true;       
+        currentHP -= dmg;       
+        if (currentHP <= 0 && isDead == false)
+        {
+            isDead = true;
+            agent.animator.SetTrigger("Death");
+            agent.agent.enabled = false;
+            if (agent.isEnemy)           
+                GameManager.Instance.enemy.Remove(this);            
+            if (agent.isPlayer)           
+                GameManager.Instance.player.Remove(this);                           
+            this.DelayCall(timeToDestroy, () =>
+            {
+                Destroy(gameObject);
+            });
+        }
     }
 
-    public void GoToRallyPoint()
-    {        
-        agent.LookAtEnemyBase();
-        animator.SetBool("Run", true);
+    public virtual void TargetIsNull(BaseSoldier target)
+    {             
+        onAttack = false;
+        agent.animator.SetBool("Attack", false);
+        target = null;
+        agent.obstacle.enabled = false;
+        agent.agent.enabled = true;
+        agent.agent.isStopped = false;       
     }
+   
+    
     public void StopRallyPoint()
     {
         agent.LookAtEnemyBase();
-        animator.SetBool("Run", false);                
+        agent.animator.SetBool("Run", false);                
     }
 
 
@@ -106,6 +121,64 @@ public class BaseSoldier : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(targetE.transform.position, transform.position);
+        }
+    }
+
+    public virtual void TargetOnWho()
+    {        
+        if (agent.isPlayer == true)
+        {
+            List<BaseSoldier> listEnemy = GameManager.Instance.enemy.OrderBy(e => Vector3.Distance(transform.position, e.transform.position)).ToList();
+            HowToAttackE(listEnemy);
+                       
+        }  
+        if (agent.isEnemy == true)
+        {
+            List<BaseSoldier> listPlayer = GameManager.Instance.player.OrderBy(p => Vector3.Distance(transform.position, p.transform.position)).ToList();
+            HowToAttackP(listPlayer);
+        }
+    }
+
+    public virtual void HowToAttackE(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetE = list[0];
+                distanceE = Vector3.Distance(transform.position, targetE.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull(targetE);
+            }
+        }
+        if (list.Count == 0)
+        {
+            TargetIsNull(targetE);
+        }
+    }
+    public virtual void HowToAttackP(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetP = list[0];
+                distanceP = Vector3.Distance(transform.position, targetP.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull(targetP);
+            }
+        }
+        if (list.Count == 0)
+        {
+            TargetIsNull(targetP);
         }
     }
 }

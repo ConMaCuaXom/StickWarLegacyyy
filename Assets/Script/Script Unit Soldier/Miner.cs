@@ -28,7 +28,7 @@ public class Miner : BaseSoldier
     {
         checkAddPerson = true;
         agent = GetComponent<Agent>();
-        animator = GetComponent<Animator>();
+        
         if (agent.isPlayer)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldMine];
         if (agent.isEnemy)
@@ -66,7 +66,7 @@ public class Miner : BaseSoldier
         if (distanceToGoldMine <= rangeToCook)
         {           
             agent.agent.isStopped = true;             
-            animator.SetBool("CookCook", true);           
+            agent.animator.SetBool("CookCook", true);           
             time += Time.deltaTime;           
             if (time >= timeForCook)
             {
@@ -76,7 +76,7 @@ public class Miner : BaseSoldier
             }
             
         } else
-            animator.SetBool("CookCook", false);
+            agent.animator.SetBool("CookCook", false);
 
 
     }
@@ -86,7 +86,7 @@ public class Miner : BaseSoldier
         if (canGoToGoldMine == true)
             return;
         agent.LookAtYourBase();
-        animator.SetBool("CookCook", false);
+        agent.animator.SetBool("CookCook", false);
         agent.MoveForward();
         if (agent.isPlayer == true)
             distanceToBase = Vector3.Distance(transform.position,basePlayer.transform.position);
@@ -134,25 +134,10 @@ public class Miner : BaseSoldier
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
-        if (currentHP <= 0 && isDead == false)
+        if (isDead && agent.isPlayer)
         {
-            isDead = true;
-            animator.SetTrigger("Death");
-            agent.agent.enabled = false;
-            if (agent.isEnemy)
-            {
-                GameManager.Instance.enemy.Remove(this);
-            }
-            if (agent.isPlayer)
-            {
-                GameManager.Instance.player.Remove(this);
-                buyUnit.rally.miners.Remove(this);
-            }
-            this.DelayCall(timeToDestroy, () =>
-            {
-                Destroy(gameObject);
-
-            });
+            buyUnit.rally.miners.Remove(this);
+            buyUnit.limitUnitCurrent--;
         }
     }
 }

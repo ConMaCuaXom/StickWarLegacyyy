@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public Rally rally;
     public BuyUnit buyUnit;
 
+    public Transform defensePointP = null;
+    public Transform defensePointE = null;
+
     private void Awake()
     {
         if (Instance == null)
