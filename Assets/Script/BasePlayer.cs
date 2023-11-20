@@ -10,11 +10,15 @@ public class BasePlayer : MonoBehaviour
     public float timeToAddGold = 5f;
     public bool checkTime = true;
     public float goldAddAuto = 20;
+    public float HP = 2000f;
+    public float currentHP;
+
+    public WinOrLose wl;
 
     private void Awake()
     {
         currentGold = totalGold;
-        
+        currentHP = HP;
     }
 
     private void Update()
@@ -33,5 +37,14 @@ public class BasePlayer : MonoBehaviour
             currentGold += gold;
             checkTime = true;
         });
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        currentHP -= dmg;
+        if (currentHP <= 0)
+        {
+            wl.LoseOrWin();
+        }
     }
 }

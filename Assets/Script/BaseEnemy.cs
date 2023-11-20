@@ -10,12 +10,23 @@ public class BaseEnemy : MonoBehaviour
     public GameObject Spearman;
     public GameObject TitanMan;
     public GameObject Magicman;
-    public void SpawnEnemy()
+    public WinOrLose wl;
+
+
+    public float HP = 2000f;
+    public float currentHP;
+
+    private void Awake()
     {
-        GameObject swordMan = Instantiate(Swordman);
-        SwordMan sw = swordMan.GetComponent<SwordMan>();
-        sw.agent.isEnemy = true;
-        swordMan.transform.position = transform.position;       
-        
+        currentHP = HP;
+    }
+    
+    public void TakeDamage(float dmg)
+    {
+        currentHP -= dmg;
+        if (currentHP <= 0)
+        {
+            wl.LoseOrWin();
+        }
     }
 }

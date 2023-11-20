@@ -9575,6 +9575,7 @@ GameObject:
   - component: {fileID: 8467719959654111954}
   - component: {fileID: 7713697362020416262}
   - component: {fileID: 4938587475803202809}
+  - component: {fileID: 2329093864885311026}
   m_Layer: 0
   m_Name: Swordman
   m_TagString: Untagged
@@ -9692,7 +9693,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  animator: {fileID: 0}
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
   targetE: {fileID: 0}
@@ -9708,6 +9708,8 @@ MonoBehaviour:
   timeToDestroy: 3
   isDead: 0
   onAttack: 0
+  onDef: 0
+  attackOnBase: 0
 --- !u!195 &8467719959654111954
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9744,8 +9746,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   obstacle: {fileID: 0}
+  animator: {fileID: 0}
   BaseEnemy: {fileID: 0}
   BasePlayer: {fileID: 0}
+  DefensePointP: {fileID: 0}
+  DefensePointE: {fileID: 0}
   isPlayer: 0
   isEnemy: 0
   moveSpeed: 3
@@ -9766,6 +9771,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.2
+--- !u!136 &2329093864885311026
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7591037309784729018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!1 &7591037309784729758
 GameObject:
   m_ObjectHideFlags: 0

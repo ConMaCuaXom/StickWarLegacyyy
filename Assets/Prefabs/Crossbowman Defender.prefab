@@ -13451,6 +13451,9 @@ GameObject:
   - component: {fileID: 6721259237166597001}
   - component: {fileID: 6721259237159630149}
   - component: {fileID: 2301579744724294065}
+  - component: {fileID: -7690867819855960542}
+  - component: {fileID: 697572785165904704}
+  - component: {fileID: 2605981938048564400}
   m_Layer: 0
   m_Name: Crossbowman Defender
   m_TagString: Untagged
@@ -13545,7 +13548,7 @@ Animator:
   m_GameObject: {fileID: 6721259237166933997}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 02ded044b8e0963439276550f50be6f9, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fbdddf6bbccb2fe42ab9ad86fa843c9d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -13577,6 +13580,64 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7690867819855960542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6721259237166933997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e8a8f66e87874429733a9fbe076dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  targetE: {fileID: 0}
+  targetP: {fileID: 0}
+  attackPoint: {fileID: 0}
+  defensePoint: {fileID: 0}
+  attackRange: 10
+  damage: 10
+--- !u!114 &697572785165904704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6721259237166933997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303255b491f77ef4cad08935038c66dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  obstacle: {fileID: 0}
+  animator: {fileID: 0}
+  BaseEnemy: {fileID: 0}
+  BasePlayer: {fileID: 0}
+  DefensePointP: {fileID: 0}
+  DefensePointE: {fileID: 0}
+  isPlayer: 0
+  isEnemy: 0
+  moveSpeed: 4
+  angularSpeed: 20
+--- !u!208 &2605981938048564400
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6721259237166933997}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6721259237166934005
 GameObject:
   m_ObjectHideFlags: 0

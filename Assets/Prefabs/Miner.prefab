@@ -3452,6 +3452,7 @@ GameObject:
   - component: {fileID: 9094774000843334117}
   - component: {fileID: 1996355429977615114}
   - component: {fileID: 7496759126390842492}
+  - component: {fileID: 6726510417606381149}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -3569,7 +3570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  animator: {fileID: 0}
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
   targetE: {fileID: 0}
@@ -3585,6 +3585,8 @@ MonoBehaviour:
   timeToDestroy: 3
   isDead: 0
   onAttack: 0
+  onDef: 0
+  attackOnBase: 0
   goldMineGO: {fileID: 0}
   indexGoldMine: 0
   indexGoldEnemy: 7
@@ -3634,12 +3636,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  obstacle: {fileID: 0}
+  animator: {fileID: 0}
   BaseEnemy: {fileID: 0}
   BasePlayer: {fileID: 0}
+  DefensePointP: {fileID: 0}
+  DefensePointE: {fileID: 0}
   isPlayer: 0
   isEnemy: 0
   moveSpeed: 1
   angularSpeed: 20
+--- !u!136 &6726510417606381149
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535646747368899763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!1 &4535646747368900273
 GameObject:
   m_ObjectHideFlags: 0

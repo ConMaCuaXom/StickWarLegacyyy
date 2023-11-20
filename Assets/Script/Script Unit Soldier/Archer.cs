@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Archer : BaseSoldier
-{   
-    
+{
+    public GameObject Arrow;
     private void Awake()
     {
         agent = GetComponent<Agent>();       
@@ -38,5 +38,29 @@ public class Archer : BaseSoldier
             buyUnit.limitUnitCurrent--;
         }
                                         
+    }
+
+    public void RespawnArrow()
+    {
+        GameObject arrow = Instantiate(Arrow);
+        ArrowAndBolt aab = arrow.GetComponent<ArrowAndBolt>();
+        aab.archer = this;
+        if (agent.isPlayer)
+            aab.target = targetE;
+        if (agent.isEnemy)
+            aab.target = targetP;
+        arrow.transform.position = transform.position;       
+    }
+
+    public void RespawnArrowBase()
+    {
+        GameObject arrow = Instantiate(Arrow);
+        ArrowAndBolt aab = arrow.GetComponent<ArrowAndBolt>();
+        aab.archer = this;
+        if (agent.isPlayer)
+            aab.target = targetE;
+        if (agent.isEnemy)
+            aab.target = targetP;
+        arrow.transform.position = transform.position;
     }
 }

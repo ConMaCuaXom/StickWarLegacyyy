@@ -41,6 +41,7 @@ public class Agent : MonoBehaviour
         RotationOnTarget(target - transform.position);
         agent.SetDestination(target);
         animator.SetBool("Run", true);
+        animator.SetBool("AttackOnBase", false);
     }
    
 

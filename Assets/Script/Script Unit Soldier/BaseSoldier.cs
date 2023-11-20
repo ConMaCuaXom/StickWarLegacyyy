@@ -25,6 +25,7 @@ public class BaseSoldier : MonoBehaviour
     public bool isDead = false;
     public bool onAttack = false;
     public bool onDef = false;
+    public bool attackOnBase = false;
 
     public void GoToEnemy(BaseSoldier target,float distanceToEnemy)
     {
@@ -47,6 +48,7 @@ public class BaseSoldier : MonoBehaviour
                 agent.obstacle.enabled = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", true);
+                attackOnBase = false;
             }
         } 
         else
@@ -102,9 +104,13 @@ public class BaseSoldier : MonoBehaviour
         onAttack = false;
         agent.animator.SetBool("Attack", false);
         target = null;
-        agent.obstacle.enabled = false;
-        agent.agent.enabled = true;
-        agent.agent.isStopped = false;       
+        if (onAttack == false && attackOnBase == false)
+        {
+            agent.obstacle.enabled = false;
+            agent.agent.enabled = true;
+            agent.agent.isStopped = false;
+        }
+              
     }
    
     
@@ -180,5 +186,47 @@ public class BaseSoldier : MonoBehaviour
         {
             TargetIsNull(targetP);
         }
+    }
+
+    public virtual void AttackOnBaseEnemy()
+    {
+        if (agent.isPlayer && onAttack == false)
+        {
+            float distanceToBaseEnemy = Vector3.Distance(transform.position, baseEnemy.transform.position);
+            if (distanceToBaseEnemy <= attackRange + 2)
+            {
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
+                attackOnBase = true;
+                agent.agent.enabled = false;
+                agent.obstacle.enabled = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);                
+            } else
+            {
+                agent.AttackBase();
+            }
+        }
+        if (agent.isEnemy && onAttack == false)
+        {
+            float distanceToBaseEnemy = Vector3.Distance(transform.position, basePlayer.transform.position);
+            if (distanceToBaseEnemy <= attackRange + 2)
+            {
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
+                agent.agent.enabled = false;
+                agent.obstacle.enabled = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);
+            }
+        }
+    }
+
+    public virtual void DamageForBase()
+    {
+        if (agent.isPlayer)
+            baseEnemy.TakeDamage(damage);
+        if (agent.isEnemy)
+            basePlayer.TakeDamage(damage);
     }
 }

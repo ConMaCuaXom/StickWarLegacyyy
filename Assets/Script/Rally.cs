@@ -14,6 +14,7 @@ public class Rally : MonoBehaviour
     public List<BaseSoldier> magics = null;
     public List<BaseSoldier> titans = null;
     public List<Miner> miners = null;
+    public List<CrossbowmanDefender> crbP = null;
     public Dictionary<string, List<BaseSoldier>> dic = new Dictionary<string, List<BaseSoldier>>();
     public Transform[,] arrayRally = new Transform[4,12];
 
@@ -35,6 +36,7 @@ public class Rally : MonoBehaviour
         AddDic();
         index = 0;
         buyUnit = GetComponent<BuyUnit>();
+        crbP = GameManager.Instance.crossbowmanDefendersP;
         GetIndex();
     }
 
@@ -67,8 +69,15 @@ public class Rally : MonoBehaviour
                 whichSoldier.agent.agent.enabled = true;
                 whichSoldier.agent.DefenseBase();
                 whichSoldier.agent.animator.SetBool("Attack", false);
+                whichSoldier.agent.animator.SetBool("AttackOnBase", false);
                 whichSoldier.onDef = true;
+                whichSoldier.onAttack = false;
             }
+        }
+        foreach (CrossbowmanDefender crb in crbP)
+        {
+            crb.GoAttackPoint();
+            crb.AttackDef();
         }
     }
 
@@ -79,10 +88,20 @@ public class Rally : MonoBehaviour
             foreach (var whichSoldier in soldier)
             {
                 whichSoldier.onDef = false;
-                if (whichSoldier.onAttack == false)               
-                    whichSoldier.agent.AttackBase();                                                    
+                if (whichSoldier.onAttack == false)
+                {
+                    
+                    whichSoldier.AttackOnBaseEnemy();
+                }           
+                    
+                
             }
         }
+        foreach (CrossbowmanDefender crb in crbP)
+        {
+            crb.GoDefensePoint();
+        }     
+                              
     }
 
     public void GetIndex()
@@ -100,7 +119,11 @@ public class Rally : MonoBehaviour
     
 
     public void Rallyt1()
-    {        
+    {
+        foreach (CrossbowmanDefender crb in crbP)
+        {
+            crb.GoDefensePoint();
+        }
         int mgPoint = (magics.Count + 3) / 4;
         int arPoint = (archers.Count + 3) / 4;
         int swPoint = (swords.Count + 3) / 4;

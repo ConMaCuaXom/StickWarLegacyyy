@@ -7,6 +7,7 @@ public class DisplayRes : MonoBehaviour
 {
     public Text text;
     public BasePlayer player;
+    
 
     private void Awake()
     {
@@ -18,6 +19,6 @@ public class DisplayRes : MonoBehaviour
     private void Update()
     {
         text.text = player.currentGold.ToString();
-       
+        
     }
 }

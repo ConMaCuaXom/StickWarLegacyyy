@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public List<Transform> rallyPointE = null;
     public List<BaseSoldier> player = null;
     public List<BaseSoldier> enemy = null;
+    public List<CrossbowmanDefender> crossbowmanDefendersP = null;
     public BasePlayer basePlayer;
     public BaseEnemy baseEnemy;
     public Rally rally;

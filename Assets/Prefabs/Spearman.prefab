@@ -18297,6 +18297,7 @@ GameObject:
   - component: {fileID: -8523584250595559346}
   - component: {fileID: -5316988867425597084}
   - component: {fileID: 2820366236516089389}
+  - component: {fileID: 1819428957162327709}
   m_Layer: 0
   m_Name: Spearman
   m_TagString: Untagged
@@ -18437,8 +18438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   obstacle: {fileID: 0}
+  animator: {fileID: 0}
   BaseEnemy: {fileID: 0}
   BasePlayer: {fileID: 0}
+  DefensePointP: {fileID: 0}
+  DefensePointE: {fileID: 0}
   isPlayer: 0
   isEnemy: 0
   moveSpeed: 3
@@ -18456,7 +18460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  animator: {fileID: 0}
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
   targetE: {fileID: 0}
@@ -18472,6 +18475,8 @@ MonoBehaviour:
   timeToDestroy: 3
   isDead: 0
   onAttack: 0
+  onDef: 0
+  attackOnBase: 0
 --- !u!208 &2820366236516089389
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -18488,6 +18493,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.2
+--- !u!136 &1819428957162327709
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5192868323827546737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!1 &5192868323827546769
 GameObject:
   m_ObjectHideFlags: 0
