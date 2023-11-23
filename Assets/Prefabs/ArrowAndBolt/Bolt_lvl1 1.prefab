@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6917568380593141803}
   - component: {fileID: 8223788041301246925}
   - component: {fileID: -739633271605385283}
-  - component: {fileID: 8041866989647579403}
+  - component: {fileID: 637620166274358463}
   m_Layer: 0
   m_Name: Bolt_lvl1 1
   m_TagString: Untagged
@@ -124,7 +124,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &8041866989647579403
+--- !u!64 &637620166274358463
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

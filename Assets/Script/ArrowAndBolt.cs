@@ -22,6 +22,9 @@ public class ArrowAndBolt : MonoBehaviour
 
     private bool haveMove = true;
 
+
+    
+
     
 
     private void Awake()
@@ -46,7 +49,7 @@ public class ArrowAndBolt : MonoBehaviour
 
         if (target != null)
             MoveToTarget(target.transform);
-        if (archer.attackOnBase == true)
+        if (archer!= null && archer.attackOnBase == true)
             MoveToBase();
     }
 
@@ -58,8 +61,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (crossbowmanDefender.transform.position + target.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1);
-            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
+            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
         }
         if (archer != null)
         {
@@ -67,8 +70,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (archer.transform.position + target.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1);
-            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
+            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
         }
         
     }
@@ -102,8 +105,8 @@ public class ArrowAndBolt : MonoBehaviour
     {
         if (other.CompareTag("test"))
         {
-            haveMove = false;           
-            transform.SetParent(other.transform); // con set bo'
+            haveMove = false;
+            transform.SetParent(other.transform); // con set bo'                       
             if (crossbowmanDefender != null)
                 target.TakeDamage(damageBo);
             if (archer != null)
@@ -122,5 +125,7 @@ public class ArrowAndBolt : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 
 }

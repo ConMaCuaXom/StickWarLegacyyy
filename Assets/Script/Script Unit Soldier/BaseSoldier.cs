@@ -21,13 +21,17 @@ public class BaseSoldier : MonoBehaviour
     public float distanceE;
     public float distanceP;
     public float timeToDestroy = 3f;
+    public float timeToPush;
 
     public bool isDead = false;
     public bool onAttack = false;
     public bool onDef = false;
     public bool attackOnBase = false;
+    public bool pushBack = false;
+    public bool pushFront = false;
 
-    public void GoToEnemy(BaseSoldier target,float distanceToEnemy)
+
+    public virtual void GoToEnemy(BaseSoldier target,float distanceToEnemy)
     {
         if (target.isDead == false)
         {
@@ -160,7 +164,13 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull(targetE);
             }
+            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, baseEnemy.transform.position + Vector3.right*(-2)))
+            {
+                onAttack = false;
+                AttackOnBaseEnemy();
+            }
         }
+        
         if (list.Count == 0)
         {
             TargetIsNull(targetE);
@@ -181,7 +191,13 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull(targetP);
             }
+            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, basePlayer.transform.position + Vector3.right * 2))
+            {
+                onAttack = false;
+                AttackOnBaseEnemy();
+            }
         }
+        
         if (list.Count == 0)
         {
             TargetIsNull(targetP);
@@ -228,5 +244,26 @@ public class BaseSoldier : MonoBehaviour
             baseEnemy.TakeDamage(damage);
         if (agent.isEnemy)
             basePlayer.TakeDamage(damage);
+    }
+
+    public virtual void PushBack()
+    {
+        pushBack = true;
+        this.DelayCall(2f, () =>
+        {
+            
+            pushBack = false;
+        });
+        
+        agent.animator.SetTrigger("PushBack");
+        agent.animator.SetBool("Run", false);
+        agent.animator.SetBool("AttackOnBase", false);
+        agent.animator.SetBool("Attack", false);
+    }
+
+    public virtual void ActionInPush()
+    {
+        timeToPush += Time.deltaTime;
+        transform.position = transform.position + Vector3.forward * Time.deltaTime;
     }
 }

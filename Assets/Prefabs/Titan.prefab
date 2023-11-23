@@ -7048,7 +7048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2632483962094976866
 Transform:
   m_ObjectHideFlags: 0
@@ -9935,6 +9935,7 @@ GameObject:
   - component: {fileID: -1303909015739553667}
   - component: {fileID: 3693395797285896643}
   - component: {fileID: 1766743000299969204}
+  - component: {fileID: 5001450079619352113}
   m_Layer: 0
   m_Name: Titan
   m_TagString: Untagged
@@ -10110,10 +10111,13 @@ MonoBehaviour:
   distanceE: 0
   distanceP: 0
   timeToDestroy: 3
+  timeToPush: 0
   isDead: 0
   onAttack: 0
   onDef: 0
   attackOnBase: 0
+  pushBack: 0
+  pushFront: 0
 --- !u!208 &3693395797285896643
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -10140,10 +10144,26 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.77, z: 0}
+--- !u!54 &5001450079619352113
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632483962094737284}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2632483962094737430
 GameObject:
   m_ObjectHideFlags: 0
@@ -11508,7 +11528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2632483962094906696
 Transform:
   m_ObjectHideFlags: 0

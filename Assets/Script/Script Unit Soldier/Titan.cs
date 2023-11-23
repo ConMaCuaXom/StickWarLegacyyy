@@ -37,4 +37,20 @@ public class Titan : BaseSoldier
             buyUnit.limitUnitCurrent -= 3;
         }
     }
+
+    public override void AttackOnTarget()
+    {
+        if (agent.isPlayer && targetE != null)
+        {
+            targetE.TakeDamage(damage);
+            targetE.PushBack();
+        }
+            
+        if (agent.isEnemy && targetP != null)
+        {
+            targetP.TakeDamage(damage);
+            targetP.PushBack();
+        }
+            
+    }
 }
