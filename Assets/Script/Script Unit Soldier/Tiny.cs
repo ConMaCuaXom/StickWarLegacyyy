@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tiny : BaseSoldier
 {
+    public MagicMan daddy;
     private void Awake()
     {
         agent = GetComponent<Agent>();
@@ -21,7 +22,6 @@ public class Tiny : BaseSoldier
 
     private void Update()
     {
-
         if (isDead == true || onDef == true || pushBack == true)
             return;
         TargetOnWho();
@@ -32,7 +32,8 @@ public class Tiny : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-
+            buyUnit.rally.tinys.Remove(this);
+            daddy.numberOfSoldier--;
         }
     }
 }

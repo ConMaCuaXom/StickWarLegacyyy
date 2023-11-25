@@ -12,7 +12,7 @@ public class Titan : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
-        attackRange = 2.5f;
+        attackRange = 2.7f;
         dangerRange = 10f;
         damage = 5f;
         hp = 200f;

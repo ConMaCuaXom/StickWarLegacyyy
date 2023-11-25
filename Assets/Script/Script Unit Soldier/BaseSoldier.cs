@@ -28,6 +28,7 @@ public class BaseSoldier : MonoBehaviour
     public bool onDef = false;
     public bool attackOnBase = false;
     public bool pushBack = false;
+    public bool hulolo = false;
     
 
 
@@ -271,7 +272,8 @@ public class BaseSoldier : MonoBehaviour
         {            
             pushBack = false;
         });        
-        agent.animator.SetTrigger("PushBack");
+        if (currentHP > 0) 
+            agent.animator.SetTrigger("PushBack");
         agent.animator.SetBool("Run", false);
         agent.animator.SetBool("AttackOnBase", false);
         agent.animator.SetBool("Attack", false);

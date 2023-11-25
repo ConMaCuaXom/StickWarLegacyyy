@@ -138,7 +138,7 @@ public class Rally : MonoBehaviour
                 magics[i].onDef = false;
                 int mgPos = (magics.Count - 1) / 4 - (i / 4);
                 float distanceM = Vector3.Distance(magics[i].transform.position, arrayRally[i % 4, mgPos].position);
-                if (magics[i].onAttack == true)
+                if (magics[i].onAttack == true || magics[i].hulolo == true)
                     return;
                 magics[i].agent.agent.isStopped = false;                
                 if (distanceM > 0.2)

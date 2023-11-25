@@ -11,6 +11,9 @@ public class MagicMan : BaseSoldier
     public Rally rally;
     
     public float timeForSpawn = 0;
+    public int numberOfSoldier;
+
+    
     private void Awake()
     {
         agent = GetComponent<Agent>();       
@@ -25,12 +28,12 @@ public class MagicMan : BaseSoldier
         currentHP = hp;
         isDead = false;
         onAttack = false;
-        
+        numberOfSoldier = 0;
     }
 
     private void Update()
     {
-        if (isDead == true || onDef == true)
+        if (isDead == true || onDef == true || hulolo == true)
             return;
         TargetOnWho();
         SpawnSoldier();
@@ -49,27 +52,39 @@ public class MagicMan : BaseSoldier
     public void SpawnSoldier()
     {
         timeForSpawn += Time.deltaTime;
-        if (timeForSpawn >= 3 && rally.tinys.Count < 10)
+        if (timeForSpawn >= 3 && numberOfSoldier < 8)
         {
-            agent.animator.SetTrigger("SpawnTiny");           
-            GameObject Soldier = Instantiate(soldierOfMe);
-            Tiny tiny = Soldier.GetComponent<Tiny>();
-            rally.tinys.Add(tiny);
-            if (agent.isPlayer)
-            {
-                tiny.agent.isPlayer = true;
-                GameManager.Instance.player.Add(tiny);
-            }
-                
-            if (agent.isEnemy)
-            {
-                tiny.agent.isEnemy = true;
-                GameManager.Instance.enemy.Add(tiny);
-            }
-                
-            Soldier.transform.position = transform.position + Vector3.right * 5f;
+            hulolo = true;
+            agent.agent.isStopped = true;
+            agent.animator.SetTrigger("SpawnTiny");                       
             timeForSpawn = 0;
         }
+    }
 
+    public void HololoBegin()
+    {       
+        GameObject Soldier = Instantiate(soldierOfMe);
+        Tiny tiny = Soldier.GetComponent<Tiny>();
+        tiny.daddy = this;
+        rally.tinys.Add(tiny);
+        numberOfSoldier++;
+        if (agent.isPlayer)
+        {
+            tiny.agent.isPlayer = true;
+            tiny.agent.transform.forward = Vector3.right;
+            GameManager.Instance.player.Add(tiny);
+        }
+        if (agent.isEnemy)
+        {
+            tiny.agent.isEnemy = true;
+            tiny.agent.transform.forward = Vector3.left;            
+            GameManager.Instance.enemy.Add(tiny);
+        }
+        Soldier.transform.position = transform.position + Vector3.right * 1.5f;
+    }
+
+    public void HololoFinish()
+    {
+        hulolo = false;
     }
 }
