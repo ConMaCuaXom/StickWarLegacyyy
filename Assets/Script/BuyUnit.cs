@@ -120,7 +120,7 @@ public class BuyUnit : MonoBehaviour
         GameManager.Instance.player.Add(mg);
         mg.agent.isPlayer = true;
         magicman.transform.position = basePlayer.transform.position;
-        limitUnitCurrent += 3;       
+        limitUnitCurrent += 5;       
         rally.magics.Add(mg);        
     }
 

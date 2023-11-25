@@ -12,7 +12,7 @@ public class Titan : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
-        attackRange = 5f;
+        attackRange = 2.5f;
         dangerRange = 10f;
         damage = 5f;
         hp = 200f;
@@ -44,12 +44,28 @@ public class Titan : BaseSoldier
         {
             targetE.TakeDamage(damage);
             targetE.PushBack();
+            foreach (BaseSoldier soldier in GameManager.Instance.enemy)
+            {
+                if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f)
+                {
+                    soldier.TakeDamage(damage);
+                    soldier.PushBack();
+                }
+            }
         }
             
         if (agent.isEnemy && targetP != null)
         {
             targetP.TakeDamage(damage);
             targetP.PushBack();
+            foreach (BaseSoldier soldier in GameManager.Instance.player)
+            {
+                if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f)
+                {
+                    soldier.TakeDamage(damage);
+                    soldier.PushBack();
+                }
+            }
         }
             
     }

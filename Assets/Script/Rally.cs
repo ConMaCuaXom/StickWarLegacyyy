@@ -13,6 +13,7 @@ public class Rally : MonoBehaviour
     public List<BaseSoldier> spears = null;
     public List<BaseSoldier> magics = null;
     public List<BaseSoldier> titans = null;
+    public List<BaseSoldier> tinys = null;
     public List<Miner> miners = null;
     public List<CrossbowmanDefender> crbP = null;
     public Dictionary<string, List<BaseSoldier>> dic = new Dictionary<string, List<BaseSoldier>>();
@@ -57,6 +58,7 @@ public class Rally : MonoBehaviour
         dic.Add("Spear", spears);        
         dic.Add("Magic", magics);       
         dic.Add("Titan", titans);
+        dic.Add("Tiny", tinys);
     }
 
     public void Defense()
@@ -128,6 +130,7 @@ public class Rally : MonoBehaviour
         int arPoint = (archers.Count + 3) / 4;
         int swPoint = (swords.Count + 3) / 4;
         int spPoint = (spears.Count + 3) / 4;
+        int tnPoint = (tinys.Count + 3) / 4;
         if (magics.Count > 0)
         {
             for (int i = 0; i < magics.Count; i++)
@@ -198,6 +201,24 @@ public class Rally : MonoBehaviour
             }
         }
 
+        if (tinys.Count > 0)
+        {
+            for (int i = 0; i < tinys.Count; i++)
+            {
+                tinys[i].onDef = false;
+                int tnPos = (tinys.Count - 1) / 4 - (i / 4);
+                float distanceTn = Vector3.Distance(tinys[i].transform.position, arrayRally[i % 4, tnPos + mgPoint + arPoint + swPoint + spPoint].position);
+                if (tinys[i].onAttack == false)
+                {
+                    tinys[i].agent.agent.isStopped = false;
+                    if (distanceTn > 0.2)
+                        tinys[i].agent.SetDestination(arrayRally[i % 4, tnPos + mgPoint + arPoint + swPoint + spPoint].position);
+                    else
+                        tinys[i].StopRallyPoint();
+                }
+            }
+        }
+
         if (titans != null)
         {
             Vector3 add = new Vector3 (0, 0, 0.35f);
@@ -210,17 +231,17 @@ public class Rally : MonoBehaviour
                 titans[i].agent.agent.isStopped = false;               
                 if (i%2 == 0)
                 {
-                    float distanceTt = Vector3.Distance(titans[i].transform.position, arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint].position + add);
+                    float distanceTt = Vector3.Distance(titans[i].transform.position, arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint + tnPoint].position + add);
                     if (distanceTt > 0.1)
-                        titans[i].agent.SetDestination(arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint].position + add);
+                        titans[i].agent.SetDestination(arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint + tnPoint].position + add);
                     else
                         titans[i].StopRallyPoint();                                   
                 } 
                 else
                 {
-                    float distanceTt = Vector3.Distance(titans[i].transform.position, arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint].position - add);
+                    float distanceTt = Vector3.Distance(titans[i].transform.position, arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint + tnPoint].position - add);
                     if (distanceTt > 0.1)
-                        titans[i].agent.SetDestination(arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint].position - add);
+                        titans[i].agent.SetDestination(arrayRally[i % 2, ttPos + mgPoint + arPoint + swPoint + spPoint + tnPoint].position - add);
                     else
                         titans[i].StopRallyPoint();                                     
                 }           

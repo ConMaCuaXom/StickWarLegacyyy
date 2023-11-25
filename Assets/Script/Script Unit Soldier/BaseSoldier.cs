@@ -28,7 +28,7 @@ public class BaseSoldier : MonoBehaviour
     public bool onDef = false;
     public bool attackOnBase = false;
     public bool pushBack = false;
-    public bool pushFront = false;
+    
 
 
     public virtual void GoToEnemy(BaseSoldier target,float distanceToEnemy)
@@ -52,6 +52,7 @@ public class BaseSoldier : MonoBehaviour
                 agent.obstacle.enabled = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", true);
+                RandomAttack();               
                 attackOnBase = false;
             }
         } 
@@ -59,6 +60,23 @@ public class BaseSoldier : MonoBehaviour
             TargetIsDead();
 
     }
+
+    public void RandomAttack()
+    {
+        int rd = Random.Range(0, 2);
+        if (rd == 0)
+        {
+            agent.animator.SetBool("Attack0", true);
+            agent.animator.SetBool("Attack1", false);
+        }
+        if (rd == 1)
+        {
+            agent.animator.SetBool("Attack0", false);
+            agent.animator.SetBool("Attack1", true);
+        }
+    }
+
+    
 
     public virtual void InDangerZone()
     {       
@@ -250,20 +268,14 @@ public class BaseSoldier : MonoBehaviour
     {
         pushBack = true;
         this.DelayCall(2f, () =>
-        {
-            
+        {            
             pushBack = false;
-        });
-        
+        });        
         agent.animator.SetTrigger("PushBack");
         agent.animator.SetBool("Run", false);
         agent.animator.SetBool("AttackOnBase", false);
         agent.animator.SetBool("Attack", false);
     }
 
-    public virtual void ActionInPush()
-    {
-        timeToPush += Time.deltaTime;
-        transform.position = transform.position + Vector3.forward * Time.deltaTime;
-    }
+    
 }

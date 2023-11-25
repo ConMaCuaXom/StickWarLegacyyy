@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class SwordMan : BaseSoldier
+public class Tiny : BaseSoldier
 {
     private void Awake()
     {
-        agent = GetComponent<Agent>();        
+        agent = GetComponent<Agent>();
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
-        buyUnit = GameManager.Instance.buyUnit;
         attackRange = 2f;
         dangerRange = 10f;
         damage = 5f;
@@ -23,10 +21,10 @@ public class SwordMan : BaseSoldier
 
     private void Update()
     {
-        
+
         if (isDead == true || onDef == true || pushBack == true)
             return;
-        TargetOnWho();       
+        TargetOnWho();
     }
 
     public override void TakeDamage(float dmg)
@@ -34,8 +32,7 @@ public class SwordMan : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.swords.Remove(this);
-            buyUnit.limitUnitCurrent--;
+
         }
     }
 }
