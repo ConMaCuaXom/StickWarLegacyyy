@@ -91,19 +91,15 @@ public class Rally : MonoBehaviour
             {
                 whichSoldier.onDef = false;
                 if (whichSoldier.onAttack == false)
-                {
-                    
+                {                   
                     whichSoldier.AttackOnBaseEnemy();
-                }           
-                    
-                
+                }                                           
             }
         }
         foreach (CrossbowmanDefender crb in crbP)
         {
             crb.GoDefensePoint();
-        }     
-                              
+        }                                  
     }
 
     public void GetIndex()

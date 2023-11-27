@@ -28,13 +28,14 @@ public class Miner : BaseSoldier
     {
         checkAddPerson = true;
         agent = GetComponent<Agent>();
-        
+        wol = GameManager.Instance.winOrLose;
         if (agent.isPlayer)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldMine];
         if (agent.isEnemy)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
+        testEnemy = GameManager.Instance.testEnemy;
         attackRange = 10f;
         damage = 5f;
         hp = 200f;   
@@ -45,7 +46,8 @@ public class Miner : BaseSoldier
     private void Update()
     {       
         GoToGoldMine();
-        GoToBase();       
+        GoToBase();
+        WiOrLo();
     }
 
     public void GoToGoldMine()
@@ -136,8 +138,20 @@ public class Miner : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.miners.Remove(this);
-            buyUnit.limitUnitCurrent--;
+            if (buyUnit.rally.miners.Contains(this) == true)
+            {
+                buyUnit.rally.miners.Remove(this);
+                buyUnit.limitUnitCurrent--;
+            }            
         }
+        if (isDead && agent.isEnemy)
+        {
+            if (testEnemy.rallyE.minersE.Contains(this) == true)
+            {
+                testEnemy.rallyE.minersE.Remove(this);
+                testEnemy.limitUnitCurrent--;
+            }
+        }
+                
     }
 }

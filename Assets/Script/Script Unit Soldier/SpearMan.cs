@@ -12,7 +12,9 @@ public class SpearMan : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
-        attackRange = 3f;
+        wol = GameManager.Instance.winOrLose;
+        testEnemy = GameManager.Instance.testEnemy;
+        attackRange = 2.5f;
         dangerRange = 10f;
         damage = 5f;
         hp = 200f;
@@ -25,7 +27,8 @@ public class SpearMan : BaseSoldier
     {
         if (isDead == true || onDef == true)
             return;
-        TargetOnWho();      
+        TargetOnWho();
+        WiOrLo();
     }
 
     public override void TakeDamage(float dmg)
@@ -33,8 +36,20 @@ public class SpearMan : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.spears.Remove(this);
-            buyUnit.limitUnitCurrent -= 3;
+            if (buyUnit.rally.spears.Contains(this) == true)
+            {
+                buyUnit.rally.spears.Remove(this);
+                buyUnit.limitUnitCurrent -= 3;
+            }          
+        }
+        if (isDead && agent.isEnemy)
+        {            
+            if (testEnemy.rallyE.spearsE.Contains(this) == true)
+            {
+                testEnemy.rallyE.spearsE.Remove(this);
+                testEnemy.limitUnitCurrent -= 3;
+            }
+                
         }
     }
 }

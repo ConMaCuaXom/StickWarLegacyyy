@@ -62,13 +62,12 @@ public class BuyUnit : MonoBehaviour
         if (checkMiner || (limitUnitCurrent >= limitUnit))
             return;
         GameObject miner = Instantiate(Miner);
-        Miner mn = miner.GetComponent<Miner>();
-        mn.agent.isPlayer = true;
+        Miner mn = miner.GetComponent<Miner>();       
         GameManager.Instance.player.Add(mn);
         rally.miners.Add(mn);
         if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        miner.transform.position = basePlayer.transform.position;
+        miner.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;
     }
 
@@ -77,9 +76,8 @@ public class BuyUnit : MonoBehaviour
         if (limitUnitCurrent >= limitUnit)
             return;
         GameObject swordMan = Instantiate(Swordman);
-        SwordMan sw = swordMan.GetComponent<SwordMan>();
-        sw.agent.isPlayer = true;
-        swordMan.transform.position = basePlayer.transform.position;
+        SwordMan sw = swordMan.GetComponent<SwordMan>();       
+        swordMan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;                      
         rally.swords.Add(sw);
         GameManager.Instance.player.Add(sw);
@@ -91,9 +89,8 @@ public class BuyUnit : MonoBehaviour
             return;
         GameObject archer = Instantiate(Archer);        
         Archer ar = archer.GetComponent<Archer>();
-        GameManager.Instance.player.Add(ar);
-        ar.agent.isPlayer = true;
-        archer.transform.position = basePlayer.transform.position;
+        GameManager.Instance.player.Add(ar);       
+        archer.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;        
         rally.archers.Add(ar);                
     }
@@ -104,9 +101,8 @@ public class BuyUnit : MonoBehaviour
             return;
         GameObject spearMan = Instantiate(Spearman);       
         SpearMan sp = spearMan.GetComponent<SpearMan>();
-        GameManager.Instance.player.Add(sp);
-        sp.agent.isPlayer = true;
-        spearMan.transform.position = basePlayer.transform.position;
+        GameManager.Instance.player.Add(sp);       
+        spearMan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 3;                   
         rally.spears.Add(sp);
     }
@@ -117,9 +113,8 @@ public class BuyUnit : MonoBehaviour
             return;
         GameObject magicman = Instantiate(Magicman);       
         MagicMan mg = magicman.GetComponent<MagicMan>();
-        GameManager.Instance.player.Add(mg);
-        mg.agent.isPlayer = true;
-        magicman.transform.position = basePlayer.transform.position;
+        GameManager.Instance.player.Add(mg);        
+        magicman.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 5;       
         rally.magics.Add(mg);        
     }
@@ -130,9 +125,8 @@ public class BuyUnit : MonoBehaviour
             return;
         GameObject titan = Instantiate(TitanMan);       
         Titan tt = titan.GetComponent<Titan>();
-        GameManager.Instance.player.Add(tt);
-        tt.agent.isPlayer = true;
-        titan.transform.position = basePlayer.transform.position;
+        GameManager.Instance.player.Add(tt);       
+        titan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 3;        
         rally.titans.Add(tt);
     }

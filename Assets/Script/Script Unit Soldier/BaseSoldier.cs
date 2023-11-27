@@ -12,6 +12,8 @@ public class BaseSoldier : MonoBehaviour
     public BaseSoldier targetE;
     public BaseSoldier targetP;
     public BuyUnit buyUnit;
+    public TestEnemy testEnemy;
+    public WinOrLose wol;
 
     public float dangerRange;
     public float attackRange;
@@ -62,7 +64,7 @@ public class BaseSoldier : MonoBehaviour
 
     }
 
-    public void RandomAttack()
+    public virtual void RandomAttack()
     {
         int rd = Random.Range(0, 2);
         if (rd == 0)
@@ -77,7 +79,16 @@ public class BaseSoldier : MonoBehaviour
         }
     }
 
-    
+    public virtual void RandomDeath()
+    {
+        int rd = Random.Range(0, 2);
+        if (rd == 0)       
+            agent.animator.SetTrigger("Death1");                    
+        if (rd == 1)       
+            agent.animator.SetTrigger("Death2");                   
+    }
+
+
 
     public virtual void InDangerZone()
     {       
@@ -109,7 +120,7 @@ public class BaseSoldier : MonoBehaviour
         if (currentHP <= 0 && isDead == false)
         {
             isDead = true;
-            agent.animator.SetTrigger("Death");
+            RandomDeath();
             agent.agent.enabled = false;
             if (agent.isEnemy)           
                 GameManager.Instance.enemy.Remove(this);            
@@ -122,11 +133,14 @@ public class BaseSoldier : MonoBehaviour
         }
     }
 
-    public virtual void TargetIsNull(BaseSoldier target)
+    public virtual void TargetIsNull()
     {             
         onAttack = false;
         agent.animator.SetBool("Attack", false);
-        target = null;
+        if (agent.isEnemy)
+            targetP = null;
+        if (agent.isPlayer)
+            targetE = null;
         if (onAttack == false && attackOnBase == false)
         {
             agent.obstacle.enabled = false;
@@ -151,17 +165,22 @@ public class BaseSoldier : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(targetE.transform.position, transform.position);
         }
+        if (agent != null && agent.isEnemy && targetP != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(targetP.transform.position, transform.position);
+        }
     }
 
     public virtual void TargetOnWho()
     {        
-        if (agent.isPlayer == true)
+        if (agent.isPlayer == true && GameManager.Instance.enemy != null)
         {
             List<BaseSoldier> listEnemy = GameManager.Instance.enemy.OrderBy(e => Vector3.Distance(transform.position, e.transform.position)).ToList();
             HowToAttackE(listEnemy);
                        
         }  
-        if (agent.isEnemy == true)
+        if (agent.isEnemy == true && GameManager.Instance.player != null)
         {
             List<BaseSoldier> listPlayer = GameManager.Instance.player.OrderBy(p => Vector3.Distance(transform.position, p.transform.position)).ToList();
             HowToAttackP(listPlayer);
@@ -181,7 +200,7 @@ public class BaseSoldier : MonoBehaviour
             }
             else
             {
-                TargetIsNull(targetE);
+                TargetIsNull();
             }
             if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, baseEnemy.transform.position + Vector3.right*(-2)))
             {
@@ -192,7 +211,7 @@ public class BaseSoldier : MonoBehaviour
         
         if (list.Count == 0)
         {
-            TargetIsNull(targetE);
+            TargetIsNull();
         }
     }
     public virtual void HowToAttackP(List<BaseSoldier> list)
@@ -208,7 +227,7 @@ public class BaseSoldier : MonoBehaviour
             }
             else
             {
-                TargetIsNull(targetP);
+                TargetIsNull();
             }
             if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, basePlayer.transform.position + Vector3.right * 2))
             {
@@ -219,7 +238,7 @@ public class BaseSoldier : MonoBehaviour
         
         if (list.Count == 0)
         {
-            TargetIsNull(targetP);
+            TargetIsNull();
         }
     }
 
@@ -249,10 +268,15 @@ public class BaseSoldier : MonoBehaviour
             {
                 if (agent.agent.enabled == true)
                     agent.agent.isStopped = true;
+                attackOnBase = true;
                 agent.agent.enabled = false;
                 agent.obstacle.enabled = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
+            }
+            else
+            {
+                agent.AttackBase();
             }
         }
     }
@@ -277,6 +301,18 @@ public class BaseSoldier : MonoBehaviour
         agent.animator.SetBool("Run", false);
         agent.animator.SetBool("AttackOnBase", false);
         agent.animator.SetBool("Attack", false);
+    }
+
+    public virtual void WiOrLo()
+    {
+        if (agent.isPlayer && wol.playerWin == true)
+        {
+            agent.animator.SetBool("Victory", true);
+        }
+        if (agent.isEnemy && wol.playerLose == true)
+        {
+            agent.animator.SetBool("Victory", true);
+        }
     }
 
     

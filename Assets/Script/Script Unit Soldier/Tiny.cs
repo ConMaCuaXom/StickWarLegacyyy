@@ -10,6 +10,8 @@ public class Tiny : BaseSoldier
         agent = GetComponent<Agent>();
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
+        wol = GameManager.Instance.winOrLose;
+        testEnemy = GameManager.Instance.testEnemy;
         attackRange = 2f;
         dangerRange = 10f;
         damage = 5f;
@@ -25,6 +27,7 @@ public class Tiny : BaseSoldier
         if (isDead == true || onDef == true || pushBack == true)
             return;
         TargetOnWho();
+        WiOrLo();
     }
 
     public override void TakeDamage(float dmg)
@@ -32,8 +35,21 @@ public class Tiny : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.tinys.Remove(this);
-            daddy.numberOfSoldier--;
+            if (daddy.rally.tinys.Contains(this) == true)
+            {
+                daddy.rally.tinys.Remove(this);
+                daddy.numberOfSoldier--;
+            }           
+        }
+        if (isDead && agent.isEnemy)
+        {
+            if (testEnemy.rallyE.tinysE.Contains(this) == true)
+            {
+                testEnemy.rallyE.tinysE.Remove(this);
+                daddy.numberOfSoldier--;
+            }
+                
+            
         }
     }
 }

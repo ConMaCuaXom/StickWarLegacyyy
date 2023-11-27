@@ -11,6 +11,8 @@ public class SwordMan : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
+        testEnemy = GameManager.Instance.testEnemy;
+        wol = GameManager.Instance.winOrLose;
         attackRange = 2f;
         dangerRange = 10f;
         damage = 5f;
@@ -26,7 +28,8 @@ public class SwordMan : BaseSoldier
         
         if (isDead == true || onDef == true || pushBack == true)
             return;
-        TargetOnWho();       
+        TargetOnWho();
+        WiOrLo();
     }
 
     public override void TakeDamage(float dmg)
@@ -34,8 +37,20 @@ public class SwordMan : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.swords.Remove(this);
-            buyUnit.limitUnitCurrent--;
+            if (buyUnit.rally.swords.Contains(this) == true)
+            {
+                buyUnit.rally.swords.Remove(this);
+                buyUnit.limitUnitCurrent--;
+            }          
+        }
+        if (isDead && agent.isEnemy)
+        {
+            if (testEnemy.rallyE.swordsE.Contains(this) == true)
+            {
+                testEnemy.rallyE.swordsE.Remove(this);
+                testEnemy.limitUnitCurrent--;
+            }
+                
         }
     }
 }

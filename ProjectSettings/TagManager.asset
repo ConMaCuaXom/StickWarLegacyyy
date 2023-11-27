@@ -7,6 +7,8 @@ TagManager:
   - test
   - BasePlayer
   - BaseEnemy
+  - Human
+  - Enemy
   layers:
   - Default
   - TransparentFX

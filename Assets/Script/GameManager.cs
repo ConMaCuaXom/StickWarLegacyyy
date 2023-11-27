@@ -13,10 +13,15 @@ public class GameManager : MonoBehaviour
     public List<BaseSoldier> player = null;
     public List<BaseSoldier> enemy = null;
     public List<CrossbowmanDefender> crossbowmanDefendersP = null;
+    public List<CrossbowmanDefender> crossbowmanDefendersE = null;
+    public List<ParticleSystem> allMagicAndEffect = null;
     public BasePlayer basePlayer;
     public BaseEnemy baseEnemy;
     public Rally rally;
+    public RallyEnemy rallyEnemy;
     public BuyUnit buyUnit;
+    public TestEnemy testEnemy;
+    public WinOrLose winOrLose;
 
     public Transform defensePointP = null;
     public Transform defensePointE = null;

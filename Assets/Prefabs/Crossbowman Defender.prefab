@@ -13456,7 +13456,7 @@ GameObject:
   - component: {fileID: 2605981938048564400}
   m_Layer: 0
   m_Name: Crossbowman Defender
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13597,6 +13597,7 @@ MonoBehaviour:
   targetP: {fileID: 0}
   attackPoint: {fileID: 0}
   defensePoint: {fileID: 0}
+  Bolt: {fileID: 0}
   attackRange: 10
   damage: 10
 --- !u!114 &697572785165904704

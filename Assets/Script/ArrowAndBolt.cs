@@ -12,6 +12,7 @@ public class ArrowAndBolt : MonoBehaviour
     public BasePlayer basePlayer;
     
     
+    
     public float damageAr;
     public float damageBo;
     public float timeToDestroy = 10f;
@@ -20,7 +21,8 @@ public class ArrowAndBolt : MonoBehaviour
 
     
 
-    private bool haveMove = true;
+    //private bool haveMove = true;
+    public bool isPlayer;
 
 
     
@@ -44,8 +46,8 @@ public class ArrowAndBolt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!haveMove)
-            return;
+        //if (!haveMove)
+        //    return;
 
         if (target != null)
             MoveToTarget(target.transform);
@@ -60,9 +62,9 @@ public class ArrowAndBolt : MonoBehaviour
             timeDur += Time.deltaTime;
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
-            Vector3 p1 = (crossbowmanDefender.transform.position + target.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
-            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
+            Vector3 p1 = (crossbowmanDefender.transform.position + target.transform.position) / 2 + Vector3.up * 4;
+            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right *0.5f) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
+            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right * 0.5f) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
         }
         if (archer != null)
         {
@@ -103,10 +105,11 @@ public class ArrowAndBolt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("test"))
+        if (target!=null && other.gameObject.transform.position == target.transform.position)
         {
-            haveMove = false;
-            transform.SetParent(other.transform); // con set bo'                       
+            //    haveMove = false;
+            //    transform.SetParent(other.transform); // con set bo'
+            Destroy(gameObject);
             if (crossbowmanDefender != null)
                 target.TakeDamage(damageBo);
             if (archer != null)

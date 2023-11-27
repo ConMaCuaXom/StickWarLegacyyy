@@ -13,6 +13,8 @@ public class Archer : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
+        testEnemy = GameManager.Instance.testEnemy;
+        wol = GameManager.Instance.winOrLose;
         attackRange = 10f;
         dangerRange = 15f;
         damage = 5f;
@@ -26,7 +28,8 @@ public class Archer : BaseSoldier
     {
         if (isDead == true || onDef == true)
             return;
-        TargetOnWho();      
+        TargetOnWho();
+        WiOrLo();
     }
 
     public override void TakeDamage(float dmg)
@@ -34,10 +37,22 @@ public class Archer : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.archers.Remove(this);
-            buyUnit.limitUnitCurrent--;
+            if(buyUnit.rally.archers.Contains(this) == true)
+            {
+                buyUnit.rally.archers.Remove(this);
+                buyUnit.limitUnitCurrent--;
+            }           
         }
-                                        
+        if (isDead && agent.isEnemy)
+        {
+            if (testEnemy.rallyE.archersE.Contains(this) == true)
+            {
+                testEnemy.rallyE.archersE.Remove(this);
+                testEnemy.limitUnitCurrent--;
+            }
+                           
+        }
+
     }
 
     public void RespawnArrow()
@@ -46,9 +61,17 @@ public class Archer : BaseSoldier
         ArrowAndBolt aab = arrow.GetComponent<ArrowAndBolt>();
         aab.archer = this;
         if (agent.isPlayer)
+        {
             aab.target = targetE;
+            aab.isPlayer = true;
+        }
+            
         if (agent.isEnemy)
+        {
             aab.target = targetP;
+            aab.isPlayer = false;
+        }
+            
         arrow.transform.position = transform.position;       
     }
 
@@ -58,9 +81,9 @@ public class Archer : BaseSoldier
         ArrowAndBolt aab = arrow.GetComponent<ArrowAndBolt>();
         aab.archer = this;
         if (agent.isPlayer)
-            aab.target = targetE;
+            aab.isPlayer = true;
         if (agent.isEnemy)
-            aab.target = targetP;
+            aab.isPlayer = false;
         arrow.transform.position = transform.position;
     }
 }

@@ -12,6 +12,8 @@ public class Titan : BaseSoldier
         basePlayer = GameManager.Instance.basePlayer;
         baseEnemy = GameManager.Instance.baseEnemy;
         buyUnit = GameManager.Instance.buyUnit;
+        testEnemy = GameManager.Instance.testEnemy;
+        wol = GameManager.Instance.winOrLose;
         attackRange = 2.7f;
         dangerRange = 10f;
         damage = 5f;
@@ -25,7 +27,8 @@ public class Titan : BaseSoldier
     {
         if (isDead == true || onDef == true)
             return;
-        TargetOnWho();       
+        TargetOnWho();
+        WiOrLo();
     }
 
     public override void TakeDamage(float dmg)
@@ -33,8 +36,20 @@ public class Titan : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
-            buyUnit.rally.titans.Remove(this);
-            buyUnit.limitUnitCurrent -= 3;
+            if (buyUnit.rally.titans.Contains(this) == true)
+            {
+                buyUnit.rally.titans.Remove(this);
+                buyUnit.limitUnitCurrent -= 3;
+            }          
+        }
+        if (isDead && agent.isEnemy)
+        {
+            if (testEnemy.rallyE.titansE.Contains(this) == true)
+            {
+                testEnemy.rallyE.titansE.Remove(this);
+                testEnemy.limitUnitCurrent -= 3;
+            }
+                
         }
     }
 
