@@ -12,6 +12,7 @@ public class MagicMan : BaseSoldier
     public ParticleSystem destroyedMid;
     public Rally rally;
     public RallyEnemy rallyEnemy;
+    public Transform spawnPoint;
     
     public float timeForSpawn = 0;
     public int numberOfSoldier;
@@ -41,7 +42,7 @@ public class MagicMan : BaseSoldier
     {
         if (isDead == true || onDef == true || hulolo == true || pushBack == true)
             return;
-        TargetOnWho();
+        //TargetOnWho();
         SpawnSoldier();
         WiOrLo();
     }
@@ -85,9 +86,11 @@ public class MagicMan : BaseSoldier
             targetE.TakeDamage(damage);
             targetE.PushBack();           
             destroyedMid.gameObject.transform.position = targetE.transform.position;
-            List<BaseSoldier> listEnemy = GameManager.Instance.enemy;
-            foreach (BaseSoldier soldier in listEnemy)
+            
+            foreach (var soldier in GameManager.Instance.enemy)
             {
+                if (soldier is null)
+                    return;
                 if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f)
                 {
                     soldier.TakeDamage(damage);
@@ -100,9 +103,11 @@ public class MagicMan : BaseSoldier
             targetP.TakeDamage(damage);
             targetP.PushBack();            
             destroyedMid.gameObject.transform.position = targetP.transform.position;
-            List<BaseSoldier> listPlayer = GameManager.Instance.player;
-            foreach (BaseSoldier soldier in listPlayer)
+           
+            foreach (BaseSoldier soldier in GameManager.Instance.player)
             {
+                if (soldier is null)
+                    return;
                 if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f)
                 {
                     soldier.TakeDamage(damage);
@@ -111,6 +116,8 @@ public class MagicMan : BaseSoldier
             }
         }       
     }
+
+    
 
     public void SpawnSoldier()
     {
@@ -127,28 +134,28 @@ public class MagicMan : BaseSoldier
 
     public void HololoBegin()
     {       
-        GameObject Soldier = Instantiate(soldierOfMe);
+        GameObject Soldier = Instantiate(soldierOfMe, spawnPoint.position, transform.rotation);
         Tiny tiny = Soldier.GetComponent<Tiny>();
         tiny.daddy = this;       
         numberOfSoldier++;
-        Soldier.SetActive(false);
+        //Soldier.SetActive(false);
         if (agent.isPlayer)
         {
             rally.tinys.Add(tiny);
-            tiny.transform.LookAt(baseEnemy.transform);
+            //tiny.transform.LookAt(baseEnemy.transform);
             GameManager.Instance.player.Add(tiny);
-            Soldier.transform.position = this.transform.position + Vector3.right * 1.5f;
+            //Soldier.transform.position = this.transform.position + Vector3.right * 1.5f;
             //Debug.Log(tiny.gameObject.transform.position);
-            Soldier.SetActive(true);
+            //Soldier.SetActive(true);
         }
         if (agent.isEnemy)
         {
             rallyEnemy.tinysE.Add(tiny);
-            tiny.transform.LookAt(basePlayer.transform);
+            //tiny.transform.LookAt(basePlayer.transform);
             GameManager.Instance.enemy.Add(tiny);
-            tiny.transform.position = this.transform.position + Vector3.right * (-1.5f);
+            //tiny.transform.position = this.transform.position + Vector3.right * (-1.5f);
             //Debug.Log(tiny.gameObject.transform.position);
-            Soldier.SetActive(true);
+            //Soldier.SetActive(true);
         }
         this.DelayCall(1f, () =>
         {

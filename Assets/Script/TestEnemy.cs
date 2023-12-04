@@ -52,13 +52,13 @@ public class TestEnemy : MonoBehaviour
     {
         if (checkMiner || (limitUnitCurrent >= limitUnit))
             return;
-        GameObject miner = Instantiate(Miner);
+        GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         Miner mn = miner.GetComponent<Miner>();      
         GameManager.Instance.enemy.Add(mn);
         rallyE.minersE.Add(mn);
         if (rallyE.minersE.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        miner.transform.position = GameManager.Instance.defensePointE.position;
+        //miner.transform.position = GameManager.Instance.defensePointE.position;
         limitUnitCurrent++;
     }
 
@@ -66,9 +66,9 @@ public class TestEnemy : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject swordMan = Instantiate(Swordman);
+        GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         SwordMan sw = swordMan.GetComponent<SwordMan>();       
-        swordMan.transform.position = GameManager.Instance.defensePointE.position;        
+        //swordMan.transform.position = GameManager.Instance.defensePointE.position;        
         rallyE.swordsE.Add(sw);
         GameManager.Instance.enemy.Add(sw);
         limitUnitCurrent++;
@@ -78,10 +78,10 @@ public class TestEnemy : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject archer = Instantiate(Archer);
+        GameObject archer = Instantiate(Archer, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         Archer ar = archer.GetComponent<Archer>();
         GameManager.Instance.enemy.Add(ar);       
-        archer.transform.position = GameManager.Instance.defensePointE.position;
+        //archer.transform.position = GameManager.Instance.defensePointE.position;
         rallyE.archersE.Add(ar);
         limitUnitCurrent++;
     }
@@ -90,10 +90,10 @@ public class TestEnemy : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject spearMan = Instantiate(Spearman);
+        GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         SpearMan sp = spearMan.GetComponent<SpearMan>();
         GameManager.Instance.enemy.Add(sp);       
-        spearMan.transform.position = GameManager.Instance.defensePointE.position;
+        //spearMan.transform.position = GameManager.Instance.defensePointE.position;
         rallyE.spearsE.Add(sp);
         limitUnitCurrent += 3;
     }
@@ -102,10 +102,10 @@ public class TestEnemy : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject magicman = Instantiate(Magicman);
+        GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         MagicMan mg = magicman.GetComponent<MagicMan>();
         GameManager.Instance.enemy.Add(mg);       
-        magicman.transform.position = GameManager.Instance.defensePointE.position;
+        //magicman.transform.position = GameManager.Instance.defensePointE.position;
         rallyE.magicsE.Add(mg);
         limitUnitCurrent += 5;
     }
@@ -114,10 +114,10 @@ public class TestEnemy : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject titan = Instantiate(TitanMan);
+        GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         Titan tt = titan.GetComponent<Titan>();
         GameManager.Instance.enemy.Add(tt);       
-        titan.transform.position = GameManager.Instance.defensePointE.position;
+        //titan.transform.position = GameManager.Instance.defensePointE.position;
         rallyE.titansE.Add(tt);
         limitUnitCurrent += 3;
     }

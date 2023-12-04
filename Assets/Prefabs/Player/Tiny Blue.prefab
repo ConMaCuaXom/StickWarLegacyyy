@@ -2211,8 +2211,9 @@ GameObject:
   - component: {fileID: -6012369975676262260}
   - component: {fileID: -1444235123994862624}
   - component: {fileID: 8532280065933867693}
-  - component: {fileID: -3120393278221579380}
   - component: {fileID: -6089424185722946336}
+  - component: {fileID: 9024269145525022489}
+  - component: {fileID: 8102824655832867531}
   m_Layer: 0
   m_Name: Tiny Blue
   m_TagString: Player
@@ -2378,20 +2379,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.2
---- !u!136 &-3120393278221579380
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111318}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 1.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.86, z: 0}
 --- !u!114 &-6089424185722946336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2408,7 +2395,9 @@ MonoBehaviour:
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
   targetE: {fileID: 0}
+  targetEE: []
   targetP: {fileID: 0}
+  targetPP: []
   buyUnit: {fileID: 0}
   testEnemy: {fileID: 0}
   wol: {fileID: 0}
@@ -2428,6 +2417,35 @@ MonoBehaviour:
   pushBack: 0
   hulolo: 0
   daddy: {fileID: 0}
+--- !u!135 &9024269145525022489
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8102824655832867531
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111318}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &111836
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,13 +61,13 @@ public class BuyUnit : MonoBehaviour
     {
         if (checkMiner || (limitUnitCurrent >= limitUnit))
             return;
-        GameObject miner = Instantiate(Miner);
+        GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
         Miner mn = miner.GetComponent<Miner>();       
         GameManager.Instance.player.Add(mn);
         rally.miners.Add(mn);
         if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        miner.transform.position = GameManager.Instance.defensePointP.position;
+        //miner.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;
     }
 
@@ -75,9 +75,9 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject swordMan = Instantiate(Swordman);
+        GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
         SwordMan sw = swordMan.GetComponent<SwordMan>();       
-        swordMan.transform.position = GameManager.Instance.defensePointP.position;
+        //swordMan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;                      
         rally.swords.Add(sw);
         GameManager.Instance.player.Add(sw);
@@ -87,10 +87,10 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject archer = Instantiate(Archer);        
+        GameObject archer = Instantiate(Archer, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);        
         Archer ar = archer.GetComponent<Archer>();
         GameManager.Instance.player.Add(ar);       
-        archer.transform.position = GameManager.Instance.defensePointP.position;
+        //archer.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent++;        
         rally.archers.Add(ar);                
     }
@@ -99,10 +99,10 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject spearMan = Instantiate(Spearman);       
+        GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         SpearMan sp = spearMan.GetComponent<SpearMan>();
         GameManager.Instance.player.Add(sp);       
-        spearMan.transform.position = GameManager.Instance.defensePointP.position;
+        //spearMan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 3;                   
         rally.spears.Add(sp);
     }
@@ -111,10 +111,10 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject magicman = Instantiate(Magicman);       
+        GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         MagicMan mg = magicman.GetComponent<MagicMan>();
         GameManager.Instance.player.Add(mg);        
-        magicman.transform.position = GameManager.Instance.defensePointP.position;
+        //magicman.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 5;       
         rally.magics.Add(mg);        
     }
@@ -123,10 +123,10 @@ public class BuyUnit : MonoBehaviour
     {
         if (limitUnitCurrent >= limitUnit)
             return;
-        GameObject titan = Instantiate(TitanMan);       
+        GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         Titan tt = titan.GetComponent<Titan>();
         GameManager.Instance.player.Add(tt);       
-        titan.transform.position = GameManager.Instance.defensePointP.position;
+        //titan.transform.position = GameManager.Instance.defensePointP.position;
         limitUnitCurrent += 3;        
         rally.titans.Add(tt);
     }

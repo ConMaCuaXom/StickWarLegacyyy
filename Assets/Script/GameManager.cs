@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public Transform defensePointP = null;
     public Transform defensePointE = null;
+
 
     private void Awake()
     {

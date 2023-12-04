@@ -14,7 +14,7 @@ public class CrossbowmanDefender : MonoBehaviour
     public Transform defensePoint;   
     public GameObject Bolt;
 
-    public float attackRange = 10f;
+    public float attackRange = 15f;
     public float damage = 10f;
 
     private void Awake()

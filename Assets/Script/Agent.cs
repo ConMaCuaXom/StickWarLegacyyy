@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Agent : MonoBehaviour
@@ -17,7 +20,7 @@ public class Agent : MonoBehaviour
     public bool isEnemy = false;
 
     public float moveSpeed = 4;
-    public float angularSpeed = 20f;           
+    public float angularSpeed = 20f;
 
     private void Awake()
     {
@@ -30,10 +33,12 @@ public class Agent : MonoBehaviour
         DefensePointP = GameManager.Instance.defensePointP;
         DefensePointE = GameManager.Instance.defensePointE;
     }
-
-    private void Update()
+    private void Start()
     {
         
+    }
+    private void Update()
+    {
     }
 
     public void SetDestination(Vector3 target)

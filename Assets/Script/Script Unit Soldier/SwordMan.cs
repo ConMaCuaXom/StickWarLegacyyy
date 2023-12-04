@@ -28,7 +28,7 @@ public class SwordMan : BaseSoldier
         
         if (isDead == true || onDef == true || pushBack == true)
             return;
-        TargetOnWho();
+        //TargetOnWho();
         WiOrLo();
     }
 

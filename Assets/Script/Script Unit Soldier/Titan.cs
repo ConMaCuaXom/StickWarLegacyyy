@@ -27,7 +27,7 @@ public class Titan : BaseSoldier
     {
         if (isDead == true || onDef == true)
             return;
-        TargetOnWho();
+        //TargetOnWho();
         WiOrLo();
     }
 
