@@ -14,7 +14,7 @@ public class Cameraa : MonoBehaviour
     {
         firstPos = transform.position;
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
