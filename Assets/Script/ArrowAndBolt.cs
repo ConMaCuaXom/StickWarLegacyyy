@@ -63,8 +63,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (crossbowmanDefender.transform.position + target.transform.position) / 2 + Vector3.up * 4;
-            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right *0.5f) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
-            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right * 0.5f) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right *0.5f) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1f);
+            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right * 0.5f) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1f)) - transform.position;
         }
         if (archer != null)
         {
@@ -72,8 +72,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (archer.transform.position + target.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 0.5f);
-            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 0.5f)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1f);
+            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1f)) - transform.position;
         }
         
     }
@@ -86,8 +86,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (archer.transform.position + baseEnemy.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (baseEnemy.transform.position + Vector3.up * 1);
-            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (baseEnemy.transform.position + Vector3.up * 1)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (baseEnemy.transform.position + Vector3.up * 0.5f);
+            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (baseEnemy.transform.position + Vector3.up * 0.5f)) - transform.position;
         }
         if (archer.agent.isEnemy)
         {
@@ -95,8 +95,8 @@ public class ArrowAndBolt : MonoBehaviour
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
             Vector3 p1 = (archer.transform.position + basePlayer.transform.position) / 2 + Vector3.up * 2;
-            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (basePlayer.transform.position + Vector3.up * 1);
-            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (basePlayer.transform.position + Vector3.up * 1)) - transform.position;
+            transform.position = (1 - delta) * (1 - delta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - delta) * delta * p1 + delta * delta * (basePlayer.transform.position + Vector3.up * 0.5f);
+            transform.up = ((1 - teta) * (1 - teta) * (archer.transform.position + Vector3.up * 1) + 2 * (1 - teta) * teta * p1 + teta * teta * (basePlayer.transform.position + Vector3.up * 0.5f)) - transform.position;
         }
 
     }

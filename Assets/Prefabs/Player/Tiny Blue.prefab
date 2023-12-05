@@ -2212,8 +2212,7 @@ GameObject:
   - component: {fileID: -1444235123994862624}
   - component: {fileID: 8532280065933867693}
   - component: {fileID: -6089424185722946336}
-  - component: {fileID: 9024269145525022489}
-  - component: {fileID: 8102824655832867531}
+  - component: {fileID: 8344613211859941528}
   m_Layer: 0
   m_Name: Tiny Blue
   m_TagString: Player
@@ -2417,8 +2416,8 @@ MonoBehaviour:
   pushBack: 0
   hulolo: 0
   daddy: {fileID: 0}
---- !u!135 &9024269145525022489
-SphereCollider:
+--- !u!136 &8344613211859941528
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2427,25 +2426,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 15
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8102824655832867531
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111318}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_Radius: 0.15
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &111836
 GameObject:
   m_ObjectHideFlags: 0

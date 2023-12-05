@@ -27,7 +27,7 @@ public class Titan : BaseSoldier
     {
         if (isDead == true || onDef == true)
             return;
-        //TargetOnWho();
+        TargetOnWho();
         WiOrLo();
     }
 
@@ -58,30 +58,31 @@ public class Titan : BaseSoldier
         if (agent.isPlayer && targetE != null)
         {
             targetE.TakeDamage(damage);
-            targetE.PushBack();
-            foreach (BaseSoldier soldier in GameManager.Instance.enemy)
+            targetE.PushBack();           
+            for (int i = GameManager.Instance.enemy.Count - 1; i >= 0; i--)
             {
-                if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f)
+                BaseSoldier soldier = GameManager.Instance.enemy[i];
+                if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f && soldier != null)
                 {
                     soldier.TakeDamage(damage);
                     soldier.PushBack();
                 }
-            }
+            }           
         }
             
         if (agent.isEnemy && targetP != null)
         {
             targetP.TakeDamage(damage);
-            targetP.PushBack();
-            foreach (BaseSoldier soldier in GameManager.Instance.player)
+            targetP.PushBack();            
+            for(int i = GameManager.Instance.player.Count - 1; i >= 0; i--)
             {
-                if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f)
+                BaseSoldier soldier = GameManager.Instance.player[i];
+                if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f && soldier != null)
                 {
                     soldier.TakeDamage(damage);
                     soldier.PushBack();
                 }
-            }
-        }
-            
+            }            
+        }            
     }
 }

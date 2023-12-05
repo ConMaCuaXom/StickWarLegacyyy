@@ -9934,8 +9934,7 @@ GameObject:
   - component: {fileID: -6100136437889913481}
   - component: {fileID: -1303909015739553667}
   - component: {fileID: 3693395797285896643}
-  - component: {fileID: -998344111000868921}
-  - component: {fileID: 1561563088762012931}
+  - component: {fileID: -3994140733207897566}
   m_Layer: 0
   m_Name: Titan Red
   m_TagString: Enemy
@@ -10138,8 +10137,8 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.2
---- !u!135 &-998344111000868921
-SphereCollider:
+--- !u!136 &-3994140733207897566
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10148,25 +10147,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 15
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1561563088762012931
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2632483962094737284}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_Radius: 0.15
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &2632483962094737430
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class MagicMan : BaseSoldier
     {
         if (isDead == true || onDef == true || hulolo == true || pushBack == true)
             return;
-        //TargetOnWho();
+        TargetOnWho();
         SpawnSoldier();
         WiOrLo();
     }
@@ -86,11 +86,11 @@ public class MagicMan : BaseSoldier
             targetE.TakeDamage(damage);
             targetE.PushBack();           
             destroyedMid.gameObject.transform.position = targetE.transform.position;
-            
-            foreach (var soldier in GameManager.Instance.enemy)
+            targetE.TakeDamage(damage);
+            targetE.PushBack();
+            for (int i = GameManager.Instance.enemy.Count - 1; i >= 0; i--)
             {
-                if (soldier is null)
-                    return;
+                BaseSoldier soldier = GameManager.Instance.enemy[i];
                 if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f)
                 {
                     soldier.TakeDamage(damage);
@@ -103,11 +103,9 @@ public class MagicMan : BaseSoldier
             targetP.TakeDamage(damage);
             targetP.PushBack();            
             destroyedMid.gameObject.transform.position = targetP.transform.position;
-           
-            foreach (BaseSoldier soldier in GameManager.Instance.player)
+            for (int i = GameManager.Instance.player.Count - 1; i >= 0; i--)
             {
-                if (soldier is null)
-                    return;
+                BaseSoldier soldier = GameManager.Instance.player[i];
                 if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f)
                 {
                     soldier.TakeDamage(damage);
@@ -137,39 +135,23 @@ public class MagicMan : BaseSoldier
         GameObject Soldier = Instantiate(soldierOfMe, spawnPoint.position, transform.rotation);
         Tiny tiny = Soldier.GetComponent<Tiny>();
         tiny.daddy = this;       
-        numberOfSoldier++;
-        //Soldier.SetActive(false);
+        numberOfSoldier++;       
         if (agent.isPlayer)
         {
-            rally.tinys.Add(tiny);
-            //tiny.transform.LookAt(baseEnemy.transform);
-            GameManager.Instance.player.Add(tiny);
-            //Soldier.transform.position = this.transform.position + Vector3.right * 1.5f;
-            //Debug.Log(tiny.gameObject.transform.position);
-            //Soldier.SetActive(true);
+            rally.tinys.Add(tiny);            
+            GameManager.Instance.player.Add(tiny);            
         }
         if (agent.isEnemy)
         {
-            rallyEnemy.tinysE.Add(tiny);
-            //tiny.transform.LookAt(basePlayer.transform);
-            GameManager.Instance.enemy.Add(tiny);
-            //tiny.transform.position = this.transform.position + Vector3.right * (-1.5f);
-            //Debug.Log(tiny.gameObject.transform.position);
-            //Soldier.SetActive(true);
-        }
-        this.DelayCall(1f, () =>
-        {
-            hulolo = false;
-            if (agent.agent.enabled == true)
-                agent.agent.isStopped = false;
-            //Debug.Log(tiny.gameObject.transform.position);
-        });
+            rallyEnemy.tinysE.Add(tiny);            
+            GameManager.Instance.enemy.Add(tiny);            
+        }        
     }
 
     public void HololoFinish()
     {
-        //hulolo = false;
-        //if (agent.agent.enabled == true)
-        //    agent.agent.isStopped = false;
+        hulolo = false;
+        if (agent.agent.enabled == true)
+            agent.agent.isStopped = false;
     }
 }
