@@ -7,8 +7,7 @@ using static UnityEditor.PlayerSettings.Switch;
 
 public class Open : MonoBehaviour
 {
-    public Button play;
-    public Button exit;
+    public Button play;   
 
     private void Awake()
     {
@@ -21,6 +20,6 @@ public class Open : MonoBehaviour
     }
     private void PlayGame()
     {
-        SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
-    }
+        SceneManager.LoadScene("Level", LoadSceneMode.Single);
+    }   
 }

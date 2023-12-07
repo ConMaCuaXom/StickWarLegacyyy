@@ -18,10 +18,14 @@ public class BuyUnit : MonoBehaviour
     public GameObject Spearman;
     public GameObject TitanMan;
     public GameObject Magicman;
+
+    
+
     public BaseEnemy baseEnemy = null;
     public BasePlayer basePlayer = null;
-    public Rally rally = null;   
-        
+    public Rally rally = null;
+
+    
     public int limitUnit = 50;
     public int limitUnitCurrent = 2;
        
