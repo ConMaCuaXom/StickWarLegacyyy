@@ -58,7 +58,7 @@ public class TestEnemy : MonoBehaviour
         rallyE.minersE.Add(mn);
         if (rallyE.minersE.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        //miner.transform.position = GameManager.Instance.defensePointE.position;
+        
         limitUnitCurrent++;
     }
 
@@ -68,7 +68,7 @@ public class TestEnemy : MonoBehaviour
             return;
         GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointE.position, GameManager.Instance.defensePointE.rotation);
         SwordMan sw = swordMan.GetComponent<SwordMan>();       
-        //swordMan.transform.position = GameManager.Instance.defensePointE.position;        
+                
         rallyE.swordsE.Add(sw);
         GameManager.Instance.enemy.Add(sw);
         limitUnitCurrent++;

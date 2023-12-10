@@ -5041,7 +5041,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
+      scalar: 2
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -9565,7 +9565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &871312489320646439
 Transform:
   m_ObjectHideFlags: 0
@@ -14297,6 +14297,7 @@ GameObject:
   - component: {fileID: 871312489320580165}
   - component: {fileID: 871312489339975349}
   - component: {fileID: 871312489338871909}
+  - component: {fileID: 5497590897688057156}
   m_Layer: 0
   m_Name: FX_machine_destroyed
   m_TagString: Untagged
@@ -19082,6 +19083,20 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5497590897688057156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871312489320899015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b046a15ef15922246adc22d0eb050ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  timeToDestroy: 1
 --- !u!1 &4838485814822816141
 GameObject:
   m_ObjectHideFlags: 0
@@ -19099,7 +19114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5257428604350119588
 Transform:
   m_ObjectHideFlags: 0

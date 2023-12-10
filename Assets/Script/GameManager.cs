@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public List<CrossbowmanDefender> crossbowmanDefendersP = null;
     public List<CrossbowmanDefender> crossbowmanDefendersE = null;
     public List<ParticleSystem> allMagicAndEffect = null;
+    public List<ParticleSystem> boomboom = null;
     public BasePlayer basePlayer;
     public BaseEnemy baseEnemy;
     public Rally rally;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public Transform defensePointP = null;
     public Transform defensePointE = null;
+    
 
 
     private void Awake()

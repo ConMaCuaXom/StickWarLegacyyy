@@ -120,7 +120,7 @@ public class MagicMan : BaseSoldier
     public void SpawnSoldier()
     {
         timeForSpawn += Time.deltaTime;
-        if (timeForSpawn >= 3 && numberOfSoldier < 8)
+        if (timeForSpawn >= 4 && numberOfSoldier < 2)
         {
             hulolo = true;
             if (agent.agent.enabled == true)

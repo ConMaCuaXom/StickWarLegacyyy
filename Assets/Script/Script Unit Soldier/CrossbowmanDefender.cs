@@ -87,7 +87,7 @@ public class CrossbowmanDefender : MonoBehaviour
     {
         GameObject bolt = Instantiate(Bolt);
         ArrowAndBolt aab = bolt.GetComponent<ArrowAndBolt>();
-        aab.crossbowmanDefender = this;      
+        //aab.crossbowmanDefender = this;      
         if (agent.isPlayer) 
             aab.target = targetE;
         if (agent.isEnemy)

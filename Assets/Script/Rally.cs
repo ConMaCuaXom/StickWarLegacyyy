@@ -16,6 +16,7 @@ public class Rally : MonoBehaviour
     public List<BaseSoldier> tinys = null;
     public List<Miner> miners = null;
     public List<CrossbowmanDefender> crbP = null;
+    public List<Boat> boats = null;
     public Dictionary<string, List<BaseSoldier>> dic = new Dictionary<string, List<BaseSoldier>>();
     public Transform[,] arrayRally = new Transform[4,12];
 
@@ -37,7 +38,7 @@ public class Rally : MonoBehaviour
         AddDic();
         index = 0;
         buyUnit = GetComponent<BuyUnit>();
-        crbP = GameManager.Instance.crossbowmanDefendersP;
+        //crbP = GameManager.Instance.crossbowmanDefendersP;
         GetIndex();
     }
 
@@ -76,10 +77,10 @@ public class Rally : MonoBehaviour
                 whichSoldier.onAttack = false;
             }
         }
-        foreach (CrossbowmanDefender crb in crbP)
+        foreach (Boat b in boats)
         {
-            crb.GoAttackPoint();
-            crb.AttackDef();
+            b.GoAttackPoint();
+            b.AttackDef();
         }
     }
 
@@ -96,9 +97,9 @@ public class Rally : MonoBehaviour
                 }                                           
             }
         }
-        foreach (CrossbowmanDefender crb in crbP)
+        foreach (Boat b in boats)
         {
-            crb.GoDefensePoint();
+            b.GoDefensePoint();
         }                                  
     }
 
@@ -118,9 +119,9 @@ public class Rally : MonoBehaviour
 
     public void Rallyt1()
     {
-        foreach (CrossbowmanDefender crb in crbP)
+        foreach (Boat b in boats)
         {
-            crb.GoDefensePoint();
+            b.GoDefensePoint();
         }
         int mgPoint = (magics.Count + 3) / 4;
         int arPoint = (archers.Count + 3) / 4;

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArrowAndBolt : MonoBehaviour
 {   
     public BaseSoldier target;
-    public CrossbowmanDefender crossbowmanDefender;
+    //public CrossbowmanDefender crossbowmanDefender;
+    public Boat boat;
     public Archer archer;
     public BaseEnemy baseEnemy;
     public BasePlayer basePlayer;
-    
-    
-    
+
+    public GameObject Bombom;
+    public ParticleSystem bomPS;
+
     public float damageAr;
     public float damageBo;
     public float timeToDestroy = 10f;
@@ -57,14 +60,14 @@ public class ArrowAndBolt : MonoBehaviour
 
     private void MoveToTarget(Transform target)
     {
-        if (crossbowmanDefender != null)
+        if (boat != null)
         {
             timeDur += Time.deltaTime;
             float delta = timeDur / timeTotal;
             float teta = (timeDur - 0.1f) / timeTotal;
-            Vector3 p1 = (crossbowmanDefender.transform.position + target.transform.position) / 2 + Vector3.up * 4;
-            transform.position = (1 - delta) * (1 - delta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right *0.5f) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1f);
-            transform.up = ((1 - teta) * (1 - teta) * (crossbowmanDefender.transform.position + Vector3.up * 1 + Vector3.right * 0.5f) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1f)) - transform.position;
+            Vector3 p1 = (boat.transform.position + target.transform.position) / 2 + Vector3.up * 4;
+            transform.position = (1 - delta) * (1 - delta) * (boat.transform.position + Vector3.up * 1 + Vector3.right *0.5f) + 2 * (1 - delta) * delta * p1 + delta * delta * (target.transform.position + Vector3.up * 1f);
+            transform.up = ((1 - teta) * (1 - teta) * (boat.transform.position + Vector3.up * 1 + Vector3.right * 0.5f) + 2 * (1 - teta) * teta * p1 + teta * teta * (target.transform.position + Vector3.up * 1f)) - transform.position;
         }
         if (archer != null)
         {
@@ -109,9 +112,13 @@ public class ArrowAndBolt : MonoBehaviour
         {
             //    haveMove = false;
             //    transform.SetParent(other.transform); // con set bo'
+            
+            if (boat != null)
+            {
+                target.TakeDamage(damageBo);              
+                GameObject boom = Instantiate(Bombom,other.transform.position,transform.rotation);               
+            }
             Destroy(gameObject);
-            if (crossbowmanDefender != null)
-                target.TakeDamage(damageBo);
             if (archer != null)
                 target.TakeDamage(damageAr);
         }

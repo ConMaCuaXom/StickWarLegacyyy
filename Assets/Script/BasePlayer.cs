@@ -12,13 +12,15 @@ public class BasePlayer : MonoBehaviour
     public float goldAddAuto = 20;
     public float HP = 2000f;
     public float currentHP;
-
+    public BuyUnit buyUnit;
     public WinOrLose wl;
+    
 
     private void Awake()
     {
         currentGold = totalGold;
         currentHP = HP;
+        
     }
 
     private void Update()
@@ -26,7 +28,7 @@ public class BasePlayer : MonoBehaviour
         if (checkTime == false)
             return;
         AutoAddGold(goldAddAuto);
-
+       
     }
 
     private void AutoAddGold(float gold)

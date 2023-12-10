@@ -32,8 +32,6 @@ public class BaseSoldier : MonoBehaviour
     public bool attackOnBase = false;
     public bool pushBack = false;
     public bool hulolo = false;
-
-
     public virtual void TargetOnWho()
     {
         if (agent.isPlayer == true)
@@ -46,6 +44,7 @@ public class BaseSoldier : MonoBehaviour
             List<BaseSoldier> listPlayer = GameManager.Instance.player.OrderBy(p => Vector3.Distance(transform.position, p.transform.position)).ToList();
             HowToAttackP(listPlayer);
         }
+
     }
     public virtual void HowToAttackE(List<BaseSoldier> list)
     {
@@ -244,7 +243,9 @@ public class BaseSoldier : MonoBehaviour
     {
         if (agent.isPlayer && onAttack == false)
         {
-            float distanceToBaseEnemy = Vector3.Distance(transform.position, baseEnemy.transform.position);
+            Vector3 baseSquare = new Vector3(baseEnemy.transform.position.x, 0, transform.position.z);
+            Vector3 soldierGOC = new Vector3(transform.position.x,0,transform.position.z);
+            float distanceToBaseEnemy = Vector3.Distance(baseSquare, soldierGOC);          
             if (distanceToBaseEnemy <= attackRange + 2)
             {
                 if (agent.agent.enabled == true)

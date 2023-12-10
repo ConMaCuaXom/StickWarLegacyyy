@@ -6,19 +6,15 @@ using UnityEngine.UI;
 public class DisplayRes : MonoBehaviour
 {
     public Text text;
-    public BasePlayer player;
-    
+    public Text limit;
 
-    private void Awake()
-    {
-        player = GameManager.Instance.basePlayer;
-    }
+
 
 
 
     private void Update()
     {
-        text.text = player.currentGold.ToString();
-        
+        text.text = "Gold: " + GameManager.Instance.basePlayer.currentGold.ToString();
+        limit.text = "Limit: " + GameManager.Instance.buyUnit.limitUnitCurrent.ToString() + "/" + GameManager.Instance.buyUnit.limitUnit;
     }
 }

@@ -71,7 +71,7 @@ public class BuyUnit : MonoBehaviour
         rally.miners.Add(mn);
         if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
             checkMiner = true;
-        //miner.transform.position = GameManager.Instance.defensePointP.position;
+        
         limitUnitCurrent++;
     }
 
@@ -81,7 +81,7 @@ public class BuyUnit : MonoBehaviour
             return;
         GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
         SwordMan sw = swordMan.GetComponent<SwordMan>();       
-        //swordMan.transform.position = GameManager.Instance.defensePointP.position;
+        
         limitUnitCurrent++;                      
         rally.swords.Add(sw);
         GameManager.Instance.player.Add(sw);
@@ -101,7 +101,7 @@ public class BuyUnit : MonoBehaviour
 
     public void BuySpearMan()
     {
-        if (limitUnitCurrent >= limitUnit)
+        if (limitUnitCurrent >= limitUnit - 2)
             return;
         GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         SpearMan sp = spearMan.GetComponent<SpearMan>();
@@ -113,7 +113,7 @@ public class BuyUnit : MonoBehaviour
 
     public void BuyMagicMan()
     {
-        if (limitUnitCurrent >= limitUnit)
+        if (limitUnitCurrent >= limitUnit - 4)
             return;
         GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         MagicMan mg = magicman.GetComponent<MagicMan>();
@@ -125,7 +125,7 @@ public class BuyUnit : MonoBehaviour
 
     public void BuyTitan()
     {
-        if (limitUnitCurrent >= limitUnit)
+        if (limitUnitCurrent >= limitUnit - 2)
             return;
         GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
         Titan tt = titan.GetComponent<Titan>();

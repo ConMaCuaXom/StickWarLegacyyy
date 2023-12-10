@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Archer : BaseSoldier
 {
+    
     public GameObject Arrow;
     private void Awake()
     {
