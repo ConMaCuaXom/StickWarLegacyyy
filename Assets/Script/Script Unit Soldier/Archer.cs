@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -81,5 +82,39 @@ public class Archer : BaseSoldier
         if (agent.isEnemy)
             aab.isPlayer = false;
         arrow.transform.position = transform.position;
+    }
+
+    public override void AttackOnBaseEnemy()
+    {
+        if (agent.isPlayer && onAttack == false)
+        {
+            if (Vector3.Distance(transform.position,agent.baseEnemy.transform.position) <= attackRange)
+            {
+                agent.agent.isStopped = true;
+                attackOnBase = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);
+                agent.LookAtEnemyBase();
+            }
+            else
+            {
+                agent.AttackBase();
+            }
+        }
+        if (agent.isEnemy && onAttack == false)
+        {
+            if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= attackRange)
+            {
+                agent.agent.isStopped = true;
+                attackOnBase = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);
+                agent.LookAtEnemyBase();
+            }
+            else
+            {
+                agent.AttackBase();
+            }
+        }
     }
 }
