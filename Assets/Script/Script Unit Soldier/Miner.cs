@@ -92,14 +92,14 @@ public class Miner : BaseSoldier
         agent.animator.SetBool("CookCook", false);
         agent.GoToYourBase();
         if (agent.isPlayer == true)
-            distanceToBase = Vector3.Distance(transform.position, basePlayer.transform.position);
+            distanceToBase = Vector3.Distance(transform.position, agent.basePlayer.transform.position);
         if (agent.isEnemy == true)
-            distanceToBase = Vector3.Distance(transform.position, baseEnemy.transform.position);
+            distanceToBase = Vector3.Distance(transform.position, agent.baseEnemy.transform.position);
         if( distanceToBase <= rangeToBase )
         {
             canGoToGoldMine = true;
             canGoToBase = false;
-            basePlayer.currentGold += goldInMiner;
+            agent.basePlayer.currentGold += goldInMiner;
             goldInMiner = 0;
         }
     }

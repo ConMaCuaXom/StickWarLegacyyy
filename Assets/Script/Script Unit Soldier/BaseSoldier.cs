@@ -7,15 +7,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BaseSoldier : MonoBehaviour
 {
-    public Agent agent;    
-    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
-    public BasePlayer basePlayer => GameManager.Instance.basePlayer;       
+    public Agent agent;
+    public BaseSoldier targetE;
+    public BaseSoldier targetP;
     public BuyUnit buyUnit => GameManager.Instance.buyUnit;
     public TestEnemy testEnemy => GameManager.Instance.testEnemy;
     public WinOrLose wol => GameManager.Instance.winOrLose;
 
-    public BaseSoldier targetE;
-    public BaseSoldier targetP;
+    
 
     public float dangerRange;
     public float attackRange;
@@ -24,7 +23,7 @@ public class BaseSoldier : MonoBehaviour
     public float currentHP;
     public float distanceE;
     public float distanceP;
-    public float timeToDestroy = 3f;
+    public float timeToDestroy = 5f;
     public float timeToPush;
 
     public bool isDead = false;
@@ -36,7 +35,7 @@ public class BaseSoldier : MonoBehaviour
     public bool attacking = false;
     public virtual void TargetOnWho()
     {
-        if (agent.isPlayer == true)
+        if (agent.isPlayer == true && GameManager.Instance.enemy != null)
         {
             List<BaseSoldier> listEnemy = GameManager.Instance.enemy.OrderBy(e => Vector3.Distance(transform.position, e.transform.position)).ToList();
             HowToAttackE(listEnemy);
@@ -63,7 +62,7 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull();
             }
-            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, baseEnemy.transform.position) + 2)
+            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, agent.baseEnemy.transform.position) + 2)
             {
                 onAttack = false;
                 AttackOnBaseEnemy();
@@ -90,7 +89,7 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull();
             }
-            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, basePlayer.transform.position) + 2)
+            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, agent.basePlayer.transform.position) + 2)
             {
                 onAttack = false;
                 AttackOnBaseEnemy();
@@ -113,12 +112,9 @@ public class BaseSoldier : MonoBehaviour
     public virtual void GoToEnemy(BaseSoldier target, float distanceToEnemy)
     {
         if (target.isDead == false)
-        {
-            
+        {            
             if (distanceToEnemy > attackRange && attacking == false)
-            {
-                agent.obstacle.enabled = false;
-                agent.agent.enabled = true;
+            {                              
                 agent.agent.isStopped = false;
                 agent.SetDestination(target.transform.position);
                 agent.animator.SetBool("Attack", false);
@@ -126,11 +122,8 @@ public class BaseSoldier : MonoBehaviour
             else
             {
                 attacking = true;
-                agent.RotationOnTarget(target.transform.position - transform.position);
-                if (agent.agent.enabled == true)
-                    agent.agent.isStopped = true;
-                agent.agent.enabled = false;
-                agent.obstacle.enabled = true;
+                agent.RotationOnTarget(target.transform.position - transform.position);               
+                agent.agent.isStopped = true;                             
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", true);
                 RandomAttack();
@@ -173,9 +166,7 @@ public class BaseSoldier : MonoBehaviour
     public void TargetIsDead()
     {        
         onAttack = false;
-        agent.animator.SetBool("Attack", false);
-        agent.obstacle.enabled = false;
-        agent.agent.enabled = true;       
+        agent.animator.SetBool("Attack", false);                     
     }
 
     public virtual void AttackOnTarget()
@@ -193,8 +184,7 @@ public class BaseSoldier : MonoBehaviour
         {
             isDead = true;
             RandomDeath();
-            agent.agent.enabled = false;
-            
+            agent.agent.enabled = false;            
             if (agent.isEnemy)           
                 GameManager.Instance.enemy.Remove(this);            
             if (agent.isPlayer)           
@@ -214,13 +204,8 @@ public class BaseSoldier : MonoBehaviour
             targetP = null;
         if (agent.isPlayer)
             targetE = null;
-        if (onAttack == false && attackOnBase == false)
-        {
-            agent.obstacle.enabled = false;
-            agent.agent.enabled = true;
-            agent.agent.isStopped = false;
-        }
-              
+        if (onAttack == false && attackOnBase == false)                               
+            agent.agent.isStopped = false;                    
     }     
     public void StopRallyPoint()
     {
@@ -248,14 +233,11 @@ public class BaseSoldier : MonoBehaviour
     {
         if (agent.isPlayer && onAttack == false)
         {                  
-            if (((transform.position.x >= baseEnemy.transform.position.x - 3) && (transform.position.x <= baseEnemy.transform.position.x + 3)) &&
-                    ((transform.position.z >= baseEnemy.transform.position.z - 3) && (transform.position.z <= baseEnemy.transform.position.z + 3)))           
-            {
-                if (agent.agent.enabled == true)
-                    agent.agent.isStopped = true;
+            if (((transform.position.x >= agent.baseEnemy.transform.position.x - 3) && (transform.position.x <= agent.baseEnemy.transform.position.x + 3)) &&
+                    ((transform.position.z >= agent.baseEnemy.transform.position.z - 3) && (transform.position.z <= agent.baseEnemy.transform.position.z + 3)))           
+            {               
+                agent.agent.isStopped = true;
                 attackOnBase = true;
-                agent.agent.enabled = false;
-                agent.obstacle.enabled = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
                 agent.LookAtEnemyBase();
@@ -266,14 +248,11 @@ public class BaseSoldier : MonoBehaviour
         }
         if (agent.isEnemy && onAttack == false)
         {
-            if (((transform.position.x >= basePlayer.transform.position.x - 3) && (transform.position.x <= basePlayer.transform.position.x + 3)) &&
-                    ((transform.position.z >= basePlayer.transform.position.z - 3) && (transform.position.z <= basePlayer.transform.position.z + 3)))
-            {
-                if (agent.agent.enabled == true)
-                    agent.agent.isStopped = true;
+            if (((transform.position.x >= agent.basePlayer.transform.position.x - 3) && (transform.position.x <= agent.basePlayer.transform.position.x + 3)) &&
+                    ((transform.position.z >= agent.basePlayer.transform.position.z - 3) && (transform.position.z <= agent.basePlayer.transform.position.z + 3)))
+            {                
+                agent.agent.isStopped = true;
                 attackOnBase = true;
-                agent.agent.enabled = false;
-                agent.obstacle.enabled = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
                 agent.LookAtEnemyBase();
@@ -288,16 +267,15 @@ public class BaseSoldier : MonoBehaviour
     public virtual void DamageForBase()
     {
         if (agent.isPlayer)
-            baseEnemy.TakeDamage(damage);
+            agent.baseEnemy.TakeDamage(damage);
         if (agent.isEnemy)
-            basePlayer.TakeDamage(damage);
+            agent.basePlayer.TakeDamage(damage);
     }
 
     public virtual void PushBack()
     {
-        pushBack = true;
-        if (agent.agent.enabled == true)
-            agent.agent.isStopped = true;
+        pushBack = true;       
+        agent.agent.isStopped = true;
         this.DelayCall(2f, () =>
         {            
             pushBack = false;

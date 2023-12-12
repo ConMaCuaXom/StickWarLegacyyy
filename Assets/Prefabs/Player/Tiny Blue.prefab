@@ -2210,7 +2210,6 @@ GameObject:
   - component: {fileID: 9585764}
   - component: {fileID: -6012369975676262260}
   - component: {fileID: -1444235123994862624}
-  - component: {fileID: 8532280065933867693}
   - component: {fileID: -6089424185722946336}
   - component: {fileID: 8344613211859941528}
   m_Layer: 0
@@ -2330,12 +2329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  obstacle: {fileID: 0}
   animator: {fileID: 0}
-  BaseEnemy: {fileID: 0}
-  BasePlayer: {fileID: 0}
-  DefensePointP: {fileID: 0}
-  DefensePointE: {fileID: 0}
   isPlayer: 1
   isEnemy: 0
   moveSpeed: 4
@@ -2358,26 +2352,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.5
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!208 &8532280065933867693
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111318}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.3, y: 1, z: 0.3}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1, z: 0}
-  m_TimeToStationary: 0.2
 --- !u!114 &-6089424185722946336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,15 +2369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  baseEnemy: {fileID: 0}
-  basePlayer: {fileID: 0}
   targetE: {fileID: 0}
-  targetEE: []
   targetP: {fileID: 0}
-  targetPP: []
-  buyUnit: {fileID: 0}
-  testEnemy: {fileID: 0}
-  wol: {fileID: 0}
   dangerRange: 0
   attackRange: 0
   damage: 0
@@ -2415,6 +2386,7 @@ MonoBehaviour:
   attackOnBase: 0
   pushBack: 0
   hulolo: 0
+  attacking: 0
   daddy: {fileID: 0}
 --- !u!136 &8344613211859941528
 CapsuleCollider:
@@ -2427,9 +2399,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.15
-  m_Height: 1
+  m_Height: 1.3
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!1 &111836
 GameObject:
   m_ObjectHideFlags: 0

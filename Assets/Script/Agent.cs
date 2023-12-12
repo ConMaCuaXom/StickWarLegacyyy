@@ -9,13 +9,12 @@ using UnityEngine.EventSystems;
 
 public class Agent : MonoBehaviour
 {
-    public NavMeshAgent agent;   
-    public NavMeshObstacle obstacle;
+    public NavMeshAgent agent;       
     public Animator animator;
-    public BaseEnemy BaseEnemy = null;
-    public BasePlayer BasePlayer = null;
-    public Transform DefensePointP = null;
-    public Transform DefensePointE = null;
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
+    public Transform defensePointP => GameManager.Instance.defensePointP;
+    public Transform defensePointE => GameManager.Instance.defensePointE;
     public bool isPlayer = false;
     public bool isEnemy = false;
 
@@ -25,13 +24,7 @@ public class Agent : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>(); 
-        animator = GetComponent<Animator>();
-        obstacle = GetComponent<NavMeshObstacle>();
-        obstacle.enabled = false;
-        BaseEnemy = GameManager.Instance.baseEnemy;
-        BasePlayer = GameManager.Instance.basePlayer;
-        DefensePointP = GameManager.Instance.defensePointP;
-        DefensePointE = GameManager.Instance.defensePointE;
+        animator = GetComponent<Animator>();              
     }
     private void Start()
     {
@@ -65,44 +58,44 @@ public class Agent : MonoBehaviour
     public void LookAtYourBase()
     {      
        if (isPlayer == true)                            
-            RotationOnTarget(BasePlayer.transform.position - transform.position);       
+            RotationOnTarget(basePlayer.transform.position - transform.position);       
        if (isEnemy == true) 
-            RotationOnTarget(BaseEnemy.transform.position - transform.position);
+            RotationOnTarget(baseEnemy.transform.position - transform.position);
     }
 
     public void LookAtEnemyBase()
     {
         if (isEnemy == true)        
-            RotationOnTarget(BasePlayer.transform.position - transform.position);       
+            RotationOnTarget(basePlayer.transform.position - transform.position);       
         if (isPlayer == true)
-            RotationOnTarget(BaseEnemy.transform.position - transform.position);
+            RotationOnTarget(baseEnemy.transform.position - transform.position);
     }
 
     public void AttackBase()
     {
         if (isEnemy == true)                    
-            SetDestination(BasePlayer.transform.position);                                
+            SetDestination(basePlayer.transform.position);                                
         if (isPlayer == true)                    
-            SetDestination(BaseEnemy.transform.position);                             
+            SetDestination(baseEnemy.transform.position);                             
     }
 
     public void DefenseBase()
     {
         if (isEnemy == true)        
-            SetDestination(DefensePointE.transform.position);        
+            SetDestination(defensePointE.transform.position);        
         if (isPlayer == true)       
-            SetDestination(DefensePointP.transform.position);        
+            SetDestination(defensePointP.transform.position);        
     }        
 
     public void GoToYourBase()
     {
         if (isEnemy == true)
         {
-            SetDestination(BaseEnemy.transform.position);
+            SetDestination(baseEnemy.transform.position);
         }
         if (isPlayer == true)
         {
-            SetDestination(BasePlayer.transform.position);
+            SetDestination(basePlayer.transform.position);
         }
     }
 }

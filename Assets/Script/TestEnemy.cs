@@ -17,8 +17,8 @@ public class TestEnemy : MonoBehaviour
     public GameObject Spearman;
     public GameObject TitanMan;
     public GameObject Magicman;
-    public BaseEnemy baseEnemy = null;
-    public BasePlayer basePlayer = null;
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
     public RallyEnemy rallyE = null;
 
     public int limitUnit = 50;
@@ -35,9 +35,7 @@ public class TestEnemy : MonoBehaviour
         buyArcher.onClick.AddListener(BuyArcher);
         buySpearMan.onClick.AddListener(BuySpearMan);
         buyMagicMan.onClick.AddListener(BuyMagicMan);
-        buyTitanMan.onClick.AddListener(BuyTitan);
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
+        buyTitanMan.onClick.AddListener(BuyTitan);        
     }
     private void OnDisable()
     {

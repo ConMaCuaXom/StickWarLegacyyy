@@ -66,9 +66,7 @@ public class Rally : MonoBehaviour
         foreach (var soldier in dic.Values)
         {
             foreach (var whichSoldier in soldier)
-            {     
-                whichSoldier.agent.obstacle.enabled = false;
-                whichSoldier.agent.agent.enabled = true;
+            {                                     
                 whichSoldier.agent.DefenseBase();
                 whichSoldier.agent.animator.SetBool("Attack", false);
                 whichSoldier.agent.animator.SetBool("AttackOnBase", false);

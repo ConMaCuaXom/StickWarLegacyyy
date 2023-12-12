@@ -28,10 +28,6 @@ public class ArrowAndBolt : MonoBehaviour
     public bool isPlayer;
 
 
-    
-
-    
-
     private void Awake()
     {
         baseEnemy = GameManager.Instance.baseEnemy;
@@ -125,13 +121,13 @@ public class ArrowAndBolt : MonoBehaviour
         if (archer != null && archer.agent.isPlayer && other.CompareTag("BaseEnemy"))
         {
             
-            archer.baseEnemy.TakeDamage(damageAr);
+            archer.agent.baseEnemy.TakeDamage(damageAr);
             Destroy(gameObject);
         }
         if (archer != null && archer.agent.isEnemy && other.CompareTag("BasePlayer"))
         {
             
-            archer.basePlayer.TakeDamage(damageAr);
+            archer.agent.basePlayer.TakeDamage(damageAr);
             Destroy(gameObject);
         }
     }

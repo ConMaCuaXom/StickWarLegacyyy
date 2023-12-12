@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class WinOrLose : MonoBehaviour
 {
-    public BaseEnemy enemy;
-    public BasePlayer player;
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
     public GameObject win;
     public GameObject lose;
 
@@ -16,9 +16,7 @@ public class WinOrLose : MonoBehaviour
     public bool playerLose;
 
     private void Awake()
-    {
-        enemy = GameManager.Instance.baseEnemy;
-        player = GameManager.Instance.basePlayer;
+    {       
         win.SetActive(false);
         lose.SetActive(false);
         playerLose = false;
@@ -33,7 +31,7 @@ public class WinOrLose : MonoBehaviour
 
     public void LoseOrWin()
     {
-        if (enemy.currentHP <= 0 && playerLose == false)
+        if (baseEnemy.currentHP <= 0 && playerLose == false)
         {
             win.SetActive(true);
             nextLv.gameObject.SetActive(true);
@@ -48,7 +46,7 @@ public class WinOrLose : MonoBehaviour
             }
         }
 
-        if (player.currentHP <= 0 && playerWin == false)
+        if (basePlayer.currentHP <= 0 && playerWin == false)
         {
             lose.SetActive(true);
             playerLose = true;
