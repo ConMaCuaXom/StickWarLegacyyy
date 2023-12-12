@@ -8,12 +8,7 @@ public class SpearMan : BaseSoldier
 
     private void Awake()
     {
-        agent = GetComponent<Agent>();        
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        buyUnit = GameManager.Instance.buyUnit;
-        wol = GameManager.Instance.winOrLose;
-        testEnemy = GameManager.Instance.testEnemy;
+        agent = GetComponent<Agent>();                
         attackRange = 2.5f;
         dangerRange = 10f;
         damage = 5f;

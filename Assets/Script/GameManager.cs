@@ -12,11 +12,8 @@ public class GameManager : MonoBehaviour
     public List<Transform> rallyPoint = null;
     public List<Transform> rallyPointE = null;
     public List<BaseSoldier> player = null;
-    public List<BaseSoldier> enemy = null;
-    public List<CrossbowmanDefender> crossbowmanDefendersP = null;
-    public List<CrossbowmanDefender> crossbowmanDefendersE = null;
-    public List<ParticleSystem> allMagicAndEffect = null;
-    public List<ParticleSystem> boomboom = null;
+    public List<BaseSoldier> enemy = null;    
+    public List<ParticleSystem> allMagicAndEffect = null;   
     public BasePlayer basePlayer;
     public BaseEnemy baseEnemy;
     public Rally rally;

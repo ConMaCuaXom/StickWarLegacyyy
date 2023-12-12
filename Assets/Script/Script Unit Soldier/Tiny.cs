@@ -7,11 +7,7 @@ public class Tiny : BaseSoldier
     public MagicMan daddy;
     private void Awake()
     {
-        agent = GetComponent<Agent>();
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        wol = GameManager.Instance.winOrLose;
-        testEnemy = GameManager.Instance.testEnemy;
+        agent = GetComponent<Agent>();        
         attackRange = 2f;
         dangerRange = 10f;
         damage = 5f;

@@ -3571,15 +3571,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  baseEnemy: {fileID: 0}
-  basePlayer: {fileID: 0}
   targetE: {fileID: 0}
-  targetEE: []
   targetP: {fileID: 0}
-  targetPP: []
-  buyUnit: {fileID: 0}
-  testEnemy: {fileID: 0}
-  wol: {fileID: 0}
   dangerRange: 0
   attackRange: 0
   damage: 0
@@ -3601,7 +3594,7 @@ MonoBehaviour:
   goldTake: 40
   distanceToGoldMine: 0
   distanceToBase: 0
-  rangeToBase: 3
+  rangeToBase: 4
   rangeToCook: 2.5
   timeForCook: 4
   time: 0

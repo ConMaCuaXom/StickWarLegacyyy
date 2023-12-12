@@ -10,12 +10,7 @@ public class Archer : BaseSoldier
     public GameObject Arrow;
     private void Awake()
     {
-        agent = GetComponent<Agent>();       
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        buyUnit = GameManager.Instance.buyUnit;
-        testEnemy = GameManager.Instance.testEnemy;
-        wol = GameManager.Instance.winOrLose;
+        agent = GetComponent<Agent>();                       
         attackRange = 10f;
         dangerRange = 15f;
         damage = 5f;

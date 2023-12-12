@@ -20,14 +20,9 @@ public class MagicMan : BaseSoldier
     
     private void Awake()
     {
-        agent = GetComponent<Agent>();       
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        buyUnit = GameManager.Instance.buyUnit;
+        agent = GetComponent<Agent>();              
         rally = GameManager.Instance.rally;
-        rallyEnemy = GameManager.Instance.rallyEnemy;
-        testEnemy = GameManager.Instance.testEnemy;
-        wol = GameManager.Instance.winOrLose;
+        rallyEnemy = GameManager.Instance.rallyEnemy;        
         attackRange = 10f;
         dangerRange = 15f;
         damage = 5f;

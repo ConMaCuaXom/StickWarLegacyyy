@@ -14,8 +14,7 @@ public class Rally : MonoBehaviour
     public List<BaseSoldier> magics = null;
     public List<BaseSoldier> titans = null;
     public List<BaseSoldier> tinys = null;
-    public List<Miner> miners = null;
-    public List<CrossbowmanDefender> crbP = null;
+    public List<Miner> miners = null;    
     public List<Boat> boats = null;
     public Dictionary<string, List<BaseSoldier>> dic = new Dictionary<string, List<BaseSoldier>>();
     public Transform[,] arrayRally = new Transform[4,12];

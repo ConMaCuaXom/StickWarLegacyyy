@@ -24,13 +24,18 @@ public class Cameraa : MonoBehaviour
         if (isDrag && Input.GetMouseButton(0))
         {
             Vector3 delta = Input.mousePosition - lastPos;
-            Vector3 direction = Camera.main.ScreenToViewportPoint(delta);
-            transform.Translate(direction.x * dragSpeed * Time.deltaTime, 0, 0);
+            Vector3 direction = Camera.main.ScreenToViewportPoint(delta);           
+            transform.Translate(direction.x * dragSpeed * Time.deltaTime, 0, direction.y * dragSpeed * Time.deltaTime);
             if (transform.position.x <= 6.22f)
-                transform.position = firstPos;
+                transform.position = new Vector3(6.22f,transform.position.y,transform.position.z);
             if (transform.position.x >= 74f)
-                transform.position = firstPos + Vector3.right * 67.78f;
-            lastPos = Input.mousePosition;
+                transform.position = new Vector3(74f, transform.position.y, transform.position.z);
+            if (transform.position.z >= -9f)
+                transform.position = new Vector3(transform.position.x, transform.position.y, -9f);
+            if (transform.position.z <= -16f)
+                transform.position = new Vector3(transform.position.x, transform.position.y, -16f);
+            if (transform.position.y != 10.42f)
+                transform.position = new Vector3(transform.position.x, 10.42f, transform.position.z);
         }
         if (Input.GetMouseButtonUp(0))
         {

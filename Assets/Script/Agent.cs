@@ -43,7 +43,7 @@ public class Agent : MonoBehaviour
 
     public void SetDestination(Vector3 target)
     {
-        RotationOnTarget(target - transform.position);
+        //RotationOnTarget(target - transform.position);
         agent.SetDestination(target);
         animator.SetBool("Run", true);
         animator.SetBool("AttackOnBase", false);
@@ -93,4 +93,16 @@ public class Agent : MonoBehaviour
         if (isPlayer == true)       
             SetDestination(DefensePointP.transform.position);        
     }        
+
+    public void GoToYourBase()
+    {
+        if (isEnemy == true)
+        {
+            SetDestination(BaseEnemy.transform.position);
+        }
+        if (isPlayer == true)
+        {
+            SetDestination(BasePlayer.transform.position);
+        }
+    }
 }

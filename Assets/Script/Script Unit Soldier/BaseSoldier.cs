@@ -8,13 +8,14 @@ using static UnityEngine.GraphicsBuffer;
 public class BaseSoldier : MonoBehaviour
 {
     public Agent agent;    
-    public BaseEnemy baseEnemy;
-    public BasePlayer basePlayer;
-    public BaseSoldier targetE;    
-    public BaseSoldier targetP;    
-    public BuyUnit buyUnit;
-    public TestEnemy testEnemy;
-    public WinOrLose wol;   
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;       
+    public BuyUnit buyUnit => GameManager.Instance.buyUnit;
+    public TestEnemy testEnemy => GameManager.Instance.testEnemy;
+    public WinOrLose wol => GameManager.Instance.winOrLose;
+
+    public BaseSoldier targetE;
+    public BaseSoldier targetP;
 
     public float dangerRange;
     public float attackRange;
@@ -32,6 +33,7 @@ public class BaseSoldier : MonoBehaviour
     public bool attackOnBase = false;
     public bool pushBack = false;
     public bool hulolo = false;
+    public bool attacking = false;
     public virtual void TargetOnWho()
     {
         if (agent.isPlayer == true)
@@ -112,8 +114,8 @@ public class BaseSoldier : MonoBehaviour
     {
         if (target.isDead == false)
         {
-            agent.RotationOnTarget(target.transform.position - transform.position);
-            if (distanceToEnemy > attackRange)
+            
+            if (distanceToEnemy > attackRange && attacking == false)
             {
                 agent.obstacle.enabled = false;
                 agent.agent.enabled = true;
@@ -123,6 +125,8 @@ public class BaseSoldier : MonoBehaviour
             }
             else
             {
+                attacking = true;
+                agent.RotationOnTarget(target.transform.position - transform.position);
                 if (agent.agent.enabled == true)
                     agent.agent.isStopped = true;
                 agent.agent.enabled = false;
@@ -137,6 +141,10 @@ public class BaseSoldier : MonoBehaviour
             TargetIsDead();
     }
 
+    public void AttackingOff()
+    {
+        attacking = false;
+    }
 
     public virtual void RandomAttack()
     {
@@ -235,18 +243,13 @@ public class BaseSoldier : MonoBehaviour
             Gizmos.DrawLine(targetP.transform.position, transform.position);           
         }
     } 
-    
-
-    
 
     public virtual void AttackOnBaseEnemy()
     {
         if (agent.isPlayer && onAttack == false)
-        {
-            Vector3 baseSquare = new Vector3(baseEnemy.transform.position.x, 0, transform.position.z);
-            Vector3 soldierGOC = new Vector3(transform.position.x,0,transform.position.z);
-            float distanceToBaseEnemy = Vector3.Distance(baseSquare, soldierGOC);          
-            if (distanceToBaseEnemy <= attackRange + 2)
+        {                  
+            if (((transform.position.x >= baseEnemy.transform.position.x - 3) && (transform.position.x <= baseEnemy.transform.position.x + 3)) &&
+                    ((transform.position.z >= baseEnemy.transform.position.z - 3) && (transform.position.z <= baseEnemy.transform.position.z + 3)))           
             {
                 if (agent.agent.enabled == true)
                     agent.agent.isStopped = true;
@@ -263,8 +266,8 @@ public class BaseSoldier : MonoBehaviour
         }
         if (agent.isEnemy && onAttack == false)
         {
-            float distanceToBaseEnemy = Vector3.Distance(transform.position, basePlayer.transform.position);
-            if (distanceToBaseEnemy <= attackRange + 2)
+            if (((transform.position.x >= basePlayer.transform.position.x - 3) && (transform.position.x <= basePlayer.transform.position.x + 3)) &&
+                    ((transform.position.z >= basePlayer.transform.position.z - 3) && (transform.position.z <= basePlayer.transform.position.z + 3)))
             {
                 if (agent.agent.enabled == true)
                     agent.agent.isStopped = true;
@@ -293,9 +296,12 @@ public class BaseSoldier : MonoBehaviour
     public virtual void PushBack()
     {
         pushBack = true;
+        if (agent.agent.enabled == true)
+            agent.agent.isStopped = true;
         this.DelayCall(2f, () =>
         {            
             pushBack = false;
+            agent.agent.isStopped = false;
         });        
         if (currentHP > 0) 
             agent.animator.SetTrigger("PushBack");

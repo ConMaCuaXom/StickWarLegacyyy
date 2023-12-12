@@ -7,12 +7,7 @@ public class SwordMan : BaseSoldier
 {
     private void Awake()
     {
-        agent = GetComponent<Agent>();        
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        buyUnit = GameManager.Instance.buyUnit;
-        testEnemy = GameManager.Instance.testEnemy;
-        wol = GameManager.Instance.winOrLose;
+        agent = GetComponent<Agent>();               
         attackRange = 2f;
         dangerRange = 10f;
         damage = 5f;

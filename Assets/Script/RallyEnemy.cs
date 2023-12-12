@@ -11,8 +11,8 @@ public class RallyEnemy : MonoBehaviour
     public List<BaseSoldier> magicsE = null;
     public List<BaseSoldier> titansE = null;
     public List<BaseSoldier> tinysE = null;
-    public List<BaseSoldier> minersE = null;
-    public List<CrossbowmanDefender> crbE = null;
+    public List<BaseSoldier> minersE = null;   
+    public List<Boat> boatsE = null;
     public Dictionary<string, List<BaseSoldier>> dicE = new Dictionary<string, List<BaseSoldier>>();
     public Transform[,] arrayRallyE = new Transform[4, 12];
 
@@ -27,8 +27,7 @@ public class RallyEnemy : MonoBehaviour
         //SwordMan aa = sword as SwordMan;
 
         AddDicE();
-        indexE = 0;
-        crbE = GameManager.Instance.crossbowmanDefendersE;
+        indexE = 0;       
         GetIndexE();
     }
 
@@ -67,10 +66,10 @@ public class RallyEnemy : MonoBehaviour
                 whichSoldier.onAttack = false;
             }
         }
-        foreach (CrossbowmanDefender crb in crbE)
+        foreach (Boat b in boatsE)
         {
-            crb.GoAttackPoint();
-            crb.AttackDef();
+            b.GoAttackPoint();
+            b.AttackDef();
         }
     }
 
@@ -87,9 +86,9 @@ public class RallyEnemy : MonoBehaviour
                 }
             }
         }
-        foreach (CrossbowmanDefender crb in crbE)
+        foreach (Boat b in boatsE)
         {
-            crb.GoDefensePoint();
+            b.GoDefensePoint();
         }
 
     }
@@ -110,9 +109,9 @@ public class RallyEnemy : MonoBehaviour
 
     public void Rallyt1E()
     {
-        foreach (CrossbowmanDefender crb in crbE)
+        foreach (Boat b in boatsE)
         {
-            crb.GoDefensePoint();
+            b.GoDefensePoint();
         }
         int mgPoint = (magicsE.Count + 3) / 4;
         int arPoint = (archersE.Count + 3) / 4;

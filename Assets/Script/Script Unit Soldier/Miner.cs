@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class Miner : BaseSoldier
 {    
-    public GoldInGoldMine goldMineGO;
-    
-
+    public GoldInGoldMine goldMineGO;   
     public int indexGoldMine = 0;
     public int indexGoldEnemy = 7;
     public int goldTake = 120;
@@ -26,16 +24,14 @@ public class Miner : BaseSoldier
 
     private void Awake()
     {
+        canGoToBase = false;
+        canGoToGoldMine = true;
         checkAddPerson = true;
-        agent = GetComponent<Agent>();
-        wol = GameManager.Instance.winOrLose;
+        agent = GetComponent<Agent>();       
         if (agent.isPlayer)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldMine];
         if (agent.isEnemy)
-            goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];
-        basePlayer = GameManager.Instance.basePlayer;
-        baseEnemy = GameManager.Instance.baseEnemy;
-        testEnemy = GameManager.Instance.testEnemy;
+            goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];                
         attackRange = 10f;
         damage = 5f;
         hp = 200f;   
@@ -44,7 +40,9 @@ public class Miner : BaseSoldier
 
 
     private void Update()
-    {       
+    {
+        if (pushBack || isDead || onDef)
+            return;
         GoToGoldMine();
         GoToBase();
         WiOrLo();
@@ -61,22 +59,25 @@ public class Miner : BaseSoldier
             return;      
         
         agent.agent.isStopped = false;
-        agent.RotationOnTarget(goldMineGO.transform.position - transform.position);
-        agent.SetDestination(goldMineGO.transform.position);
-        
+        try
+        {
+            agent.SetDestination(goldMineGO.transform.position);
+        }
+        catch 
+        {
+            Debug.Log(gameObject.name);
+        } 
         distanceToGoldMine = Vector3.Distance(transform.position, goldMineGO.transform.position);
         if (distanceToGoldMine <= rangeToCook)
         {           
             agent.agent.isStopped = true;             
-            agent.animator.SetBool("CookCook", true);           
-            time += Time.deltaTime;           
-            if (time >= timeForCook)
+            agent.animator.SetBool("CookCook", true);
+            if (goldInMiner >= goldTake * 3)
             {
                 canGoToBase = true;
                 canGoToGoldMine = false;
-                time = 0;
-            }
-            
+                agent.agent.isStopped = false;
+            }                                                       
         } else
             agent.animator.SetBool("CookCook", false);
 
@@ -89,9 +90,9 @@ public class Miner : BaseSoldier
             return;
         agent.LookAtYourBase();
         agent.animator.SetBool("CookCook", false);
-        agent.MoveForward();
+        agent.GoToYourBase();
         if (agent.isPlayer == true)
-            distanceToBase = Vector3.Distance(transform.position,basePlayer.transform.position);
+            distanceToBase = Vector3.Distance(transform.position, basePlayer.transform.position);
         if (agent.isEnemy == true)
             distanceToBase = Vector3.Distance(transform.position, baseEnemy.transform.position);
         if( distanceToBase <= rangeToBase )
@@ -99,6 +100,7 @@ public class Miner : BaseSoldier
             canGoToGoldMine = true;
             canGoToBase = false;
             basePlayer.currentGold += goldInMiner;
+            goldInMiner = 0;
         }
     }
 
@@ -138,6 +140,7 @@ public class Miner : BaseSoldier
         base.TakeDamage(dmg);
         if (isDead && agent.isPlayer)
         {
+            goldMineGO.person--;
             if (buyUnit.rally.miners.Contains(this) == true)
             {
                 buyUnit.rally.miners.Remove(this);
@@ -146,6 +149,7 @@ public class Miner : BaseSoldier
         }
         if (isDead && agent.isEnemy)
         {
+            goldMineGO.person--;
             if (testEnemy.rallyE.minersE.Contains(this) == true)
             {
                 testEnemy.rallyE.minersE.Remove(this);
