@@ -8,10 +8,10 @@ public class Tiny : BaseSoldier
     private void Awake()
     {
         agent = GetComponent<Agent>();        
-        attackRange = 2f;
-        dangerRange = 10f;
-        damage = 5f;
-        hp = 2000f;
+        attackRange = 2.5f;
+        dangerRange = 7f;
+        damage = 10f;
+        hp = 80f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -24,6 +24,8 @@ public class Tiny : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
+        OnFighting();
+
     }
 
     public override void TakeDamage(float dmg)

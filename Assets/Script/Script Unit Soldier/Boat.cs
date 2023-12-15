@@ -19,7 +19,7 @@ public class Boat : MonoBehaviour
     public bool isEnemy;
 
     public float attackRange = 15f;
-    public float damage = 10f;
+    public float damage = 25f;
 
     private void Awake()
     {
@@ -29,7 +29,8 @@ public class Boat : MonoBehaviour
 
     private void Update()
     {
-        Fire();
+        if (Vector3.Distance(transform.position,attackPoint.transform.position) < 0.5)
+            Fire();
         //transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -105,14 +106,14 @@ public class Boat : MonoBehaviour
 
     public void RespawnBolt()
     {
-        GameObject bolt = Instantiate(Bolt);
+        GameObject bolt = Instantiate(Bolt,transform.position,transform.rotation);
         ArrowAndBolt aab = bolt.GetComponent<ArrowAndBolt>();
         aab.boat = this;
         if (isPlayer)
             aab.target = targetE;
         if (isEnemy)
             aab.target = targetP;
-        bolt.transform.position = transform.position;
+        
     }
 
     public void GoAttackPoint()

@@ -25,6 +25,7 @@ public class BaseSoldier : MonoBehaviour
     public float distanceP;
     public float timeToDestroy = 5f;
     public float timeToPush;
+    public float timeFighting;
 
     public bool isDead = false;
     public bool onAttack = false;
@@ -33,6 +34,7 @@ public class BaseSoldier : MonoBehaviour
     public bool pushBack = false;
     public bool hulolo = false;
     public bool attacking = false;
+    public bool fighting = false;
     public virtual void TargetOnWho()
     {
         if (agent.isPlayer == true && GameManager.Instance.enemy != null)
@@ -139,6 +141,11 @@ public class BaseSoldier : MonoBehaviour
         attacking = false;
     }
 
+    public void Fighting()
+    {
+        fighting = true;
+    }
+
     public virtual void RandomAttack()
     {
         int rd = Random.Range(0, 2);
@@ -171,6 +178,8 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void AttackOnTarget()
     {
+        fighting = true;
+        timeFighting = 0;
         if (agent.isPlayer && targetE != null)
             targetE.TakeDamage(damage);               
         if (agent.isEnemy && targetP != null)
@@ -179,7 +188,9 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {        
-        currentHP -= dmg;       
+        currentHP -= dmg;   
+        fighting = true;
+        timeFighting = 0;
         if (currentHP <= 0 && isDead == false)
         {
             isDead = true;
@@ -300,5 +311,13 @@ public class BaseSoldier : MonoBehaviour
         }
     }
 
-    
+    public virtual void OnFighting()
+    {
+        if (fighting == true)
+        {
+            timeFighting += Time.deltaTime;
+            if (timeFighting >= 5f)
+                fighting = false;
+        }
+    }
 }

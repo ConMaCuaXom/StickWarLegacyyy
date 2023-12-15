@@ -23,6 +23,7 @@ public class Rally : MonoBehaviour
     public Toggle rallying;
     public Toggle defense;
     public int index ;
+   
 
     
     
@@ -33,7 +34,7 @@ public class Rally : MonoBehaviour
     {
         //BaseSoldier sword = swords[index];
         //SwordMan aa = sword as SwordMan;
-
+        
         AddDic();
         index = 0;
         buyUnit = GetComponent<BuyUnit>();
@@ -48,7 +49,8 @@ public class Rally : MonoBehaviour
         if (rallying.isOn == true)       
             Rallyt1();                      
         if (defense.isOn == true)        
-            Defense();       
+            Defense();     
+       
     }
 
     public void AddDic()
@@ -59,6 +61,19 @@ public class Rally : MonoBehaviour
         dic.Add("Magic", magics);       
         dic.Add("Titan", titans);
         dic.Add("Tiny", tinys);
+    }
+
+    public bool OnFight()
+    {
+        foreach (var soldier in dic.Values)
+        {
+            foreach (var whichSoldier in soldier)
+            {
+                if (whichSoldier.fighting == true)
+                    return true;
+            }
+        }
+        return false;
     }
 
     public void Defense()
@@ -73,6 +88,14 @@ public class Rally : MonoBehaviour
                 whichSoldier.onDef = true;
                 whichSoldier.onAttack = false;
             }
+        }
+        foreach (Miner miner in miners)
+        {
+            miner.agent.agent.isStopped = false;
+            miner.agent.DefenseBase();
+            miner.agent.animator.SetBool("Run", true);
+            miner.agent.animator.SetBool("CookCook", false);
+            miner.onDef = true;
         }
         foreach (Boat b in boats)
         {
@@ -93,6 +116,10 @@ public class Rally : MonoBehaviour
                     whichSoldier.AttackOnBaseEnemy();
                 }                                           
             }
+        }
+        foreach (Miner miner in miners)
+        {                                  
+            miner.onDef = false;
         }
         foreach (Boat b in boats)
         {
@@ -116,6 +143,10 @@ public class Rally : MonoBehaviour
 
     public void Rallyt1()
     {
+        foreach (Miner miner in miners)
+        {
+            miner.onDef = false;
+        }
         foreach (Boat b in boats)
         {
             b.GoDefensePoint();

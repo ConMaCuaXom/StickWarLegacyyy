@@ -13,9 +13,9 @@ public class Archer : BaseSoldier
     {
         agent = GetComponent<Agent>();                       
         attackRange = 10f;
-        dangerRange = 15f;
-        damage = 5f;
-        hp = 200f;
+        dangerRange = 10f;
+        damage = 20f;
+        hp = 60f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -27,6 +27,7 @@ public class Archer : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
+        OnFighting();
     }
 
     public override void TakeDamage(float dmg)

@@ -9,10 +9,10 @@ public class SpearMan : BaseSoldier
     private void Awake()
     {
         agent = GetComponent<Agent>();                
-        attackRange = 2.5f;
-        dangerRange = 10f;
-        damage = 5f;
-        hp = 200f;
+        attackRange = 2.7f;
+        dangerRange = 7f;
+        damage = 15f;
+        hp = 250f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -24,6 +24,7 @@ public class SpearMan : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
+        OnFighting();
     }
 
     public override void TakeDamage(float dmg)

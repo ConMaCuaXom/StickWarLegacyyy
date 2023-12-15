@@ -11,11 +11,11 @@ public class Open : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("LvUnlock", 1);
+        //PlayerPrefs.SetInt("LvUnlock", 1);
         play.onClick.AddListener(PlayGame);
         if (PlayerPrefs.GetString("FirstTime") != "No")
         {
-            PlayerPrefs.GetInt("LvUnlock", 1);
+            PlayerPrefs.SetInt("LvUnlock", 1);
         }
     }
 

@@ -95,19 +95,19 @@ public class BuyUnit : MonoBehaviour
             return;
         delayAll = true;
         loadingMiner.DOFillAmount(0, 0f);
-        loadingMinerRed.DOFillAmount(1, 0f);
-        GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
-        Miner mn = miner.GetComponent<Miner>();       
-        GameManager.Instance.player.Add(mn);
-        basePlayer.currentGold -= minerPrice;
-        rally.miners.Add(mn);
-        if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2 - 2)
-            checkMiner = true;        
+        loadingMinerRed.DOFillAmount(1, 0f);       
+        basePlayer.currentGold -= minerPrice;                    
         limitUnitCurrent++;
         loadingMinerRed.DOFillAmount(0, delayTimeMiner);
         loadingMiner.DOFillAmount(1, delayTimeMiner);
         this.DelayCall(delayTimeMiner, () =>
         {
+            GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            Miner mn = miner.GetComponent<Miner>();
+            GameManager.Instance.player.Add(mn);
+            rally.miners.Add(mn);
+            if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2)
+                checkMiner = true;
             delayAll = false;
         });
     }
@@ -119,16 +119,16 @@ public class BuyUnit : MonoBehaviour
         delayAll = true;
         loadingSwordMan.DOFillAmount(0, 0f);
         loadingSwordManRed.DOFillAmount(1, 0f);
-        GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
-        SwordMan sw = swordMan.GetComponent<SwordMan>();       
         basePlayer.currentGold -= swordManPrice;
-        limitUnitCurrent++;                      
-        rally.swords.Add(sw);
-        GameManager.Instance.player.Add(sw);
+        limitUnitCurrent++;                             
         loadingSwordMan.DOFillAmount(1, delayTimeSwordMan);
         loadingSwordManRed.DOFillAmount(0, delayTimeSwordMan);
         this.DelayCall(delayTimeSwordMan, () =>
         {
+            GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            SwordMan sw = swordMan.GetComponent<SwordMan>();           
+            rally.swords.Add(sw);
+            GameManager.Instance.player.Add(sw);
             delayAll = false;
         });
     }
@@ -139,17 +139,17 @@ public class BuyUnit : MonoBehaviour
             return;
         delayAll = true;
         loadingArcher.DOFillAmount(0, 0f);
-        loadingArcherRed.DOFillAmount(1, 0f);
-        GameObject archer = Instantiate(Archer, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);        
-        Archer ar = archer.GetComponent<Archer>();
-        GameManager.Instance.player.Add(ar);       
+        loadingArcherRed.DOFillAmount(1, 0f);             
         basePlayer.currentGold -= archerPrice;
-        limitUnitCurrent++;        
-        rally.archers.Add(ar);
+        limitUnitCurrent++;                
         loadingArcher.DOFillAmount(1, delayTimeArcher);
         loadingArcherRed.DOFillAmount(0, delayTimeArcher);
         this.DelayCall(delayTimeArcher, () =>
         {
+            GameObject archer = Instantiate(Archer, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            Archer ar = archer.GetComponent<Archer>();
+            GameManager.Instance.player.Add(ar);
+            rally.archers.Add(ar);
             delayAll = false;
         });
     }
@@ -160,17 +160,17 @@ public class BuyUnit : MonoBehaviour
             return;
         delayAll = true;
         loadingSpearMan.DOFillAmount(0, 0f);
-        loadingSpearManRed.DOFillAmount(1, 0f);
-        GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
-        SpearMan sp = spearMan.GetComponent<SpearMan>();
-        GameManager.Instance.player.Add(sp);       
+        loadingSpearManRed.DOFillAmount(1, 0f);           
         basePlayer.currentGold -= spearManPrice;
-        limitUnitCurrent += 3;                   
-        rally.spears.Add(sp);
+        limitUnitCurrent += 3;                           
         loadingSpearMan.DOFillAmount(1, delayTimeSpearMan);
         loadingSpearManRed.DOFillAmount(0, delayTimeSpearMan);
         this.DelayCall(delayTimeSpearMan, () =>
         {
+            GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            SpearMan sp = spearMan.GetComponent<SpearMan>();
+            GameManager.Instance.player.Add(sp);
+            rally.spears.Add(sp);
             delayAll = false;
         });
     }
@@ -181,17 +181,17 @@ public class BuyUnit : MonoBehaviour
             return;
         delayAll = true;
         loadingMagicMan.DOFillAmount(0, 0f);
-        loadingMagicManRed.DOFillAmount(1, 0f);
-        GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
-        MagicMan mg = magicman.GetComponent<MagicMan>();
-        GameManager.Instance.player.Add(mg);        
+        loadingMagicManRed.DOFillAmount(1, 0f);                
         basePlayer.currentGold -= magicManPrice;
-        limitUnitCurrent += 5;       
-        rally.magics.Add(mg);
+        limitUnitCurrent += 5;             
         loadingMagicMan.DOFillAmount(1, delayTimeMagicMan);
         loadingMagicManRed.DOFillAmount(0, delayTimeMagicMan);
         this.DelayCall(delayTimeMagicMan, () =>
         {
+            GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            MagicMan mg = magicman.GetComponent<MagicMan>();
+            GameManager.Instance.player.Add(mg);
+            rally.magics.Add(mg);
             delayAll = false;
         });
     }
@@ -202,17 +202,17 @@ public class BuyUnit : MonoBehaviour
             return;
         delayAll = true;
         loadingTitanMan.DOFillAmount(0, 0f);
-        loadingTitanManRed.DOFillAmount(1, 0f);
-        GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);       
-        Titan tt = titan.GetComponent<Titan>();
-        GameManager.Instance.player.Add(tt);
+        loadingTitanManRed.DOFillAmount(1, 0f);        
         basePlayer.currentGold -= titanManPrice;
-        limitUnitCurrent += 3;        
-        rally.titans.Add(tt);
+        limitUnitCurrent += 3;               
         loadingTitanMan.DOFillAmount(1, delayTimeTitanMan);
         loadingTitanManRed.DOFillAmount(0, delayTimeTitanMan);
         this.DelayCall(delayTimeTitanMan, () =>
         {
+            GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            Titan tt = titan.GetComponent<Titan>();
+            GameManager.Instance.player.Add(tt);
+            rally.titans.Add(tt);
             delayAll = false;
         });
     }

@@ -24,9 +24,9 @@ public class MagicMan : BaseSoldier
         rally = GameManager.Instance.rally;
         rallyEnemy = GameManager.Instance.rallyEnemy;        
         attackRange = 10f;
-        dangerRange = 15f;
-        damage = 5f;
-        hp = 200f;
+        dangerRange = 10f;
+        damage = 25f;
+        hp = 70f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -40,6 +40,7 @@ public class MagicMan : BaseSoldier
         TargetOnWho();
         SpawnSoldier();
         WiOrLo();
+        OnFighting();
     }
 
     public override void TakeDamage(float dmg)

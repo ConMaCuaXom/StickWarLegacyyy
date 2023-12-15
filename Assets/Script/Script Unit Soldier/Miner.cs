@@ -34,7 +34,7 @@ public class Miner : BaseSoldier
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];                
         attackRange = 10f;
         damage = 5f;
-        hp = 200f;   
+        hp = 100f;   
         currentHP = hp;
     }
 
@@ -58,20 +58,14 @@ public class Miner : BaseSoldier
         if (canGoToBase)
             return;      
         
-        agent.agent.isStopped = false;
-        try
-        {
-            agent.SetDestination(goldMineGO.transform.position);
-        }
-        catch 
-        {
-            Debug.Log(gameObject.name);
-        } 
+        agent.agent.isStopped = false;              
+        agent.SetDestination(goldMineGO.transform.position);                 
         distanceToGoldMine = Vector3.Distance(transform.position, goldMineGO.transform.position);
         if (distanceToGoldMine <= rangeToCook)
         {           
             agent.agent.isStopped = true;             
             agent.animator.SetBool("CookCook", true);
+            agent.RotationOnTarget(goldMineGO.transform.position - transform.position);
             if (goldInMiner >= goldTake * 3)
             {
                 canGoToBase = true;
@@ -98,8 +92,12 @@ public class Miner : BaseSoldier
         if( distanceToBase <= rangeToBase )
         {
             canGoToGoldMine = true;
-            canGoToBase = false;
-            agent.basePlayer.currentGold += goldInMiner;
+            canGoToBase = false;           
+            
+            if (agent.isPlayer)
+                agent.basePlayer.currentGold += goldInMiner;
+            if (agent.isEnemy)
+                agent.baseEnemy.currentGold += goldInMiner;
             goldInMiner = 0;
         }
     }

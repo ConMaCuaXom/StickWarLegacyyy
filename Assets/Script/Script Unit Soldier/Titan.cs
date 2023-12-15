@@ -10,9 +10,9 @@ public class Titan : BaseSoldier
     {
         agent = GetComponent<Agent>();              
         attackRange = 2.7f;
-        dangerRange = 10f;
-        damage = 5f;
-        hp = 200f;
+        dangerRange = 7f;
+        damage = 30f;
+        hp = 1000f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -24,6 +24,7 @@ public class Titan : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
+        OnFighting();
     }
 
     public override void TakeDamage(float dmg)

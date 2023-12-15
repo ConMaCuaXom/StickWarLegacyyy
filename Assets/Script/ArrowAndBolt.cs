@@ -16,8 +16,8 @@ public class ArrowAndBolt : MonoBehaviour
     public GameObject Bombom;
     public ParticleSystem bomPS;
 
-    public float damageAr;
-    public float damageBo;
+    public float damageAr => archer.damage;
+    public float damageBo => boat.damage;
     public float timeToDestroy = 10f;
     public float timeDur;
     public float timeTotal = 10f;

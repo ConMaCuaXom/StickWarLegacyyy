@@ -20,12 +20,16 @@ public class RallyEnemy : MonoBehaviour
     public Toggle rallyingE;
     public Toggle defenseE;
     public int indexE;
+    
+
+    
 
     private void Awake()
     {
+       
         //BaseSoldier sword = swords[index];
         //SwordMan aa = sword as SwordMan;
-
+       
         AddDicE();
         indexE = 0;       
         GetIndexE();
@@ -33,12 +37,14 @@ public class RallyEnemy : MonoBehaviour
 
     private void Update()
     {
+        
         if (attackForwardE.isOn == true)
             AttackForwardE();
         if (rallyingE.isOn == true)
             Rallyt1E();
         if (defenseE.isOn == true)
             DefenseE();
+       
     }
 
     public void AddDicE()
@@ -50,9 +56,30 @@ public class RallyEnemy : MonoBehaviour
         dicE.Add("Titan", titansE);
         dicE.Add("Tiny", tinysE);
     }
+    
+    public bool OnFight()
+    {
+        foreach (var soldier in dicE.Values)
+        {
+            foreach (var whichSoldier in soldier)
+            {
+                if (whichSoldier.fighting == true) 
+                return true;               
+            }           
+        }
+        return false;
+    }
 
     public void DefenseE()
     {
+        foreach (Miner miner in minersE)
+        {
+            miner.agent.agent.isStopped = false;
+            miner.agent.DefenseBase();
+            miner.agent.animator.SetBool("Run", true);
+            miner.agent.animator.SetBool("CookCook", false);
+            miner.onDef = true;
+        }
         foreach (var soldier in dicE.Values)
         {
             foreach (var whichSoldier in soldier)
@@ -73,6 +100,10 @@ public class RallyEnemy : MonoBehaviour
 
     public void AttackForwardE()
     {
+        foreach (Miner miner in minersE)
+        {
+            miner.onDef = false;
+        }
         foreach (var soldier in dicE.Values)
         {
             foreach (var whichSoldier in soldier)
@@ -107,6 +138,10 @@ public class RallyEnemy : MonoBehaviour
 
     public void Rallyt1E()
     {
+        foreach (Miner miner in minersE)
+        {
+            miner.onDef = false;
+        }
         foreach (Boat b in boatsE)
         {
             b.GoDefensePoint();
