@@ -16,6 +16,7 @@ public class SwordMan : BaseSoldier
         isDead = false;
         onAttack = false;
         onDef = false;
+        nearBase = false;
     }
 
     private void Update()
@@ -26,6 +27,7 @@ public class SwordMan : BaseSoldier
         TargetOnWho();
         WiOrLo();
         OnFighting();
+       
     }
 
     public override void TakeDamage(float dmg)

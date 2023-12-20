@@ -35,6 +35,8 @@ public class BaseSoldier : MonoBehaviour
     public bool hulolo = false;
     public bool attacking = false;
     public bool fighting = false;
+    public bool onRally = false;
+    public bool nearBase = false;
     public virtual void TargetOnWho()
     {
         if (agent.isPlayer == true && GameManager.Instance.enemy != null)
@@ -221,7 +223,8 @@ public class BaseSoldier : MonoBehaviour
     public void StopRallyPoint()
     {
         agent.LookAtEnemyBase();
-        agent.animator.SetBool("Run", false);                
+        agent.animator.SetBool("Run", false);
+        onRally = true;
     }
 
 
@@ -240,27 +243,60 @@ public class BaseSoldier : MonoBehaviour
         }
     } 
 
+    //public virtual void MaxMove()
+    //{
+    //    if (agent.isPlayer)
+    //    {
+    //        if ((transform.position.x >= agent.baseEnemy.transform.position.x - 3) &&
+    //               (transform.position.z >= agent.baseEnemy.transform.position.z - 3) && (transform.position.z <= agent.baseEnemy.transform.position.z + 3))           
+    //            transform.position = new Vector3(agent.baseEnemy.transform.position.x - 3, transform.position.y, transform.position.z);
+    //        if ((transform.position.x >= agent.baseEnemy.transform.position.x) &&
+    //              (transform.position.z <= agent.baseEnemy.transform.position.z - 3) && (transform.position.z >= agent.baseEnemy.transform.position.z + 3))
+    //            transform.position = new Vector3(agent.baseEnemy.transform.position.x, transform.position.y, transform.position.z);
+    //    }
+    //    if (agent.isEnemy)
+    //    {
+    //        if ((transform.position.x <= agent.basePlayer.transform.position.x + 3) &&
+    //               (transform.position.z >= agent.basePlayer.transform.position.z - 3) && (transform.position.z <= agent.basePlayer.transform.position.z + 3))
+    //            transform.position = new Vector3(agent.basePlayer.transform.position.x + 3, transform.position.y, transform.position.z);
+    //        if ((transform.position.x <= agent.basePlayer.transform.position.x) &&
+    //              (transform.position.z <= agent.basePlayer.transform.position.z - 3) && (transform.position.z >= agent.basePlayer.transform.position.z + 3))
+    //            transform.position = new Vector3(agent.basePlayer.transform.position.x, transform.position.y, transform.position.z);
+    //    }
+    //}
+    private void OnTriggerEnter(Collider other)
+    {       
+        if (agent.isPlayer && other.CompareTag("BaseEnemy") || agent.isEnemy && other.CompareTag("BasePlayer"))
+            nearBase = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (agent.isPlayer && other.CompareTag("BaseEnemy") || agent.isEnemy && other.CompareTag("BasePlayer"))
+            nearBase = false;
+    }
+
+
     public virtual void AttackOnBaseEnemy()
     {
         if (agent.isPlayer && onAttack == false)
         {                  
-            if (((transform.position.x >= agent.baseEnemy.transform.position.x - 3) && (transform.position.x <= agent.baseEnemy.transform.position.x + 3)) &&
-                    ((transform.position.z >= agent.baseEnemy.transform.position.z - 3) && (transform.position.z <= agent.baseEnemy.transform.position.z + 3)))           
+            if (nearBase == true)
             {               
                 agent.agent.isStopped = true;
                 attackOnBase = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
                 agent.LookAtEnemyBase();
-            } else
+            }            
+            else
             {
                 agent.AttackBase();
             }
         }
         if (agent.isEnemy && onAttack == false)
         {
-            if (((transform.position.x >= agent.basePlayer.transform.position.x - 3) && (transform.position.x <= agent.basePlayer.transform.position.x + 3)) &&
-                    ((transform.position.z >= agent.basePlayer.transform.position.z - 3) && (transform.position.z <= agent.basePlayer.transform.position.z + 3)))
+            if (nearBase)
             {                
                 agent.agent.isStopped = true;
                 attackOnBase = true;
@@ -278,9 +314,9 @@ public class BaseSoldier : MonoBehaviour
     public virtual void DamageForBase()
     {
         if (agent.isPlayer)
-            agent.baseEnemy.TakeDamage(damage);
+            agent.baseEnemy.TakeDamage(damage - 10f);
         if (agent.isEnemy)
-            agent.basePlayer.TakeDamage(damage);
+            agent.basePlayer.TakeDamage(damage - 10f);
     }
 
     public virtual void PushBack()
@@ -301,12 +337,15 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void WiOrLo()
     {
+        
         if (agent.isPlayer && wol.playerWin == true)
         {
+            agent.agent.isStopped = true;
             agent.animator.SetBool("Victory", true);
         }
         if (agent.isEnemy && wol.playerLose == true)
         {
+            agent.agent.isStopped = true;
             agent.animator.SetBool("Victory", true);
         }
     }

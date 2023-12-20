@@ -12,28 +12,45 @@ public class LevelManager : MonoBehaviour
 
     public BuyUnit buyUnit => GameManager.Instance.buyUnit;
     public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
     public TestEnemy testEnemy => GameManager.Instance.testEnemy;
     public RallyEnemy rallyEnemy => GameManager.Instance.rallyEnemy;
     public Rally rally => GameManager.Instance.rally;
 
     public TestMode testMode;
     public List<Boat> boats;
+    public List<GameObject> tutorialLv1;
 
     public float pOP;
     public float pOE;
     public float time;
+    public float timeCheck;
     public float timeMiner;
     public float timeArcher;
 
     public bool checkHP;
-
+    public bool goldFirst;
+    public bool soldierPlayerFirst;
+    public bool soldierEnemyFirst;
+    public List<bool> tuto;
+    
 
     private void Awake()
     {
+        
         time = 0;
+        timeCheck = 0;
         timeMiner = 0;
         timeArcher = 0;
         checkHP = false;
+        goldFirst = true;
+        soldierPlayerFirst = true;
+        soldierEnemyFirst = true;
+        for (int i = 0; i < 10; i++)
+        {
+            bool ttrl = true;
+            tuto.Add(ttrl);
+        }
     }
 
     private void Update()
@@ -73,7 +90,55 @@ public class LevelManager : MonoBehaviour
     }
     public void Level1()
     {
-        
+        if (time > 2f && tuto[0])
+            tutorialLv1[0].SetActive(true);
+        if (rally.miners.Count > 0 && tuto[1])
+        {           
+            tutorialLv1[0].SetActive(false);
+            tutorialLv1[1].SetActive(true);
+            if (tuto[0])
+            {
+                basePlayer.currentGold += 250;
+                testEnemy.BuyMiner();
+                tuto[0] = false;
+            }          
+        }
+        if (rally.swords.Count == 2)
+        {
+            if (rally.swords[1].onRally && tuto[2])
+            {
+                tuto[1] = false;
+                tutorialLv1[1].SetActive(false);
+                tutorialLv1[2].SetActive(true);
+            }
+        }
+       
+        if (rally.attackForward.isOn && tuto[3])
+        {
+            tuto[2] = false;
+            tutorialLv1[2].SetActive(false);
+            tutorialLv1[3].SetActive(true);
+            timeCheck += Time.deltaTime;
+            if (timeCheck > 2f && timeCheck < 4f)
+            {               
+                tutorialLv1[3].SetActive(false);
+                tutorialLv1[4].SetActive(true);
+            }
+            if (timeCheck >= 4f && timeCheck < 7f)
+            {
+                tutorialLv1[4].SetActive(false);
+                tutorialLv1[5].SetActive(true);
+            }
+            if (timeCheck > 7f)
+            {
+                tutorialLv1[5].SetActive(false);
+                tutorialLv1[3].SetActive(false);
+                tuto[3] = false;
+            }
+            
+                
+        } 
+
         if (testMode.cheating == false)
         {
             buyUnit.buyArcher.gameObject.SetActive(false);
@@ -85,12 +150,18 @@ public class LevelManager : MonoBehaviour
         {
             boatHide.agent.isStopped = true;
         }
+        if (goldFirst)
+        {
+            basePlayer.currentGold = 150;
+            goldFirst = false;
+        }               
+        
         if (rally.swords.Count >= 2 && rallyEnemy.archersE.Count < 1 && timeArcher > 10)
         {
             testEnemy.BuyArcher();
             timeArcher = 0;
         }
-        if (rallyEnemy.minersE.Count < 2 && timeMiner > 40)
+        if (rallyEnemy.minersE.Count < 2 && timeMiner > 30)
         {
             testEnemy.BuyMiner();
             timeMiner = 0;
@@ -107,9 +178,7 @@ public class LevelManager : MonoBehaviour
             testEnemy.BuyMiner();
             checkHP = true;
         }
-        
-        
-        
+       
     }
     public void Level2()
     {

@@ -30,7 +30,7 @@ public class TestEnemy : MonoBehaviour
     public RallyEnemy rallyE = null;
 
     public int limitUnit = 50;
-    public int limitUnitCurrent = 2;
+    public int limitUnitCurrent = 0;
 
     public bool checkMiner = false;
     public bool checkLimit = false;

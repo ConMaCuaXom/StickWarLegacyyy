@@ -25,6 +25,7 @@ public class Titan : BaseSoldier
         TargetOnWho();
         WiOrLo();
         OnFighting();
+        
     }
 
     public override void TakeDamage(float dmg)

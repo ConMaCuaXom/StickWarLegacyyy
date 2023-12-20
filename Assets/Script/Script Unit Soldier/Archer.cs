@@ -28,6 +28,7 @@ public class Archer : BaseSoldier
         TargetOnWho();
         WiOrLo();
         OnFighting();
+        
     }
 
     public override void TakeDamage(float dmg)

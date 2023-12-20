@@ -25,6 +25,7 @@ public class Tiny : BaseSoldier
         TargetOnWho();
         WiOrLo();
         OnFighting();
+    
 
     }
 

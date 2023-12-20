@@ -41,6 +41,7 @@ public class MagicMan : BaseSoldier
         SpawnSoldier();
         WiOrLo();
         OnFighting();
+       
     }
 
     public override void TakeDamage(float dmg)

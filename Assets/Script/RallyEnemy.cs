@@ -138,10 +138,13 @@ public class RallyEnemy : MonoBehaviour
 
     public void Rallyt1E()
     {
-        foreach (Miner miner in minersE)
+        if (minersE.Count > 0)
         {
-            miner.onDef = false;
-        }
+            foreach (Miner miner in minersE)
+            {
+                miner.onDef = false;
+            }
+        }       
         foreach (Boat b in boatsE)
         {
             b.GoDefensePoint();

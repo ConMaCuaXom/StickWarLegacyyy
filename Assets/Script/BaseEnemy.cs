@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseEnemy : MonoBehaviour
 {      
@@ -12,7 +14,9 @@ public class BaseEnemy : MonoBehaviour
     public float goldAddAuto = 20;
     public float HP = 2000f;
     public float currentHP;   
-    public WinOrLose wl;        
+    public WinOrLose wl;
+    public Image healthBar;
+    public Text DisplayCurrentHP;
 
     private void Awake()
     {
@@ -41,6 +45,9 @@ public class BaseEnemy : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        float ratio = currentHP / HP;
+        healthBar.DOFillAmount(ratio, 0.25f);
+        DisplayCurrentHP.text = currentHP.ToString();
         if (currentHP <= 0)
         {
             wl.LoseOrWin();

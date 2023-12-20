@@ -87,6 +87,7 @@ public class Rally : MonoBehaviour
                 whichSoldier.agent.animator.SetBool("AttackOnBase", false);
                 whichSoldier.onDef = true;
                 whichSoldier.onAttack = false;
+                whichSoldier.onRally = false;
             }
         }
         foreach (Miner miner in miners)
@@ -114,6 +115,7 @@ public class Rally : MonoBehaviour
                 if (whichSoldier.onAttack == false)
                 {                   
                     whichSoldier.AttackOnBaseEnemy();
+                    whichSoldier.onRally = false;
                 }                                           
             }
         }
@@ -143,10 +145,13 @@ public class Rally : MonoBehaviour
 
     public void Rallyt1()
     {
-        foreach (Miner miner in miners)
+        if (miners.Count > 0)
         {
-            miner.onDef = false;
-        }
+            foreach (Miner miner in miners)
+            {
+                miner.onDef = false;
+            }
+        }        
         foreach (Boat b in boats)
         {
             b.GoDefensePoint();

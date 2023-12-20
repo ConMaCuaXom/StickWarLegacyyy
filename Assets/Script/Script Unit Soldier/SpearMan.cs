@@ -25,6 +25,7 @@ public class SpearMan : BaseSoldier
         TargetOnWho();
         WiOrLo();
         OnFighting();
+       
     }
 
     public override void TakeDamage(float dmg)

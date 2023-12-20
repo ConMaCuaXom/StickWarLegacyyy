@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BasePlayer : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class BasePlayer : MonoBehaviour
     public float currentHP;
     public BuyUnit buyUnit;
     public WinOrLose wl;
+    public Image healthBar;
+    public Text DisplayCurrentHP;
     
 
     private void Awake()
@@ -44,6 +48,9 @@ public class BasePlayer : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        float ratio = currentHP / HP;
+        healthBar.DOFillAmount(ratio, 0.25f);
+        DisplayCurrentHP.text = currentHP.ToString();
         if (currentHP <= 0)
         {
             wl.LoseOrWin();
