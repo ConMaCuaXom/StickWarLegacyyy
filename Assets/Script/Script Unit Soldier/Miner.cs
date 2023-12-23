@@ -66,7 +66,7 @@ public class Miner : BaseSoldier
             agent.agent.isStopped = true;             
             agent.animator.SetBool("CookCook", true);
             agent.RotationOnTarget(goldMineGO.transform.position - transform.position);
-            if (goldInMiner >= goldTake * 3)
+            if (goldInMiner >= 120)
             {
                 canGoToBase = true;
                 canGoToGoldMine = false;

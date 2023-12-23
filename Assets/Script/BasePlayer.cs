@@ -48,6 +48,8 @@ public class BasePlayer : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        if (currentHP < 0)
+            currentHP = 0;
         float ratio = currentHP / HP;
         healthBar.DOFillAmount(ratio, 0.25f);
         DisplayCurrentHP.text = currentHP.ToString();

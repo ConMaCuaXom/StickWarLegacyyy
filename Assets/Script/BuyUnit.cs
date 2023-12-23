@@ -89,6 +89,19 @@ public class BuyUnit : MonoBehaviour
         buyTitanMan.onClick.RemoveAllListeners();
     }
 
+    public void AddMiner(int i)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
+            Miner mn = miner.GetComponent<Miner>();
+            GameManager.Instance.player.Add(mn);
+            rally.miners.Add(mn);
+            limitUnitCurrent++;
+        }
+        
+    }
+
     public void BuyMiner()
     {
         if (checkMiner || limitUnitCurrent >= limitUnit || basePlayer.currentGold < minerPrice || delayAll )
@@ -96,16 +109,12 @@ public class BuyUnit : MonoBehaviour
         delayAll = true;
         loadingMiner.DOFillAmount(0, 0f);
         loadingMinerRed.DOFillAmount(1, 0f);       
-        basePlayer.currentGold -= minerPrice;                    
-        limitUnitCurrent++;
+        basePlayer.currentGold -= minerPrice;                          
         loadingMinerRed.DOFillAmount(0, delayTimeMiner);
         loadingMiner.DOFillAmount(1, delayTimeMiner);
         this.DelayCall(delayTimeMiner, () =>
         {
-            GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
-            Miner mn = miner.GetComponent<Miner>();
-            GameManager.Instance.player.Add(mn);
-            rally.miners.Add(mn);
+            AddMiner(1);
             if (rally.miners.Count >= GameManager.Instance.goldInGoldMine.Count * 2)
                 checkMiner = true;
             delayAll = false;

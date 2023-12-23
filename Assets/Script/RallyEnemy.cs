@@ -20,6 +20,8 @@ public class RallyEnemy : MonoBehaviour
     public Toggle rallyingE;
     public Toggle defenseE;
     public int indexE;
+
+    
     
 
     
@@ -33,6 +35,7 @@ public class RallyEnemy : MonoBehaviour
         AddDicE();
         indexE = 0;       
         GetIndexE();
+        
     }
 
     private void Update()
@@ -69,6 +72,8 @@ public class RallyEnemy : MonoBehaviour
         }
         return false;
     }
+
+    
 
     public void DefenseE()
     {

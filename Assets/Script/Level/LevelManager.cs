@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public static int currentLv;
 
+    public List<LevelConfig> levelConfig = null;
     public BuyUnit buyUnit => GameManager.Instance.buyUnit;
     public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
     public BasePlayer basePlayer => GameManager.Instance.basePlayer;
@@ -27,11 +29,13 @@ public class LevelManager : MonoBehaviour
     public float timeCheck;
     public float timeMiner;
     public float timeArcher;
+    public float timeSwordMan;
+    public float timeSpearMan;
+    public float timeTitanMan;
+    public float timeMagicMan;
 
     public bool checkHP;
-    public bool goldFirst;
-    public bool soldierPlayerFirst;
-    public bool soldierEnemyFirst;
+    public bool goldFirst;  
     public List<bool> tuto;
     
 
@@ -42,10 +46,12 @@ public class LevelManager : MonoBehaviour
         timeCheck = 0;
         timeMiner = 0;
         timeArcher = 0;
+        timeSwordMan = 0;
+        timeSpearMan = 0;
+        timeTitanMan = 0;
+        timeMagicMan = 0;
         checkHP = false;
-        goldFirst = true;
-        soldierPlayerFirst = true;
-        soldierEnemyFirst = true;
+        goldFirst = true;       
         for (int i = 0; i < 10; i++)
         {
             bool ttrl = true;
@@ -58,6 +64,10 @@ public class LevelManager : MonoBehaviour
         time += Time.deltaTime;
         timeMiner += Time.deltaTime;
         timeArcher += Time.deltaTime;
+        timeSwordMan += Time.deltaTime;
+        timeSpearMan += Time.deltaTime;
+        timeTitanMan += Time.deltaTime;
+        timeMagicMan += Time.deltaTime;
         WhichLv();
         PowerOfMilitary();
     }
@@ -134,9 +144,7 @@ public class LevelManager : MonoBehaviour
                 tutorialLv1[5].SetActive(false);
                 tutorialLv1[3].SetActive(false);
                 tuto[3] = false;
-            }
-            
-                
+            }              
         } 
 
         if (testMode.cheating == false)
@@ -152,27 +160,27 @@ public class LevelManager : MonoBehaviour
         }
         if (goldFirst)
         {
-            basePlayer.currentGold = 150;
+            basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
             goldFirst = false;
         }               
         
-        if (rally.swords.Count >= 2 && rallyEnemy.archersE.Count < 1 && timeArcher > 10)
+        if (rallyEnemy.archersE.Count < levelConfig[currentLv - 1].maxArcher && timeArcher > levelConfig[currentLv - 1].timeSpawnArcher)
         {
             testEnemy.BuyArcher();
             timeArcher = 0;
         }
-        if (rallyEnemy.minersE.Count < 2 && timeMiner > 30)
+        if (rallyEnemy.minersE.Count < levelConfig[currentLv - 1].maxArcher && timeMiner > levelConfig[currentLv - 1].timeSpawnMiner)
         {
             testEnemy.BuyMiner();
             timeMiner = 0;
         }
-        rallyEnemy.OnFight();
-        if (pOP > pOE && rallyEnemy.OnFight() && baseEnemy.currentHP > 300)
+        //rallyEnemy.OnFight();
+        if (pOP > pOE && rallyEnemy.OnFight() == true && baseEnemy.currentHP > levelConfig[currentLv - 1].minCurrentHpForDef)
         {
             rallyEnemy.DefenseE();
         }
         
-        if (baseEnemy.currentHP < 650 && checkHP == false)
+        if (baseEnemy.currentHP < levelConfig[currentLv - 1].currentHpForAddUnit && checkHP == false)
         {
             testEnemy.BuyArcher();
             testEnemy.BuyMiner();
@@ -182,16 +190,127 @@ public class LevelManager : MonoBehaviour
     }
     public void Level2()
     {
-        
-        buyUnit.buySpearMan.gameObject.SetActive(false);
-        buyUnit.buyTitanMan.gameObject.SetActive(false);
-        buyUnit.buyMagicMan.gameObject.SetActive(false);
+        if (testMode.cheating == false)
+        {           
+            buyUnit.buySpearMan.gameObject.SetActive(false);
+            buyUnit.buyTitanMan.gameObject.SetActive(false);
+            buyUnit.buyMagicMan.gameObject.SetActive(false);
+        }
+        if (goldFirst)
+        {
+            basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
+            buyUnit.AddMiner(2);
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            this.DelayCall(2f, () =>
+            {
+                testEnemy.BuySwordMan();                
+            });
+            goldFirst = false;
+        }
+        if (tuto[4])
+        foreach (Miner mn in rally.miners)
+        {
+            if (mn.currentHP < mn.hp)
+            {
+                tutorialLv1[6].SetActive(true);
+                tuto[4] = false; 
+                break;
+            }
+        }
+        if (rally.defense.isOn == true)
+            tutorialLv1[6].SetActive(false);
+
+        if (rallyEnemy.minersE.Count < levelConfig[currentLv - 1].maxMiner && timeMiner > levelConfig[currentLv - 1].timeSpawnMiner)
+        {
+            testEnemy.BuyMiner();
+            timeMiner = 0;
+        }
+        if (rallyEnemy.swordsE.Count < levelConfig[currentLv - 1].maxSwordMan && timeSwordMan > levelConfig[currentLv - 1].timeSpawnSwordMan)
+        {
+            testEnemy.BuySwordMan();
+            timeSwordMan = 0;
+        }
+        if (pOP > pOE && baseEnemy.currentHP > levelConfig[currentLv - 1].minCurrentHpForDef && rally.PlayerIsNear() == true)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.DefenseE();
+        }
+        if (pOP > pOE && (rally.PlayerIsNear() == false || baseEnemy.currentHP <= levelConfig[currentLv - 1].minCurrentHpForDef))
+        {
+            rallyEnemy.Rallyt1E();
+        }
+        if (pOP <= pOE)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.AttackForwardE();
+        }
+        if (baseEnemy.currentHP < levelConfig[currentLv - 1].currentHpForAddUnit && checkHP == false)
+        {
+            baseEnemy.currentGold += levelConfig[currentLv - 1].addGoldForEnemy;
+            testEnemy.BuySwordMan();
+            testEnemy.BuySwordMan();
+            testEnemy.BuySwordMan();
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            checkHP = true;
+        }
+
     }
     public void Level3()
     {
-        
-        buyUnit.buyTitanMan.gameObject.SetActive(false);
-        buyUnit.buyMagicMan.gameObject.SetActive(false);
+        if (testMode.cheating == false)
+        {
+            buyUnit.buySpearMan.gameObject.SetActive(false);
+            buyUnit.buyTitanMan.gameObject.SetActive(false);
+            buyUnit.buyMagicMan.gameObject.SetActive(false);
+        }
+        if (goldFirst)
+        {
+            basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
+            buyUnit.AddMiner(2);
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            this.DelayCall(2f, () =>
+            {
+                testEnemy.BuySpearMan();
+            });
+            goldFirst = false;
+        }
+        if (rallyEnemy.minersE.Count < levelConfig[currentLv - 1].maxMiner && timeMiner > levelConfig[currentLv - 1].timeSpawnMiner)
+        {
+            testEnemy.BuyMiner();
+            timeMiner = 0;
+        }
+        if (rallyEnemy.spearsE.Count < levelConfig[currentLv - 1].maxSpearMan && timeSwordMan > levelConfig[currentLv - 1].timeSpawnSwordMan)
+        {
+            testEnemy.BuySpearMan();
+            timeSwordMan = 0;
+        }
+        if (pOP > pOE && baseEnemy.currentHP > levelConfig[currentLv - 1].minCurrentHpForDef && rally.PlayerIsNear() == true)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.DefenseE();
+        }
+        if (pOP > pOE && (rally.PlayerIsNear() == false || baseEnemy.currentHP <= levelConfig[currentLv - 1].minCurrentHpForDef))
+        {
+            rallyEnemy.Rallyt1E();
+        }
+        if (pOP <= pOE)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.AttackForwardE();
+        }
+        if (baseEnemy.currentHP < levelConfig[currentLv - 1].currentHpForAddUnit && checkHP == false)
+        {
+            baseEnemy.currentGold += levelConfig[currentLv - 1].addGoldForEnemy;
+            testEnemy.BuySpearMan();
+            testEnemy.BuySpearMan();
+            testEnemy.BuySpearMan();
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            checkHP = true;
+        }
     }
     public void Level4()
     {
@@ -225,7 +344,7 @@ public class LevelManager : MonoBehaviour
 
     public void PowerOfMilitary()
     {
-        pOP = rally.archers.Count * 75 + rally.swords.Count * 100 + rally.spears.Count * 300 + rally.magics.Count * 400 + rally.titans.Count * 400;
-        pOE = rallyEnemy.archersE.Count * 75 + rallyEnemy.swordsE.Count * 100 + rallyEnemy.spearsE.Count * 300 + rallyEnemy.magicsE.Count * 400 + rallyEnemy.titansE.Count * 400;
+        pOP = rally.archers.Count * 75 + rally.swords.Count * 100 + rally.spears.Count * 275 + rally.magics.Count * 400 + rally.titans.Count * 400;
+        pOE = rallyEnemy.archersE.Count * 75 + rallyEnemy.swordsE.Count * 100 + rallyEnemy.spearsE.Count * 275 + rallyEnemy.magicsE.Count * 400 + rallyEnemy.titansE.Count * 400;
     }
 }

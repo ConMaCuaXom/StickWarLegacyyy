@@ -66,7 +66,7 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull();
             }
-            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, agent.baseEnemy.transform.position) + 2)
+            if (nearBase)
             {
                 onAttack = false;
                 AttackOnBaseEnemy();
@@ -93,7 +93,7 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull();
             }
-            if (Vector3.Distance(transform.position, list[0].transform.position) >= Vector3.Distance(transform.position, agent.basePlayer.transform.position) + 2)
+            if (nearBase)
             {
                 onAttack = false;
                 AttackOnBaseEnemy();
@@ -123,7 +123,7 @@ public class BaseSoldier : MonoBehaviour
                 agent.SetDestination(target.transform.position);
                 agent.animator.SetBool("Attack", false);
             }
-            else
+            if (distanceToEnemy < attackRange)
             {
                 attacking = true;
                 agent.RotationOnTarget(target.transform.position - transform.position);               
@@ -175,7 +175,8 @@ public class BaseSoldier : MonoBehaviour
     public void TargetIsDead()
     {        
         onAttack = false;
-        agent.animator.SetBool("Attack", false);                     
+        agent.animator.SetBool("Attack", false);
+        agent.agent.isStopped = false;
     }
 
     public virtual void AttackOnTarget()
@@ -217,7 +218,7 @@ public class BaseSoldier : MonoBehaviour
             targetP = null;
         if (agent.isPlayer)
             targetE = null;
-        if (onAttack == false && attackOnBase == false)                               
+        if (onAttack == false && attackOnBase == false && attacking == false)                               
             agent.agent.isStopped = false;                    
     }     
     public void StopRallyPoint()
@@ -243,27 +244,7 @@ public class BaseSoldier : MonoBehaviour
         }
     } 
 
-    //public virtual void MaxMove()
-    //{
-    //    if (agent.isPlayer)
-    //    {
-    //        if ((transform.position.x >= agent.baseEnemy.transform.position.x - 3) &&
-    //               (transform.position.z >= agent.baseEnemy.transform.position.z - 3) && (transform.position.z <= agent.baseEnemy.transform.position.z + 3))           
-    //            transform.position = new Vector3(agent.baseEnemy.transform.position.x - 3, transform.position.y, transform.position.z);
-    //        if ((transform.position.x >= agent.baseEnemy.transform.position.x) &&
-    //              (transform.position.z <= agent.baseEnemy.transform.position.z - 3) && (transform.position.z >= agent.baseEnemy.transform.position.z + 3))
-    //            transform.position = new Vector3(agent.baseEnemy.transform.position.x, transform.position.y, transform.position.z);
-    //    }
-    //    if (agent.isEnemy)
-    //    {
-    //        if ((transform.position.x <= agent.basePlayer.transform.position.x + 3) &&
-    //               (transform.position.z >= agent.basePlayer.transform.position.z - 3) && (transform.position.z <= agent.basePlayer.transform.position.z + 3))
-    //            transform.position = new Vector3(agent.basePlayer.transform.position.x + 3, transform.position.y, transform.position.z);
-    //        if ((transform.position.x <= agent.basePlayer.transform.position.x) &&
-    //              (transform.position.z <= agent.basePlayer.transform.position.z - 3) && (transform.position.z >= agent.basePlayer.transform.position.z + 3))
-    //            transform.position = new Vector3(agent.basePlayer.transform.position.x, transform.position.y, transform.position.z);
-    //    }
-    //}
+    
     private void OnTriggerEnter(Collider other)
     {       
         if (agent.isPlayer && other.CompareTag("BaseEnemy") || agent.isEnemy && other.CompareTag("BasePlayer"))
@@ -313,9 +294,9 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void DamageForBase()
     {
-        if (agent.isPlayer)
+        if (agent.isPlayer && agent.baseEnemy.currentHP > 0)
             agent.baseEnemy.TakeDamage(damage - 10f);
-        if (agent.isEnemy)
+        if (agent.isEnemy && agent.basePlayer.currentHP > 0)
             agent.basePlayer.TakeDamage(damage - 10f);
     }
 
@@ -338,15 +319,35 @@ public class BaseSoldier : MonoBehaviour
     public virtual void WiOrLo()
     {
         
-        if (agent.isPlayer && wol.playerWin == true)
+        if (wol.playerWin == true)
         {
-            agent.agent.isStopped = true;
-            agent.animator.SetBool("Victory", true);
+            if (agent.isPlayer)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Victory", true);
+            }
+            if (agent.isEnemy)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("Attack", false);
+            }
+            
         }
-        if (agent.isEnemy && wol.playerLose == true)
+        if (wol.playerLose == true)
         {
-            agent.agent.isStopped = true;
-            agent.animator.SetBool("Victory", true);
+            if (agent.isEnemy)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Victory", true);
+            }
+            if (agent.isPlayer)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("Attack", false);
+            }
+            
         }
     }
 

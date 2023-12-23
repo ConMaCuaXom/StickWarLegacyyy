@@ -3581,6 +3581,7 @@ MonoBehaviour:
   distanceP: 0
   timeToDestroy: 3
   timeToPush: 0
+  timeFighting: 0
   isDead: 0
   onAttack: 0
   onDef: 0
@@ -3588,10 +3589,13 @@ MonoBehaviour:
   pushBack: 0
   hulolo: 0
   attacking: 0
+  fighting: 0
+  onRally: 0
+  nearBase: 0
   goldMineGO: {fileID: 0}
   indexGoldMine: 0
   indexGoldEnemy: 7
-  goldTake: 40
+  goldTake: 30
   distanceToGoldMine: 0
   distanceToBase: 0
   rangeToBase: 4

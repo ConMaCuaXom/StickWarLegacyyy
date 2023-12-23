@@ -11,8 +11,8 @@ public class SpearMan : BaseSoldier
         agent = GetComponent<Agent>();                
         attackRange = 2.7f;
         dangerRange = 7f;
-        damage = 15f;
-        hp = 250f;
+        damage = 20f;
+        hp = 300f;
         currentHP = hp;
         isDead = false;
         onAttack = false;

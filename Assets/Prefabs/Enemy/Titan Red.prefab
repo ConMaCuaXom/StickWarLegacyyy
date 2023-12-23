@@ -10102,6 +10102,7 @@ MonoBehaviour:
   distanceP: 0
   timeToDestroy: 3
   timeToPush: 0
+  timeFighting: 0
   isDead: 0
   onAttack: 0
   onDef: 0
@@ -10109,6 +10110,9 @@ MonoBehaviour:
   pushBack: 0
   hulolo: 0
   attacking: 0
+  fighting: 0
+  onRally: 0
+  nearBase: 0
 --- !u!136 &-3994140733207897566
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10119,7 +10123,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.15
+  m_Radius: 0.5
   m_Height: 1.3
   m_Direction: 1
   m_Center: {x: 0, y: 0.69, z: 0}

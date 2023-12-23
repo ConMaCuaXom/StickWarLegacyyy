@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class BaseEnemy : MonoBehaviour
 {      
@@ -45,6 +46,8 @@ public class BaseEnemy : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        if (currentHP < 0)
+            currentHP = 0;
         float ratio = currentHP / HP;
         healthBar.DOFillAmount(ratio, 0.25f);
         DisplayCurrentHP.text = currentHP.ToString();
@@ -52,5 +55,10 @@ public class BaseEnemy : MonoBehaviour
         {
             wl.LoseOrWin();
         }
+    }
+    private void OnDrawGizmos()
+    {        
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, 25f);      
     }
 }

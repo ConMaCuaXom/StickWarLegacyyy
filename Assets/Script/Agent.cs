@@ -72,7 +72,7 @@ public class Agent : MonoBehaviour
     }
 
     public void AttackBase()
-    {
+    {               
         if (isEnemy == true)                    
             SetDestination(basePlayer.transform.position);                                
         if (isPlayer == true)                    

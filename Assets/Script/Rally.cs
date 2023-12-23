@@ -23,8 +23,8 @@ public class Rally : MonoBehaviour
     public Toggle rallying;
     public Toggle defense;
     public int index ;
-   
 
+    public bool playerIsNear;
     
     
     
@@ -38,7 +38,7 @@ public class Rally : MonoBehaviour
         AddDic();
         index = 0;
         buyUnit = GetComponent<BuyUnit>();
-        //crbP = GameManager.Instance.crossbowmanDefendersP;
+        playerIsNear = false;
         GetIndex();
     }
 
@@ -76,6 +76,19 @@ public class Rally : MonoBehaviour
         return false;
     }
 
+    public bool PlayerIsNear()
+    {
+        foreach (var soldier in dic.Values)
+        {
+            foreach (var whichSoldier in soldier)
+            {
+                if (Vector3.Distance(whichSoldier.transform.position,whichSoldier.agent.baseEnemy.transform.position) < 25f)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public void Defense()
     {        
         foreach (var soldier in dic.Values)
@@ -88,6 +101,7 @@ public class Rally : MonoBehaviour
                 whichSoldier.onDef = true;
                 whichSoldier.onAttack = false;
                 whichSoldier.onRally = false;
+                whichSoldier.agent.agent.isStopped = false;
             }
         }
         foreach (Miner miner in miners)
