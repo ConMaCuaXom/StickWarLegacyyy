@@ -24,7 +24,7 @@ public class SpearMan : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
-        OnFighting();
+        
        
     }
 

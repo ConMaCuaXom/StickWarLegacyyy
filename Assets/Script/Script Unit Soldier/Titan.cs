@@ -24,7 +24,7 @@ public class Titan : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
-        OnFighting();
+        
         
     }
 

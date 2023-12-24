@@ -23,10 +23,7 @@ public class Tiny : BaseSoldier
         if (isDead == true || onDef == true || pushBack == true)
             return;
         TargetOnWho();
-        WiOrLo();
-        OnFighting();
-    
-
+        WiOrLo();       
     }
 
     public override void TakeDamage(float dmg)

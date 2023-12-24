@@ -27,7 +27,7 @@ public class Archer : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
-        OnFighting();
+        
         
     }
 

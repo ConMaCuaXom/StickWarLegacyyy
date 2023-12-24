@@ -26,7 +26,7 @@ public class SwordMan : BaseSoldier
             return;
         TargetOnWho();
         WiOrLo();
-        OnFighting();
+       
        
     }
 

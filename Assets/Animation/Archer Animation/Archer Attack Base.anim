@@ -35348,6 +35348,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: AttackingOn
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: RespawnArrowBase
     data: 
@@ -35357,6 +35364,13 @@ AnimationClip:
     messageOptions: 0
   - time: 1
     functionName: Fighting
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5000001
+    functionName: AttackingOff
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

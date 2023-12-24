@@ -40,7 +40,7 @@ public class MagicMan : BaseSoldier
         TargetOnWho();
         SpawnSoldier();
         WiOrLo();
-        OnFighting();
+        
        
     }
 
@@ -79,12 +79,8 @@ public class MagicMan : BaseSoldier
             destroyedMid.gameObject.SetActive(true);
         }
         if (agent.isPlayer && targetE!=null)
-        {
-            targetE.TakeDamage(damage);
-            targetE.PushBack();           
-            destroyedMid.gameObject.transform.position = targetE.transform.position;
-            targetE.TakeDamage(damage);
-            targetE.PushBack();
+        {                      
+            destroyedMid.gameObject.transform.position = targetE.transform.position;           
             for (int i = GameManager.Instance.enemy.Count - 1; i >= 0; i--)
             {
                 BaseSoldier soldier = GameManager.Instance.enemy[i];
@@ -96,9 +92,7 @@ public class MagicMan : BaseSoldier
             }
         }
         if (agent.isEnemy && targetP != null)
-        {
-            targetP.TakeDamage(damage);
-            targetP.PushBack();            
+        {                      
             destroyedMid.gameObject.transform.position = targetP.transform.position;
             for (int i = GameManager.Instance.player.Count - 1; i >= 0; i--)
             {
@@ -150,5 +144,39 @@ public class MagicMan : BaseSoldier
         hulolo = false;
         if (agent.agent.enabled == true)
             agent.agent.isStopped = false;
+    }
+
+    public override void AttackOnBaseEnemy()
+    {
+        if (agent.isPlayer && onAttack == false)
+        {
+            if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= attackRange)
+            {
+                agent.agent.isStopped = true;
+                attackOnBase = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);
+                agent.LookAtEnemyBase();
+            }
+            else
+            {
+                agent.AttackBase();
+            }
+        }
+        if (agent.isEnemy && onAttack == false)
+        {
+            if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= attackRange)
+            {
+                agent.agent.isStopped = true;
+                attackOnBase = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("AttackOnBase", true);
+                agent.LookAtEnemyBase();
+            }
+            else
+            {
+                agent.AttackBase();
+            }
+        }
     }
 }

@@ -18,12 +18,12 @@ public class TestEnemy : MonoBehaviour
     public GameObject TitanMan;
     public GameObject Magicman;
 
-    [SerializeField] private int minerPrice;
-    [SerializeField] private int swordManPrice;
-    [SerializeField] private int archerPrice;
-    [SerializeField] private int spearManPrice;
-    [SerializeField] private int titanManPrice;
-    [SerializeField] private int magicManPrice;
+    public int minerPrice;
+    public int swordManPrice;
+    public int archerPrice;
+    public int spearManPrice;
+    public int titanManPrice;
+    public int magicManPrice;
 
     public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
     public BasePlayer basePlayer => GameManager.Instance.basePlayer;

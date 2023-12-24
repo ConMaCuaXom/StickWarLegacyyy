@@ -63,18 +63,18 @@ public class Rally : MonoBehaviour
         dic.Add("Tiny", tinys);
     }
 
-    public bool OnFight()
-    {
-        foreach (var soldier in dic.Values)
-        {
-            foreach (var whichSoldier in soldier)
-            {
-                if (whichSoldier.fighting == true)
-                    return true;
-            }
-        }
-        return false;
-    }
+    //public bool OnFight()
+    //{
+    //    foreach (var soldier in dic.Values)
+    //    {
+    //        foreach (var whichSoldier in soldier)
+    //        {
+    //            if (whichSoldier.fighting == true)
+    //                return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
     public bool PlayerIsNear()
     {
@@ -126,7 +126,7 @@ public class Rally : MonoBehaviour
             foreach (var whichSoldier in soldier)
             {
                 whichSoldier.onDef = false;
-                if (whichSoldier.onAttack == false)
+                if (whichSoldier.onAttack == false && whichSoldier.isDead == false)
                 {                   
                     whichSoldier.AttackOnBaseEnemy();
                     whichSoldier.onRally = false;
@@ -182,7 +182,7 @@ public class Rally : MonoBehaviour
                 magics[i].onDef = false;
                 int mgPos = (magics.Count - 1) / 4 - (i / 4);
                 float distanceM = Vector3.Distance(magics[i].transform.position, arrayRally[i % 4, mgPos].position);
-                if (magics[i].onAttack == true || magics[i].hulolo == true)
+                if (magics[i].onAttack == true || magics[i].hulolo == true || magics[i].attacking == true)
                     return;
                 magics[i].agent.agent.isStopped = false;                
                 if (distanceM > 0.2)
@@ -199,7 +199,7 @@ public class Rally : MonoBehaviour
                 archers[i].onDef = false;
                 int arPos = (archers.Count - 1) / 4 - (i / 4);                              
                 float distanceA = Vector3.Distance(archers[i].transform.position, arrayRally[i % 4, arPos + mgPoint].position);
-                if (archers[i].onAttack == false)
+                if (archers[i].onAttack == false && archers[i].attacking == false)
                 {
                     archers[i].agent.agent.isStopped = false;                    
                     if (distanceA > 0.2)                                           
@@ -217,7 +217,7 @@ public class Rally : MonoBehaviour
                 swords[i].onDef = false;
                 int swPos = (swords.Count - 1) / 4 - (i / 4);                               
                 float distanceSw = Vector3.Distance(swords[i].transform.position, arrayRally[i % 4, swPos + mgPoint + arPoint].position);
-                if (swords[i].onAttack == false)
+                if (swords[i].onAttack == false && swords[i].attacking == false)
                 {
                     swords[i].agent.agent.isStopped = false;                    
                     if (distanceSw > 0.2)                                   
@@ -234,7 +234,7 @@ public class Rally : MonoBehaviour
             {
                 spears[i].onDef = false;
                 int spPos = (spears.Count - 1) / 4 - (i / 4);
-                if (spears[i].onAttack == true)
+                if (spears[i].onAttack == true || spears[i].attacking == true)
                     return;
                 spears[i].agent.agent.isStopped = false;                
                 float distanceSp = Vector3.Distance(spears[i].transform.position, arrayRally[i % 4, spPos + mgPoint + arPoint + swPoint].position);                                   
@@ -252,7 +252,7 @@ public class Rally : MonoBehaviour
                 tinys[i].onDef = false;
                 int tnPos = (tinys.Count - 1) / 4 - (i / 4);
                 float distanceTn = Vector3.Distance(tinys[i].transform.position, arrayRally[i % 4, tnPos + mgPoint + arPoint + swPoint + spPoint].position);
-                if (tinys[i].onAttack == false)
+                if (tinys[i].onAttack == false && tinys[i].attacking == false)
                 {
                     tinys[i].agent.agent.isStopped = false;
                     if (distanceTn > 0.2)
@@ -270,7 +270,7 @@ public class Rally : MonoBehaviour
             {
                 titans[i].onDef = false;
                 int ttPos = (titans.Count - 1) / 2 - (i / 2);
-                if (titans[i].onAttack == true)
+                if (titans[i].onAttack == true || titans[i].attacking == true)
                     return;
                 titans[i].agent.agent.isStopped = false;               
                 if (i%2 == 0)

@@ -60,18 +60,18 @@ public class RallyEnemy : MonoBehaviour
         dicE.Add("Tiny", tinysE);
     }
     
-    public bool OnFight()
-    {
-        foreach (var soldier in dicE.Values)
-        {
-            foreach (var whichSoldier in soldier)
-            {
-                if (whichSoldier.fighting == true) 
-                return true;               
-            }           
-        }
-        return false;
-    }
+    //public bool OnFight()
+    //{
+    //    foreach (var soldier in dicE.Values)
+    //    {
+    //        foreach (var whichSoldier in soldier)
+    //        {
+    //            if (whichSoldier.fighting == true) 
+    //            return true;               
+    //        }           
+    //    }
+    //    return false;
+    //}
 
     
 
@@ -114,9 +114,10 @@ public class RallyEnemy : MonoBehaviour
             foreach (var whichSoldier in soldier)
             {
                 whichSoldier.onDef = false;
-                if (whichSoldier.onAttack == false)
+                if (whichSoldier.onAttack == false && whichSoldier.isDead == false)
                 {
                     whichSoldier.AttackOnBaseEnemy();
+                    whichSoldier.onRally = false;
                 }
             }
         }

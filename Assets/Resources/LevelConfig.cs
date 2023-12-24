@@ -22,6 +22,7 @@ public class LevelConfig : ScriptableObject
     public float minCurrentHpForDef;
 
     public float firstGoldForPlayer;
+    public float firstGoldForEnemy;
 
     public float currentHpForAddUnit;
 
