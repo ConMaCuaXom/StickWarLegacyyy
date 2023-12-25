@@ -369,7 +369,63 @@ public class LevelManager : MonoBehaviour
     }
     public void Level5()
     {
-        
+        if (testMode.cheating == false)
+        {
+            buyUnit.buyTitanMan.gameObject.SetActive(false);           
+        }
+        if (pOP > pOE && baseEnemy.currentHP > levelConfig[currentLv - 1].minCurrentHpForDef && rally.PlayerIsNear() == true)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.DefenseE();
+        }
+        if (pOP > pOE && (rally.PlayerIsNear() == false || baseEnemy.currentHP <= levelConfig[currentLv - 1].minCurrentHpForDef))
+        {
+            rallyEnemy.Rallyt1E();
+        }
+        if (pOP <= pOE)
+        {
+            rallyEnemy.rallyingE.isOn = false;
+            rallyEnemy.defenseE.isOn = false;
+            rallyEnemy.AttackForwardE();
+        }
+        if (goldFirst)
+        {
+            basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
+            baseEnemy.currentGold = levelConfig[currentLv - 1].firstGoldForEnemy;
+            buyUnit.AddMiner(2);
+            buyUnit.limitUnitCurrent += 2;
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            testEnemy.BuyMiner();
+            goldFirst = false;
+        }
+        if (rallyEnemy.minersE.Count < levelConfig[currentLv - 1].maxMiner && timeMiner > levelConfig[currentLv - 1].timeSpawnMiner && baseEnemy.currentGold >= testEnemy.minerPrice)
+        {
+            testEnemy.BuyMiner();
+            timeMiner = 0;
+        }
+        if (rallyEnemy.swordsE.Count < levelConfig[currentLv - 1].maxSwordMan && timeSwordMan > levelConfig[currentLv - 1].timeSpawnSwordMan)
+        {
+            testEnemy.BuySwordMan();
+            timeSwordMan = 0;
+        }
+        if (rallyEnemy.archersE.Count < levelConfig[currentLv - 1].maxArcher && timeArcher > levelConfig[currentLv - 1].timeSpawnArcher)
+        {
+            testEnemy.BuyArcher();
+            timeArcher = 0;
+        }
+        if (baseEnemy.currentHP < levelConfig[currentLv - 1].currentHpForAddUnit && checkHP == false)
+        {
+            baseEnemy.currentGold += levelConfig[currentLv - 1].addGoldForEnemy;
+            testEnemy.BuySwordMan();
+            testEnemy.BuySwordMan();
+            testEnemy.BuySwordMan();
+            testEnemy.BuyArcher();
+            testEnemy.BuyArcher();
+            testEnemy.BuyArcher();
+            testEnemy.BuyMiner();
+            checkHP = true;
+        }
     }
     public void Level6()
     {

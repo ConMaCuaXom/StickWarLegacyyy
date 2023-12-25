@@ -35341,14 +35341,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: Fighting
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
+  - time: 0.16666667
     functionName: AttackingOn
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -35362,14 +35355,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1
-    functionName: Fighting
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.5000001
+  - time: 1.3333334
     functionName: AttackingOff
     data: 
     objectReferenceParameter: {fileID: 0}
