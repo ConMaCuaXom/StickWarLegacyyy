@@ -8419,9 +8419,11 @@ MonoBehaviour:
   Archer: {fileID: 686867530368026049, guid: 324afcd7c93e12d48929937650a1dfee, type: 3}
   Spearman: {fileID: 5192868323827546737, guid: c9a230610789bfe4a94e367d151a28ba,
     type: 3}
-  TitanMan: {fileID: 2632483962094737284, guid: 49a0abdec09acac47a6eeedf55c02d38,
+  TitanMan: {fileID: 2632483962094737284, guid: ed5bb0c227d60504898bc138eb951bc2,
     type: 3}
   Magicman: {fileID: 3427134558574220463, guid: a054355a00d58c1489666c02c8cb5e9f,
+    type: 3}
+  SuperTitan: {fileID: 2632483962094737284, guid: 49a0abdec09acac47a6eeedf55c02d38,
     type: 3}
   minerPrice: 150
   swordManPrice: 125

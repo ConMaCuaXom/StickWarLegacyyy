@@ -35,7 +35,7 @@ public class MagicMan : BaseSoldier
 
     private void Update()
     {
-        if (isDead == true || onDef == true || hulolo == true || pushBack == true)
+        if (onDef == true || hulolo == true || pushBack == true)
             return;
         TargetOnWho();
         SpawnSoldier();

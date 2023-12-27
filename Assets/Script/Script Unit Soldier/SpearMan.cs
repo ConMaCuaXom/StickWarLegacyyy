@@ -20,7 +20,7 @@ public class SpearMan : BaseSoldier
 
     private void Update()
     {
-        if (isDead == true || onDef == true)
+        if (onDef == true)
             return;
         TargetOnWho();
         WiOrLo();

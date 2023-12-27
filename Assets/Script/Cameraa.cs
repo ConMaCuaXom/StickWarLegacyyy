@@ -23,7 +23,7 @@ public class Cameraa : MonoBehaviour
         }
         if (isDrag && Input.GetMouseButton(0))
         {
-            Vector3 delta = Input.mousePosition - lastPos;
+            Vector3 delta = lastPos - Input.mousePosition;
             Vector3 direction = Camera.main.ScreenToViewportPoint(delta);           
             transform.Translate(direction.x * dragSpeed * Time.deltaTime, 0, direction.y * dragSpeed * Time.deltaTime);
             if (transform.position.x <= 6.22f)

@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a3d1fe67913db4a9efdd23ae68491d, type: 3}
   m_Name: Level6
   m_EditorClassIdentifier: 
-  timeSpawnMiner: 0
-  timeSpawnArcher: 0
+  timeSpawnMiner: 6
+  timeSpawnArcher: 25
   timeSpawnSwordMan: 0
-  timeSpawnSpearMan: 0
+  timeSpawnSpearMan: 15
   timeSpawnTitanMan: 0
   timeSpawnMagicMan: 0
-  maxMiner: 0
-  maxArcher: 0
+  maxMiner: 7
+  maxArcher: 4
   maxSwordMan: 0
-  maxSpearMan: 0
+  maxSpearMan: 8
   maxTitanMan: 0
   maxMagicMan: 0
-  minCurrentHpForDef: 0
+  minCurrentHpForDef: 300
+  firstGoldForPlayer: 500
+  firstGoldForEnemy: 1000
+  currentHpForAddUnit: 500
+  addGoldForEnemy: 3500

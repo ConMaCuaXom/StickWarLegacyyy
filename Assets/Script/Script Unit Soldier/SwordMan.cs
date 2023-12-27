@@ -22,7 +22,7 @@ public class SwordMan : BaseSoldier
     private void Update()
     {
         
-        if (isDead == true || onDef == true || pushBack == true)
+        if (onDef == true)
             return;
         TargetOnWho();
         WiOrLo();

@@ -47,6 +47,7 @@ public class WinOrLose : MonoBehaviour
 
         if (basePlayer.currentHP <= 0 && playerWin == false)
         {
+            nextLv.gameObject.SetActive(true);
             basePlayer.currentHP = 0;
             lose.SetActive(true);
             playerLose = true;

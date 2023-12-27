@@ -48,8 +48,7 @@ public class BaseSoldier : MonoBehaviour
         {
             List<BaseSoldier> listPlayer = GameManager.Instance.player.OrderBy(p => Vector3.Distance(transform.position, p.transform.position)).ToList();
             HowToAttackP(listPlayer);
-        }
-
+        }     
     }
     public virtual void HowToAttackE(List<BaseSoldier> list)
     {
@@ -116,13 +115,13 @@ public class BaseSoldier : MonoBehaviour
     public virtual void GoToEnemy(BaseSoldier target, float distanceToEnemy)
     {
                   
-            if (distanceToEnemy > attackRange && attacking == false)
+            if (distanceToEnemy > attackRange && attacking == false && isDead == false)
             {                              
                 agent.agent.isStopped = false;
                 agent.SetDestination(target.transform.position);
                 agent.animator.SetBool("Attack", false);
             }
-            if (distanceToEnemy < attackRange)
+            if (distanceToEnemy <= attackRange)
             {             
                 agent.agent.isStopped = true;
                 agent.RotationOnTarget(target.transform.position - transform.position);                                                           
@@ -130,10 +129,7 @@ public class BaseSoldier : MonoBehaviour
                 agent.animator.SetBool("Attack", true);
                 RandomAttack();
                 attackOnBase = false;
-            }
-        
-        //else
-        //    TargetIsDead();
+            }             
     }
 
     public void AttackingOff()
@@ -193,14 +189,12 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {        
-        currentHP -= dmg;   
-        
-        
+        currentHP -= dmg;                 
         if (currentHP <= 0 && isDead == false)
         {
             isDead = true;
             RandomDeath();
-            agent.agent.isStopped = true;            
+            agent.agent.isStopped = true;
             if (agent.isEnemy)           
                 GameManager.Instance.enemy.Remove(this);            
             if (agent.isPlayer)           
@@ -215,9 +209,14 @@ public class BaseSoldier : MonoBehaviour
     public virtual void TargetIsNull()
     {             
         onAttack = false;
+        agent.agent.isStopped = false;
         agent.animator.SetBool("Attack", false);
         if (agent.isEnemy)
+        {
             targetP = null;
+            
+        }
+            
         if (agent.isPlayer)
             targetE = null;                          
     }     

@@ -8,6 +8,8 @@ public class TestMode : MonoBehaviour
     public Toggle testMode;
     public GameObject UIEnemy;
     public BuyUnit buyUnit;
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
     public bool cheating;
     
     private void Start()
@@ -25,6 +27,8 @@ public class TestMode : MonoBehaviour
             buyUnit.buySpearMan.gameObject.SetActive(true);
             buyUnit.buyTitanMan.gameObject.SetActive(true);
             buyUnit.buyMagicMan.gameObject.SetActive(true);
+            baseEnemy.currentGold += 10000;
+            basePlayer.currentGold += 10000;
         }
         else
         {

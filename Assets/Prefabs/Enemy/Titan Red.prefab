@@ -9932,8 +9932,8 @@ GameObject:
   - component: {fileID: 2632483962085371812}
   - component: {fileID: 2761662844574570306}
   - component: {fileID: -6100136437889913481}
-  - component: {fileID: -1303909015739553667}
   - component: {fileID: -3994140733207897566}
+  - component: {fileID: 6820682888267346691}
   m_Layer: 0
   m_Name: Titan Red
   m_TagString: Enemy
@@ -9950,7 +9950,7 @@ Transform:
   m_GameObject: {fileID: 2632483962094737284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.45, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2632483962094964784}
@@ -10078,7 +10078,21 @@ MonoBehaviour:
   isEnemy: 1
   moveSpeed: 3
   angularSpeed: 20
---- !u!114 &-1303909015739553667
+--- !u!136 &-3994140733207897566
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632483962094737284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.69, z: 0}
+--- !u!114 &6820682888267346691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10100,9 +10114,8 @@ MonoBehaviour:
   currentHP: 0
   distanceE: 0
   distanceP: 0
-  timeToDestroy: 3
+  timeToDestroy: 2
   timeToPush: 0
-  timeFighting: 0
   isDead: 0
   onAttack: 0
   onDef: 0
@@ -10110,23 +10123,8 @@ MonoBehaviour:
   pushBack: 0
   hulolo: 0
   attacking: 0
-  fighting: 0
   onRally: 0
   nearBase: 0
---- !u!136 &-3994140733207897566
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2632483962094737284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!1 &2632483962094737430
 GameObject:
   m_ObjectHideFlags: 0

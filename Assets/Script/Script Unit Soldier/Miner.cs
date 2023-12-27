@@ -41,7 +41,7 @@ public class Miner : BaseSoldier
 
     private void Update()
     {
-        if (pushBack || isDead || onDef)
+        if (pushBack ||  onDef)
             return;
         GoToGoldMine();
         GoToBase();

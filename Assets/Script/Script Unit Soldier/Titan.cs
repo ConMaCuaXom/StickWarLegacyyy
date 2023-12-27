@@ -11,8 +11,8 @@ public class Titan : BaseSoldier
         agent = GetComponent<Agent>();              
         attackRange = 2.7f;
         dangerRange = 7f;
-        damage = 30f;
-        hp = 1000f;
+        damage = 50f;
+        hp = 1200f;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -20,12 +20,10 @@ public class Titan : BaseSoldier
 
     private void Update()
     {
-        if (isDead == true || onDef == true)
+        if (onDef == true)
             return;
         TargetOnWho();
-        WiOrLo();
-        
-        
+        WiOrLo();             
     }
 
     public override void TakeDamage(float dmg)
@@ -53,9 +51,7 @@ public class Titan : BaseSoldier
     public override void AttackOnTarget()
     {
         if (agent.isPlayer && targetE != null)
-        {
-            targetE.TakeDamage(damage);
-            targetE.PushBack();           
+        {                      
             for (int i = GameManager.Instance.enemy.Count - 1; i >= 0; i--)
             {
                 BaseSoldier soldier = GameManager.Instance.enemy[i];
@@ -65,12 +61,9 @@ public class Titan : BaseSoldier
                     soldier.PushBack();
                 }
             }           
-        }
-            
+        }           
         if (agent.isEnemy && targetP != null)
-        {
-            targetP.TakeDamage(damage);
-            targetP.PushBack();            
+        {                      
             for(int i = GameManager.Instance.player.Count - 1; i >= 0; i--)
             {
                 BaseSoldier soldier = GameManager.Instance.player[i];

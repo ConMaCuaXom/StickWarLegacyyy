@@ -10,7 +10,7 @@ public class Tiny : BaseSoldier
         agent = GetComponent<Agent>();        
         attackRange = 2.5f;
         dangerRange = 7f;
-        damage = 10f;
+        damage = 12f;
         hp = 80f;
         currentHP = hp;
         isDead = false;
@@ -20,7 +20,7 @@ public class Tiny : BaseSoldier
 
     private void Update()
     {
-        if (isDead == true || onDef == true || pushBack == true)
+        if (onDef == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();       

@@ -18,6 +18,8 @@ public class TestEnemy : MonoBehaviour
     public GameObject TitanMan;
     public GameObject Magicman;
 
+    public GameObject SuperTitan;
+
     public int minerPrice;
     public int swordManPrice;
     public int archerPrice;
@@ -126,5 +128,12 @@ public class TestEnemy : MonoBehaviour
         GameManager.Instance.enemy.Add(tt);               
         rallyE.titansE.Add(tt);
         limitUnitCurrent += 3;
+    }
+
+    public void BuySuperTitan()
+    {
+        GameObject Stitan = Instantiate(SuperTitan, GameManager.Instance.baseEnemy.transform.position, GameManager.Instance.baseEnemy.transform.rotation);
+        SuperTitan stt = Stitan.GetComponent<SuperTitan>();
+        GameManager.Instance.enemy.Add(stt);
     }
 }

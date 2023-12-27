@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings.Switch;
 
 public class Open : MonoBehaviour
 {
