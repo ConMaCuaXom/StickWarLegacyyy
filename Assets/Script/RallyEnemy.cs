@@ -92,6 +92,21 @@ public class RallyEnemy : MonoBehaviour
         }
     }
 
+
+    public void DeleteAll()
+    {
+        foreach (Miner miner in minersE)
+        {
+            miner.DeleteThis();
+        }
+        foreach (var soldier in dicE.Values)
+        {
+            foreach (var whichSoldier in soldier)
+            {
+                whichSoldier.DeleteThis();
+            }
+        }
+    }
     public void AttackForwardE()
     {
         foreach (Miner miner in minersE)

@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     public TestEnemy testEnemy => GameManager.Instance.testEnemy;
     public RallyEnemy rallyEnemy => GameManager.Instance.rallyEnemy;
     public Rally rally => GameManager.Instance.rally;
+    public WinOrLose winOrLose => GameManager.Instance.winOrLose;
 
     public TestMode testMode;
     public List<Boat> boats;
@@ -35,7 +36,8 @@ public class LevelManager : MonoBehaviour
     public float timeMagicMan;
 
     public bool checkHP;
-    public bool goldFirst;  
+    public bool goldFirst;
+    public bool checkFinalBoss;
     public List<bool> tuto;
     
 
@@ -51,7 +53,8 @@ public class LevelManager : MonoBehaviour
         timeTitanMan = 0;
         timeMagicMan = 0;
         checkHP = false;
-        goldFirst = true;       
+        goldFirst = true; 
+        checkFinalBoss = false;
         for (int i = 0; i < 10; i++)
         {
             bool ttrl = true;
@@ -504,15 +507,25 @@ public class LevelManager : MonoBehaviour
             testEnemy.BuySwordMan();
             checkHP = true;
         }
-        EnemyDefense();
-        EnemyRally();
-        EnemyAttack();
-        BuyMinerE();
-        BuySpearManE();
-        BuyArcherE();
-        BuySwordManE();
-        BuyTitanManE();
-        BuyMagicManE();
+        if (checkFinalBoss == false)
+        {
+            EnemyDefense();
+            EnemyRally();
+            EnemyAttack();
+            BuyMinerE();
+            BuySpearManE();
+            BuyArcherE();
+            BuySwordManE();
+            BuyTitanManE();
+            BuyMagicManE();
+        }
+        
+        if (winOrLose.finalBoss == true && checkFinalBoss == false)
+        {
+            rallyEnemy.DeleteAll();
+            testEnemy.BuySuperTitan();           
+            checkFinalBoss = true;
+        }
     }
 
     public void PowerOfMilitary()

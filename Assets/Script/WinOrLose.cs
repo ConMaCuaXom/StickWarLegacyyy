@@ -10,10 +10,11 @@ public class WinOrLose : MonoBehaviour
     public BasePlayer basePlayer => GameManager.Instance.basePlayer;
     public GameObject win;
     public GameObject lose;
+    public bool finalBoss = false;
 
     public Button nextLv;
     public bool playerWin;
-    public bool playerLose;
+    public bool playerLose;   
 
     private void Awake()
     {       
@@ -21,7 +22,7 @@ public class WinOrLose : MonoBehaviour
         lose.SetActive(false);
         playerLose = false;
         playerWin = false;
-        nextLv.onClick.AddListener(BackToLevelScene);
+        nextLv.onClick.AddListener(BackToLevelScene);      
     }
 
     private void OnDisable()
@@ -31,7 +32,7 @@ public class WinOrLose : MonoBehaviour
 
     public void LoseOrWin()
     {
-        if (baseEnemy.currentHP <= 0 && playerLose == false)
+        if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv < 10)
         {
             baseEnemy.currentHP = 0;
             win.SetActive(true);
@@ -44,6 +45,12 @@ public class WinOrLose : MonoBehaviour
                 PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);               
             }
         }
+        if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv == 10)
+        {
+            baseEnemy.currentHP = 0;
+            finalBoss = true;                                               
+        }
+            
 
         if (basePlayer.currentHP <= 0 && playerWin == false)
         {
@@ -52,6 +59,12 @@ public class WinOrLose : MonoBehaviour
             lose.SetActive(true);
             playerLose = true;
         }
+    }
+    public void CampaignComplete()
+    {
+        win.SetActive(true);
+        nextLv.gameObject.SetActive(true);
+        playerWin = true;
     }
 
     public void BackToLevelScene()

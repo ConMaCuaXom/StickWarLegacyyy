@@ -206,6 +206,19 @@ public class BaseSoldier : MonoBehaviour
         }
     }
 
+    public virtual void DeleteThis()
+    {
+        currentHP = 0;
+        isDead = true;
+        RandomDeath();
+        agent.agent.isStopped = true;
+        GameManager.Instance.enemy.Remove(this);
+        this.DelayCall(timeToDestroy, () =>
+        {
+            Destroy(gameObject);
+        });
+    }
+
     public virtual void TargetIsNull()
     {             
         onAttack = false;

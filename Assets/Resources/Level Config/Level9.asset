@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32a3d1fe67913db4a9efdd23ae68491d, type: 3}
-  m_Name: Level10
+  m_Name: Level9
   m_EditorClassIdentifier: 
   timeSpawnMiner: 6
   timeSpawnArcher: 15
-  timeSpawnSwordMan: 10
-  timeSpawnSpearMan: 20
+  timeSpawnSwordMan: 12
+  timeSpawnSpearMan: 35
   timeSpawnTitanMan: 45
   timeSpawnMagicMan: 40
   maxMiner: 7
   maxArcher: 4
   maxSwordMan: 3
   maxSpearMan: 3
-  maxTitanMan: 1
-  maxMagicMan: 2
+  maxTitanMan: 2
+  maxMagicMan: 1
   minCurrentHpForDef: 300
   firstGoldForPlayer: 500
   firstGoldForEnemy: 1500

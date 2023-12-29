@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SuperTitan : BaseSoldier
 {
+    
     private void Awake()
     {
         agent = GetComponent<Agent>();
         attackRange = 2.7f;
         dangerRange = 7f;
-        damage = 500f;
+        damage = 50f;
         hp = 3000f;
         currentHP = hp;
         isDead = false;
@@ -26,10 +27,16 @@ public class SuperTitan : BaseSoldier
     {
         currentHP -= dmg;
         if (currentHP <= 0 && isDead == false)
-        {
+        {            
             isDead = true;
             RandomDeath();
-            agent.agent.isStopped = true;                      
+            agent.agent.isStopped = true;          
+            GameManager.Instance.enemy.Remove(this);
+            wol.CampaignComplete();
+            this.DelayCall(timeToDestroy, () =>
+            {
+                Destroy(gameObject);
+            });
         }
     }
     public override void AttackOnTarget()
