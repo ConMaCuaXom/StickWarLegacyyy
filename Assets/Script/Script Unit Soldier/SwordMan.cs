@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class SwordMan : BaseSoldier
 {
+    public Character character;
     private void Awake()
     {
         agent = GetComponent<Agent>();               
-        attackRange = 2.5f;
-        dangerRange = 7f;
-        damage = 15f;
-        hp = 100f;
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackDamage;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;

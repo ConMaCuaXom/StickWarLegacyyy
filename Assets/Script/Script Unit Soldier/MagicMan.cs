@@ -7,30 +7,32 @@ using UnityEngine.AI;
 
 public class MagicMan : BaseSoldier
 {
+    public Character character;
     public GameObject soldierOfMe;
     public GameObject explosion;
     public ParticleSystem destroyedMid;
-    public Rally rally;
-    public RallyEnemy rallyEnemy;
+    public Rally rally => GameManager.Instance.rally;
+    public RallyEnemy rallyEnemy => GameManager.Instance.rallyEnemy;
     public Transform spawnPoint;
     
-    public float timeForSpawn = 0;
+    public float timeForSpawn;
     public int numberOfSoldier;
-
+    public int maxTiny => character.maxTiny;
+    public float timeForHololo => character.timeForHololo;
     
     private void Awake()
     {
-        agent = GetComponent<Agent>();              
-        rally = GameManager.Instance.rally;
-        rallyEnemy = GameManager.Instance.rallyEnemy;        
-        attackRange = 10f;
-        dangerRange = 10f;
-        damage = 25f;
-        hp = 70f;
+        agent = GetComponent<Agent>();                                    
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackDamage;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;
         numberOfSoldier = 0;
+        timeForSpawn = 0;
     }
 
     private void Update()
@@ -111,7 +113,7 @@ public class MagicMan : BaseSoldier
     public void SpawnSoldier()
     {
         timeForSpawn += Time.deltaTime;
-        if (timeForSpawn >= 4 && numberOfSoldier < 2)
+        if (timeForSpawn >= timeForHololo && numberOfSoldier < maxTiny)
         {
             hulolo = true;
             if (agent.agent.enabled == true)

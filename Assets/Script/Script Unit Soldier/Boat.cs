@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Boat : MonoBehaviour
 {
+    public Character character;
     public NavMeshAgent agent;
     public BaseSoldier targetE;
     public BaseSoldier targetP;
@@ -13,13 +14,13 @@ public class Boat : MonoBehaviour
     public Transform defensePoint;
     public GameObject Bolt;
     public float time;
-    public float attackSpeed;
+    
     public bool onAttack;
     public bool isPlayer;
     public bool isEnemy;
-
-    public float attackRange = 15f;
-    public float damage = 25f;
+    public float attackSpeed => character.attackSpeed;
+    public float attackRange => character.attackRange;
+    public float damage => character.attackDamage;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class Boat : MonoBehaviour
     {
         if (Vector3.Distance(transform.position,attackPoint.transform.position) < 0.5)
             Fire();
-        //transform.rotation = Quaternion.Euler(0, 0, 0);
+        
     }
 
     public void AttackDef()

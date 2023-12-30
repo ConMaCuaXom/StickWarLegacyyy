@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07df851f99bdd2a4c884344b5549a36a, type: 3}
+  m_Name: SuperTitan
+  m_EditorClassIdentifier: 
+  hp: 3000
+  armor: 0
+  dangerRange: 7
+  attackRange: 2.7
+  attackDamage: 50
+  attackSpeed: 0
+  timeToDestroy: 10
+  timeForHololo: 0
+  goldInMinerMax: 0
+  aoePushBack: 0
+  goldTake1time: 0
+  maxTiny: 0

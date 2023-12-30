@@ -1964,7 +1964,7 @@ MonoBehaviour:
   currentHP: 0
   distanceE: 0
   distanceP: 0
-  timeToDestroy: 2
+  timeToDestroy: 0
   timeToPush: 0
   isDead: 0
   onAttack: 0
@@ -1975,11 +1975,10 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 7b621bb19cffe944381d1aa0435c6133, type: 2}
   soldierOfMe: {fileID: 111318, guid: 44ded0b0255dc4a4382cfe67b90530b5, type: 3}
   explosion: {fileID: 160018, guid: 623fca5c43b49d24aba141d3f0fc0c2a, type: 3}
   destroyedMid: {fileID: 0}
-  rally: {fileID: 0}
-  rallyEnemy: {fileID: 0}
   spawnPoint: {fileID: 7090069865332625719}
   timeForSpawn: 2
   numberOfSoldier: 0

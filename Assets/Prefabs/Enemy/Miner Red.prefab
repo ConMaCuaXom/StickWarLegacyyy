@@ -3590,6 +3590,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: b46320672ea45494fa0f82186479339c, type: 2}
   goldMineGO: {fileID: 0}
   indexGoldMine: 0
   indexGoldEnemy: 7

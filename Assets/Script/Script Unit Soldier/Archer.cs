@@ -7,15 +7,16 @@ using UnityEngine.AI;
 
 public class Archer : BaseSoldier
 {
-    
+    public Character character;   
     public GameObject Arrow;
     private void Awake()
     {
         agent = GetComponent<Agent>();                       
-        attackRange = 10f;
-        dangerRange = 10f;
-        damage = 20f;
-        hp = 60f;
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackDamage;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;

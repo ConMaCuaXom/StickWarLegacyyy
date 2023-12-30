@@ -23,7 +23,7 @@ public class BaseSoldier : MonoBehaviour
     public float currentHP;
     public float distanceE;
     public float distanceP;
-    public float timeToDestroy = 5f;
+    public float timeToDestroy;
     public float timeToPush;
     
 

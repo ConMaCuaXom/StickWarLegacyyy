@@ -6517,6 +6517,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 565ffc019a1c7de45bb61884b5b4a2b3, type: 2}
   Arrow: {fileID: 8223788041303448845, guid: 92d35f6a2d74b7d44ab4b1e81c61ce83, type: 3}
 --- !u!195 &9046797320025282186
 NavMeshAgent:

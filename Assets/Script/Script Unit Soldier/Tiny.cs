@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Tiny : BaseSoldier
 {
+    public Character character;
     public MagicMan daddy;
     private void Awake()
     {
         agent = GetComponent<Agent>();        
-        attackRange = 2.5f;
-        dangerRange = 7f;
-        damage = 12f;
-        hp = 80f;
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackDamage;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;

@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class Titan : BaseSoldier
 {
-
+    public Character character;
+    public float aoePushBack => character.aoePushBack;
     private void Awake()
     {
         agent = GetComponent<Agent>();              
-        attackRange = 2.7f;
-        dangerRange = 7f;
-        damage = 50f;
-        hp = 1200f;
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackDamage;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;
@@ -55,7 +57,7 @@ public class Titan : BaseSoldier
             for (int i = GameManager.Instance.enemy.Count - 1; i >= 0; i--)
             {
                 BaseSoldier soldier = GameManager.Instance.enemy[i];
-                if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= 2f && soldier != null)
+                if (Vector3.Distance(soldier.transform.position, targetE.transform.position) <= aoePushBack && soldier != null)
                 {
                     soldier.TakeDamage(damage);
                     soldier.PushBack();
@@ -67,7 +69,7 @@ public class Titan : BaseSoldier
             for(int i = GameManager.Instance.player.Count - 1; i >= 0; i--)
             {
                 BaseSoldier soldier = GameManager.Instance.player[i];
-                if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= 2f && soldier != null)
+                if (Vector3.Distance(soldier.transform.position, targetP.transform.position) <= aoePushBack && soldier != null)
                 {
                     soldier.TakeDamage(damage);
                     soldier.PushBack();

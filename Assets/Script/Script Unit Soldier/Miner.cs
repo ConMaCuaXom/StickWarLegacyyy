@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class Miner : BaseSoldier
 {    
+    public Character character;
     public GoldInGoldMine goldMineGO;   
     public int indexGoldMine = 0;
     public int indexGoldEnemy = 7;
-    public int goldTake = 120;
+    public int goldTake1time => character.goldTake1time;
     public float distanceToGoldMine;
     public float distanceToBase;
     public float rangeToBase = 5;
-    public float rangeToCook = 5;    
-    public float timeForCook = 4.5f;
+    public float rangeToCook = 5;       
     public float time;
-    public float goldInMiner = 0;
+    public float goldInMinerCurrent;
+    public float goldInMinermax => character.goldInMinerMax;
    
     public bool canGoToBase = false;
     public bool canGoToGoldMine = true;
@@ -31,11 +32,11 @@ public class Miner : BaseSoldier
         if (agent.isPlayer)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldMine];
         if (agent.isEnemy)
-            goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];                
-        attackRange = 10f;
-        damage = 5f;
-        hp = 100f;   
+            goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];                       
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        goldInMinerCurrent = 0;
     }
 
 
@@ -66,7 +67,7 @@ public class Miner : BaseSoldier
             agent.agent.isStopped = true;             
             agent.animator.SetBool("CookCook", true);
             agent.RotationOnTarget(goldMineGO.transform.position - transform.position);
-            if (goldInMiner >= 120)
+            if (goldInMinerCurrent >= goldInMinermax)
             {
                 canGoToBase = true;
                 canGoToGoldMine = false;
@@ -95,17 +96,17 @@ public class Miner : BaseSoldier
             canGoToBase = false;           
             
             if (agent.isPlayer)
-                agent.basePlayer.currentGold += goldInMiner;
+                agent.basePlayer.currentGold += goldInMinerCurrent;
             if (agent.isEnemy)
-                agent.baseEnemy.currentGold += goldInMiner;
-            goldInMiner = 0;
+                agent.baseEnemy.currentGold += goldInMinerCurrent;
+            goldInMinerCurrent = 0;
         }
     }
 
     public void CookCook()
     {
-        goldMineGO.TakeGold(goldTake);
-        goldInMiner += goldTake;
+        goldMineGO.TakeGold(goldTake1time);
+        goldInMinerCurrent += goldTake1time;
     }
 
     public void AddPerson()

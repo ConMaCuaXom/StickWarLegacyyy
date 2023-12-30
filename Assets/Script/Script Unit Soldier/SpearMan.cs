@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class SpearMan : BaseSoldier
 {
-
+    public Character character;
     private void Awake()
     {
         agent = GetComponent<Agent>();                
-        attackRange = 2.7f;
-        dangerRange = 7f;
-        damage = 20f;
-        hp = 300f;
+        attackRange = character.attackRange;
+        dangerRange = character.dangerRange;
+        damage = character.attackRange;
+        hp = character.hp;
+        timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         isDead = false;
         onAttack = false;

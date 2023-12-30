@@ -2378,7 +2378,7 @@ MonoBehaviour:
   currentHP: 0
   distanceE: 0
   distanceP: 0
-  timeToDestroy: 2
+  timeToDestroy: 0
   timeToPush: 0
   isDead: 0
   onAttack: 0
@@ -2389,6 +2389,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 34598d27c0cf0c348b0b2724dd19b1d2, type: 2}
   daddy: {fileID: 0}
 --- !u!136 &-8181503540940258778
 CapsuleCollider:

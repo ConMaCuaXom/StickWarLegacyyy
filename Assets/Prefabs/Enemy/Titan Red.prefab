@@ -10125,6 +10125,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 1b55ecd99c73adc4ca3b9e46ea9ec461, type: 2}
 --- !u!1 &2632483962094737430
 GameObject:
   m_ObjectHideFlags: 0

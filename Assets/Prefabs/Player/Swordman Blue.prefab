@@ -9712,6 +9712,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 10de7978344e26a458446824c52db526, type: 2}
 --- !u!195 &8467719959654111954
 NavMeshAgent:
   m_ObjectHideFlags: 0

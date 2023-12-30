@@ -10111,6 +10111,7 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 1b55ecd99c73adc4ca3b9e46ea9ec461, type: 2}
 --- !u!136 &-4606215416315025650
 CapsuleCollider:
   m_ObjectHideFlags: 0

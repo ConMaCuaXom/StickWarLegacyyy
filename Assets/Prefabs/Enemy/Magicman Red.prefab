@@ -1975,11 +1975,10 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  character: {fileID: 11400000, guid: 7b621bb19cffe944381d1aa0435c6133, type: 2}
   soldierOfMe: {fileID: 111318, guid: 3eec3331af6f76d4695f6cf2c47c89fa, type: 3}
   explosion: {fileID: 160018, guid: 623fca5c43b49d24aba141d3f0fc0c2a, type: 3}
   destroyedMid: {fileID: 0}
-  rally: {fileID: 0}
-  rallyEnemy: {fileID: 0}
   spawnPoint: {fileID: 802039641750798513}
   timeForSpawn: 2
   numberOfSoldier: 0

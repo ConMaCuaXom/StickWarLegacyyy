@@ -2419,6 +2419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -2426,12 +2427,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1551757499}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
-  attackRange: 17
-  damage: 25
 --- !u!1001 &113788004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6912,6 +6910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -6919,12 +6918,9 @@ MonoBehaviour:
   defensePoint: {fileID: 44722679}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 1
   isEnemy: 0
-  attackRange: 15
-  damage: 25
 --- !u!4 &396737055
 Transform:
   m_ObjectHideFlags: 0
@@ -9808,6 +9804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -9815,12 +9812,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1311775937}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
-  attackRange: 17
-  damage: 25
 --- !u!1 &535235407
 GameObject:
   m_ObjectHideFlags: 0
@@ -11043,6 +11037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -11050,12 +11045,9 @@ MonoBehaviour:
   defensePoint: {fileID: 39257503}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
-  attackRange: 17
-  damage: 25
 --- !u!1001 &596922432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16957,6 +16949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -16964,12 +16957,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1692242836}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 1
   isEnemy: 0
-  attackRange: 15
-  damage: 25
 --- !u!4 &1053273531
 Transform:
   m_ObjectHideFlags: 0
@@ -21153,6 +21143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -21160,12 +21151,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1009640779}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
-  attackRange: 17
-  damage: 25
 --- !u!1 &1323512167
 GameObject:
   m_ObjectHideFlags: 0
@@ -28714,6 +28702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -28721,12 +28710,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1874643496}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 1
   isEnemy: 0
-  attackRange: 15
-  damage: 25
 --- !u!4 &1830346721
 Transform:
   m_ObjectHideFlags: 0
@@ -29227,6 +29213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   win: {fileID: 1484909760}
   lose: {fileID: 630004949}
+  finalBoss: 0
   nextLv: {fileID: 280341655}
   playerWin: 0
   playerLose: 0
@@ -31893,6 +31880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16447ef8babdf444088f5fcd440a854e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: d1662f855152d05489f896700c3d82dc, type: 2}
   agent: {fileID: 0}
   targetE: {fileID: 0}
   targetP: {fileID: 0}
@@ -31900,12 +31888,9 @@ MonoBehaviour:
   defensePoint: {fileID: 1927597645}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
   time: 0
-  attackSpeed: 3
   onAttack: 0
   isPlayer: 1
   isEnemy: 0
-  attackRange: 15
-  damage: 25
 --- !u!4 &2067327794
 Transform:
   m_ObjectHideFlags: 0
@@ -32700,6 +32685,7 @@ MonoBehaviour:
   timeMagicMan: 0
   checkHP: 0
   goldFirst: 0
+  checkFinalBoss: 0
   tuto: 
 --- !u!4 &2106199498
 Transform:
