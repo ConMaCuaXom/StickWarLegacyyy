@@ -38,12 +38,12 @@ public class WinOrLose : MonoBehaviour
             win.SetActive(true);
             nextLv.gameObject.SetActive(true);
             playerWin = true;
-            PlayerPrefs.SetString("FirstTime", "No");
-            
+            PlayerPrefs.SetString("FirstTime", "No");          
             if (LevelManager.currentLv == PlayerPrefs.GetInt("LvUnlock"))
             {                
                 PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);               
             }
+            PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") + 10);
         }
         if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv == 10)
         {
