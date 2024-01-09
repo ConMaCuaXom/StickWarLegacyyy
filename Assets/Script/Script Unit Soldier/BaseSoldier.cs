@@ -37,6 +37,10 @@ public class BaseSoldier : MonoBehaviour
     
     public bool onRally = false;
     public bool nearBase = false;
+
+    public List<GameObject> head = null;
+    public List<GameObject> body = null;
+    public List<GameObject> weapon = null;
     public virtual void TargetOnWho()
     {
         if (agent.isPlayer == true && GameManager.Instance.enemy != null)
@@ -367,6 +371,100 @@ public class BaseSoldier : MonoBehaviour
                 agent.animator.SetBool("Attack", false);
             }
             
+        }
+    }
+    public void WhichBody(string bodyy)
+    {
+        if (bodyy == "Body0")
+        {
+            body[0].SetActive(true);
+            body[1].SetActive(false);
+            body[2].SetActive(false);
+            body[3].SetActive(false);
+        }
+        if (bodyy == "Body1")
+        {
+            body[0].SetActive(false);
+            body[1].SetActive(true);
+            body[2].SetActive(false);
+            body[3].SetActive(false);
+        }
+        if (bodyy == "Body2")
+        {
+            body[0].SetActive(false);
+            body[1].SetActive(false);
+            body[2].SetActive(true);
+            body[3].SetActive(false);
+        }
+        if (bodyy == "Body3")
+        {
+            body[0].SetActive(false);
+            body[1].SetActive(false);
+            body[2].SetActive(false);
+            body[3].SetActive(true);
+        }
+    }
+
+    public void WhichHead(string headd)
+    {
+        if (headd == "Head0")
+        {
+            head[0].SetActive(true);
+            head[1].SetActive(false);
+            head[2].SetActive(false);
+            head[3].SetActive(false);
+        }
+        if (headd == "Head1")
+        {
+            head[0].SetActive(false);
+            head[1].SetActive(true);
+            head[2].SetActive(false);
+            head[3].SetActive(false);
+        }
+        if (headd == "Head2")
+        {
+            head[0].SetActive(false);
+            head[1].SetActive(false);
+            head[2].SetActive(true);
+            head[3].SetActive(false);
+        }
+        if (headd == "Head3")
+        {
+            head[0].SetActive(false);
+            head[1].SetActive(false);
+            head[2].SetActive(false);
+            head[3].SetActive(true);
+        }
+    }
+    public void WhichWeapon(string weaponn)
+    {
+        if (weaponn == "Weapon0")
+        {
+            weapon[0].SetActive(true);
+            weapon[1].SetActive(false);
+            weapon[2].SetActive(false);
+            weapon[3].SetActive(false);
+        }
+        if (weaponn == "Weapon1")
+        {
+            weapon[0].SetActive(false);
+            weapon[1].SetActive(true);
+            weapon[2].SetActive(false);
+            weapon[3].SetActive(false);
+        }
+        if (weaponn == "Weapon2")
+        {
+            weapon[0].SetActive(false);
+            weapon[1].SetActive(false);
+            weapon[2].SetActive(true);
+            weapon[3].SetActive(false);
+        }
+        if (weaponn == "Weapon3")
+        {
+            weapon[0].SetActive(false);
+            weapon[1].SetActive(false);
+            weapon[2].SetActive(false);
+            weapon[3].SetActive(true);
         }
     }
 

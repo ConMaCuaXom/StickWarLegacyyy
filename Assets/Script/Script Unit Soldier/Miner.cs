@@ -21,11 +21,7 @@ public class Miner : BaseSoldier
    
     public bool canGoToBase = false;
     public bool canGoToGoldMine = true;
-    public bool checkAddPerson;
-
-    public List<GameObject> head = null;
-    public List<GameObject> body = null;   
-    public List<GameObject> weapon = null;
+    public bool checkAddPerson;   
 
     private void Awake()
     {
@@ -40,10 +36,10 @@ public class Miner : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
-        goldInMinerCurrent = 0;
+        goldInMinerCurrent = 0;              
         WhichBody(PlayerPrefs.GetString("MinerBody"));
         WhichHead(PlayerPrefs.GetString("MinerHead"));
-        WhichWeapon(PlayerPrefs.GetString("MinerWeapon"));
+        WhichWeapon(PlayerPrefs.GetString("MinerWeapon"));              
     }
 
 
@@ -161,72 +157,6 @@ public class Miner : BaseSoldier
                 testEnemy.rallyE.minersE.Remove(this);
                 testEnemy.limitUnitCurrent--;
             }
-        }
-                
-    }
-
-    public void WhichBody(string bodyy)
-    {
-        if (bodyy == "Body1")
-        {
-            body[0].SetActive(true);
-            body[1].SetActive(false);
-            body[2].SetActive(false);
-        }
-        if (bodyy == "Body2")
-        {
-            body[0].SetActive(false);
-            body[1].SetActive(true);
-            body[2].SetActive(false);
-        }
-        if (bodyy == "Body3")
-        {
-            body[0].SetActive(false);
-            body[1].SetActive(false);
-            body[2].SetActive(true);
-        }
-    }
-
-    public void WhichHead(string headd)
-    {
-        if (headd == "Head1")
-        {
-            head[0].SetActive(true);
-            head[1].SetActive(false);
-            head[2].SetActive(false);
-        }
-        if (headd == "Head2")
-        {
-            head[0].SetActive(false);
-            head[1].SetActive(true);
-            head[2].SetActive(false);
-        }
-        if (headd == "Head3")
-        {
-            head[0].SetActive(false);
-            head[1].SetActive(false);
-            head[2].SetActive(true);
-        }
-    }
-    public void WhichWeapon(string weaponn)
-    {
-        if (weaponn == "Weapon1")
-        {
-            weapon[0].SetActive(true);
-            weapon[1].SetActive(false);
-            weapon[2].SetActive(false);
-        }
-        if (weaponn == "Weapon2")
-        {
-            weapon[0].SetActive(false);
-            weapon[1].SetActive(true);
-            weapon[2].SetActive(false);
-        }
-        if (weaponn == "Weapon3")
-        {
-            weapon[0].SetActive(false);
-            weapon[1].SetActive(false);
-            weapon[2].SetActive(true);
-        }
-    }
+        }               
+    }  
 }

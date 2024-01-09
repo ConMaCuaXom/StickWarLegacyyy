@@ -126,16 +126,23 @@ public class MagicMan : BaseSoldier
     public void HololoBegin()
     {       
         GameObject Soldier = Instantiate(soldierOfMe, spawnPoint.position, transform.rotation);
-        Tiny tiny = Soldier.GetComponent<Tiny>();
+        Tiny tiny = Soldier.GetComponent<Tiny>();       
+        tiny.WhichBody("Body0");
+        tiny.WhichHead("Head0");
+        tiny.WhichWeapon("Weapon0");
         tiny.daddy = this;       
         numberOfSoldier++;       
         if (agent.isPlayer)
         {
+            tiny.agent.isPlayer = true;
+            tiny.agent.isEnemy = false;
             rally.tinys.Add(tiny);            
             GameManager.Instance.player.Add(tiny);            
         }
         if (agent.isEnemy)
         {
+            tiny.agent.isPlayer = false;
+            tiny.agent.isEnemy = true;
             rallyEnemy.tinysE.Add(tiny);            
             GameManager.Instance.enemy.Add(tiny);            
         }        

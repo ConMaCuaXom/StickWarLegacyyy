@@ -3590,18 +3590,22 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  head:
+  - {fileID: 4535646747368910823}
+  body:
+  - {fileID: 4535646747368954099}
+  weapon:
+  - {fileID: 4535646747368917713}
   character: {fileID: 11400000, guid: b46320672ea45494fa0f82186479339c, type: 2}
   goldMineGO: {fileID: 0}
   indexGoldMine: 0
   indexGoldEnemy: 7
-  goldTake: 30
   distanceToGoldMine: 0
   distanceToBase: 0
   rangeToBase: 4
   rangeToCook: 2.5
-  timeForCook: 4
   time: 0
-  goldInMiner: 0
+  goldInMinerCurrent: 0
   canGoToBase: 0
   canGoToGoldMine: 0
   checkAddPerson: 0

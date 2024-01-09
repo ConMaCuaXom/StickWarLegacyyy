@@ -20,6 +20,9 @@ public class Archer : BaseSoldier
         currentHP = hp;
         isDead = false;
         onAttack = false;
+        WhichBody(PlayerPrefs.GetString("ArcherBody"));
+        WhichHead(PlayerPrefs.GetString("ArcherHead"));
+        WhichWeapon(PlayerPrefs.GetString("ArcherWeapon"));
     }
 
     private void Update()
