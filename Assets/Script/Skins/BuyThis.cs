@@ -35,22 +35,20 @@ public class BuyThis : MonoBehaviour
 
     private void Update()
     {
-        if (buy.isOn)
-            Select();
-        else
-            NoSelect();
+        
     }
     public void Buy()
     {
         if (PlayerPrefs.GetInt("Gem") >= priceSkins.price)
         {
             price.SetActive(false);
-            select.SetActive(true);
+            //select.SetActive(true);
             owned.SetActive(true);
             PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") - priceSkins.price);
             gem.UpdateGem();
             PlayerPrefs.SetString(priceSkins.name.ToString(), "Paid");
             buy.enabled = true;
+            AudioManager.Instance.PlayOneShot("Buy_Skins",1);
         }       
     }
 
@@ -58,11 +56,20 @@ public class BuyThis : MonoBehaviour
     {       
         select.SetActive(true);
         PlayerPrefs.SetInt(priceSkins.name.ToString() + "S", 1);
+        AudioManager.Instance.PlayOneShot("Select_Skins",1);
     }
 
     public void NoSelect()
     {
         select.SetActive(false);
         PlayerPrefs.SetInt(priceSkins.name.ToString() + "S", 0);
+    }
+
+    public void SelectOrNo()
+    {
+        if (buy.isOn)
+            Select();
+        else
+            NoSelect();
     }
 }

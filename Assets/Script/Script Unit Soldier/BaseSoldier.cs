@@ -10,11 +10,32 @@ public class BaseSoldier : MonoBehaviour
     public Agent agent;
     public BaseSoldier targetE;
     public BaseSoldier targetP;
+
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
     public BuyUnit buyUnit => GameManager.Instance.buyUnit;
     public TestEnemy testEnemy => GameManager.Instance.testEnemy;
     public WinOrLose wol => GameManager.Instance.winOrLose;
+    public SoundDynamic soundDynamic => AudioManager.Instance.dynamicSoundActive[transform];
 
-    
+    public enum Death
+    {
+        Death1,
+        Death2
+    }
+
+    public enum SoundDeath
+    {
+        soldier_die_01,
+        soldier_die_02,
+        soldier_die_03,
+        soldier_die_04,
+        soldier_die_05,
+        soldier_die_06,
+        soldier_die_07,
+        soldier_die_08,
+        soldier_die_09,
+        soldier_die_10
+    }
 
     public float dangerRange;
     public float attackRange;
@@ -69,7 +90,7 @@ public class BaseSoldier : MonoBehaviour
             {
                 TargetIsNull();
             }
-            if (nearBase)
+            if (nearBase && baseEnemy.currentHP > 0)
             {
                 onAttack = false;
                 AttackOnBaseEnemy();
@@ -118,7 +139,8 @@ public class BaseSoldier : MonoBehaviour
     }
     public virtual void GoToEnemy(BaseSoldier target, float distanceToEnemy)
     {
-                  
+        if (pushBack)
+            return;
             if (distanceToEnemy > attackRange && attacking == false && isDead == false)
             {                              
                 agent.agent.isStopped = false;
@@ -136,17 +158,18 @@ public class BaseSoldier : MonoBehaviour
             }             
     }
 
-    public void AttackingOff()
+    public virtual void AttackingOff()
     {
         attacking = false;
-        agent.agent.isStopped = false;
-        
+        if (agent.agent.enabled == true)
+            agent.agent.isStopped = false;   
     }
 
     public void AttackingOn()
     {
         attacking = true;
-        agent.agent.isStopped = true;
+        if (agent.agent.enabled == true)
+            agent.agent.isStopped = true;
     }
 
     
@@ -168,11 +191,10 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void RandomDeath()
     {
-        int rd = Random.Range(0, 2);
-        if (rd == 0)       
-            agent.animator.SetTrigger("Death1");                    
-        if (rd == 1)       
-            agent.animator.SetTrigger("Death2");                   
+        Death rdDeath = (Death)Random.Range(0, 2);                                          
+        agent.animator.SetTrigger(rdDeath.ToString());
+        SoundDeath rdSoundDeath = (SoundDeath)Random.Range(0, 10);
+        soundDynamic.PlayOneShot(rdSoundDeath.ToString());
     }   
 
     //public void TargetIsDead()
@@ -182,9 +204,7 @@ public class BaseSoldier : MonoBehaviour
     //}
 
     public virtual void AttackOnTarget()
-    {
-        
-        
+    {              
         if (agent.isPlayer && targetE != null)
             targetE.TakeDamage(damage);               
         if (agent.isEnemy && targetP != null)
@@ -198,7 +218,8 @@ public class BaseSoldier : MonoBehaviour
         {
             isDead = true;
             RandomDeath();
-            agent.agent.isStopped = true;
+            //agent.agent.isStopped = true;
+            agent.agent.enabled = false;
             if (agent.isEnemy)           
                 GameManager.Instance.enemy.Remove(this);            
             if (agent.isPlayer)           
@@ -226,14 +247,13 @@ public class BaseSoldier : MonoBehaviour
     public virtual void TargetIsNull()
     {             
         onAttack = false;
-        agent.agent.isStopped = false;
+        if (nearBase == false)
+            agent.agent.isStopped = false;
         agent.animator.SetBool("Attack", false);
         if (agent.isEnemy)
         {
-            targetP = null;
-            
-        }
-            
+            targetP = null;           
+        }          
         if (agent.isPlayer)
             targetE = null;                          
     }     
@@ -276,6 +296,8 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void AttackOnBaseEnemy()
     {
+        if (pushBack || baseEnemy.currentHP <= 0)
+            return;
         if (agent.isPlayer && onAttack == false)
         {                  
             if (nearBase == true)
@@ -318,8 +340,9 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void PushBack()
     {
-        pushBack = true;       
-        agent.agent.isStopped = true;
+        pushBack = true;
+        agent.agent.enabled = false;
+            //agent.agent.isStopped = true;
         //this.DelayCall(2f, () =>
         //{            
         //    pushBack = false;
@@ -334,7 +357,8 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void PushBackEnd()
     {
-        agent.agent.isStopped = false;
+        agent.agent.enabled = true;
+            //agent.agent.isStopped = false;
         pushBack = false;
         attacking = false;
     }

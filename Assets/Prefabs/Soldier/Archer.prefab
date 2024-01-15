@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 9046797320025282186}
   - component: {fileID: 3935808362798330825}
   - component: {fileID: 3274214308143360990}
+  - component: {fileID: 3211153336613158225}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -563,6 +564,18 @@ CapsuleCollider:
   m_Height: 1.3
   m_Direction: 1
   m_Center: {x: 0, y: 0.69, z: 0}
+--- !u!114 &3211153336613158225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686867530368026049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &686867530368029043
 GameObject:
   m_ObjectHideFlags: 0

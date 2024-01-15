@@ -6,6 +6,15 @@ using UnityEngine;
 public class SwordMan : BaseSoldier
 {
     public Character character;
+    public TargetDynamicSound targetDynamicSound = null;
+
+    public enum SoundAttack
+    {
+        SwordMan_Attack1,
+        SwordMan_Attack2,
+        SwordMan_Attack3,
+        SwordMan_Attack4
+    }
     private void Awake()
     {
         agent = GetComponent<Agent>();               
@@ -15,6 +24,8 @@ public class SwordMan : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
         onDef = false;
@@ -24,7 +35,7 @@ public class SwordMan : BaseSoldier
     private void Update()
     {
         
-        if (onDef == true)
+        if (onDef == true || isDead == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();
@@ -52,5 +63,17 @@ public class SwordMan : BaseSoldier
             }
                 
         }
+    }
+    public override void AttackOnTarget()
+    {
+        base.AttackOnTarget();
+        SoundAttack rdSoundAttack = (SoundAttack)Random.Range(0, 4);
+        soundDynamic.PlayOneShot(rdSoundAttack.ToString());
+    }
+    public override void DamageForBase()
+    {
+        base.DamageForBase();
+        SoundAttack rdSoundAttack = (SoundAttack)Random.Range(0, 4);
+        soundDynamic.PlayOneShot(rdSoundAttack.ToString());
     }
 }

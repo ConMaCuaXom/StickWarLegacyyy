@@ -14,7 +14,8 @@ public class WinOrLose : MonoBehaviour
 
     public Button nextLv;
     public bool playerWin;
-    public bool playerLose;   
+    public bool playerLose;
+    public AudioSource audioSource;
 
     private void Awake()
     {       
@@ -23,6 +24,7 @@ public class WinOrLose : MonoBehaviour
         playerLose = false;
         playerWin = false;
         nextLv.onClick.AddListener(BackToLevelScene);      
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnDisable()
@@ -44,11 +46,15 @@ public class WinOrLose : MonoBehaviour
                 PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);               
             }
             PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") + 10);
+            AudioManager.Instance.audioSource.Pause();
+            AudioManager.Instance.PlayOneShot("Base_Destroy", 1);
+            //AudioManager.Instance.PlayOneShot("Victory",1);
         }
         if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv == 10)
         {
             baseEnemy.currentHP = 0;
-            finalBoss = true;                                               
+            finalBoss = true;
+            AudioManager.Instance.PlayOneShot("Base_Destroy", 1);
         }
             
 
@@ -58,6 +64,9 @@ public class WinOrLose : MonoBehaviour
             basePlayer.currentHP = 0;
             lose.SetActive(true);
             playerLose = true;
+            AudioManager.Instance.audioSource.Pause();
+            AudioManager.Instance.PlayOneShot("Base_Destroy",1);
+            //AudioManager.Instance.PlayOneShot("Lose", 1);
         }
     }
     public void CampaignComplete()
@@ -70,5 +79,6 @@ public class WinOrLose : MonoBehaviour
     public void BackToLevelScene()
     {
         SceneManager.LoadScene("Level", LoadSceneMode.Single);
+        AudioManager.Instance.audioSource.Play();
     }
 }

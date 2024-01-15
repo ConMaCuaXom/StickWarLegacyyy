@@ -2362,6 +2362,7 @@ GameObject:
   - component: {fileID: 108954207}
   - component: {fileID: 108954209}
   - component: {fileID: 108954208}
+  - component: {fileID: 108954210}
   m_Layer: 0
   m_Name: Boat 4
   m_TagString: Untagged
@@ -2426,10 +2427,23 @@ MonoBehaviour:
   attackPoint: {fileID: 2059227539}
   defensePoint: {fileID: 1551757499}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
+--- !u!114 &108954210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108954206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &113788004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6869,6 +6883,7 @@ GameObject:
   - component: {fileID: 396737055}
   - component: {fileID: 396737054}
   - component: {fileID: 396737053}
+  - component: {fileID: 396737056}
   m_Layer: 0
   m_Name: Boat 1
   m_TagString: Untagged
@@ -6917,6 +6932,7 @@ MonoBehaviour:
   attackPoint: {fileID: 327389646}
   defensePoint: {fileID: 44722679}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 1
@@ -6937,6 +6953,18 @@ Transform:
   m_Father: {fileID: 2018090612}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &396737056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396737052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &398709958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8363,6 +8391,8 @@ MonoBehaviour:
   defense: {fileID: 1027117582}
   index: -1
   playerIsNear: 0
+  checkSoundAttack: 0
+  checkSoundDefense: 0
 --- !u!114 &444717946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9747,6 +9777,7 @@ GameObject:
   - component: {fileID: 533191659}
   - component: {fileID: 533191661}
   - component: {fileID: 533191660}
+  - component: {fileID: 533191662}
   m_Layer: 0
   m_Name: Boat 2
   m_TagString: Untagged
@@ -9811,10 +9842,23 @@ MonoBehaviour:
   attackPoint: {fileID: 493135866}
   defensePoint: {fileID: 1311775937}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
+--- !u!114 &533191662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533191658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &535235407
 GameObject:
   m_ObjectHideFlags: 0
@@ -10980,6 +11024,7 @@ GameObject:
   - component: {fileID: 594444947}
   - component: {fileID: 594444949}
   - component: {fileID: 594444948}
+  - component: {fileID: 594444950}
   m_Layer: 0
   m_Name: Boat 1
   m_TagString: Untagged
@@ -11044,10 +11089,23 @@ MonoBehaviour:
   attackPoint: {fileID: 1191177326}
   defensePoint: {fileID: 39257503}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
+--- !u!114 &594444950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594444946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &596922432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11274,12 +11332,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!1 &630004949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5020106235481736590, guid: 2df3321b811e1834d998f6f2e1034b1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1101710780668184391}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &635123478
 GameObject:
   m_ObjectHideFlags: 0
@@ -16908,6 +16960,7 @@ GameObject:
   - component: {fileID: 1053273531}
   - component: {fileID: 1053273530}
   - component: {fileID: 1053273529}
+  - component: {fileID: 1053273532}
   m_Layer: 0
   m_Name: Boat 4
   m_TagString: Untagged
@@ -16956,6 +17009,7 @@ MonoBehaviour:
   attackPoint: {fileID: 896115496}
   defensePoint: {fileID: 1692242836}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 1
@@ -16976,6 +17030,18 @@ Transform:
   m_Father: {fileID: 2018090612}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1053273532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053273528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1053972838
 GameObject:
   m_ObjectHideFlags: 0
@@ -21086,6 +21152,7 @@ GameObject:
   - component: {fileID: 1320411825}
   - component: {fileID: 1320411827}
   - component: {fileID: 1320411826}
+  - component: {fileID: 1320411828}
   m_Layer: 0
   m_Name: Boat 3
   m_TagString: Untagged
@@ -21150,10 +21217,23 @@ MonoBehaviour:
   attackPoint: {fileID: 258357846}
   defensePoint: {fileID: 1009640779}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 0
   isEnemy: 1
+--- !u!114 &1320411828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320411824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1323512167
 GameObject:
   m_ObjectHideFlags: 0
@@ -23301,12 +23381,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4509780323381818, guid: 36888e805d00a0b4b82757e3692ede9b,
     type: 3}
   m_PrefabInstance: {fileID: 1339704871}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1484909760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5839120394999738212, guid: 2df3321b811e1834d998f6f2e1034b1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1101710780668184391}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1488788164
 PrefabInstance:
@@ -28661,6 +28735,7 @@ GameObject:
   - component: {fileID: 1830346721}
   - component: {fileID: 1830346720}
   - component: {fileID: 1830346719}
+  - component: {fileID: 1830346722}
   m_Layer: 0
   m_Name: Boat 2
   m_TagString: Untagged
@@ -28709,6 +28784,7 @@ MonoBehaviour:
   attackPoint: {fileID: 1832485346}
   defensePoint: {fileID: 1874643496}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 1
@@ -28729,6 +28805,18 @@ Transform:
   m_Father: {fileID: 2018090612}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830346722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830346718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1831863478
 GameObject:
   m_ObjectHideFlags: 0
@@ -29187,36 +29275,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.18100001, y: -0.09200001, z: -0.026}
   m_TimeToStationary: 0.5
---- !u!1 &1861720198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 773620083220237847, guid: 2df3321b811e1834d998f6f2e1034b1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1101710780668184391}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1861720199 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8066795809946399179, guid: 2df3321b811e1834d998f6f2e1034b1a,
     type: 3}
   m_PrefabInstance: {fileID: 1101710780668184391}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1861720201
+--- !u!114 &1861720201 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7024888029582011833, guid: 2df3321b811e1834d998f6f2e1034b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1101710780668184391}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861720198}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 346830669159cf744b68711232980678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  win: {fileID: 1484909760}
-  lose: {fileID: 630004949}
-  finalBoss: 0
-  nextLv: {fileID: 280341655}
-  playerWin: 0
-  playerLose: 0
 --- !u!1 &1863271797
 GameObject:
   m_ObjectHideFlags: 0
@@ -29830,6 +29906,7 @@ MonoBehaviour:
   wl: {fileID: 1861720201}
   healthBar: {fileID: 1854231581}
   DisplayCurrentHP: {fileID: 1435063376}
+  boxCollider: {fileID: 0}
 --- !u!65 &1891094801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31839,6 +31916,7 @@ GameObject:
   - component: {fileID: 2067327794}
   - component: {fileID: 2067327793}
   - component: {fileID: 2067327792}
+  - component: {fileID: 2067327795}
   m_Layer: 0
   m_Name: Boat 3
   m_TagString: Untagged
@@ -31887,6 +31965,7 @@ MonoBehaviour:
   attackPoint: {fileID: 964406829}
   defensePoint: {fileID: 1927597645}
   Bolt: {fileID: 2947774521723940529, guid: 2c37dbaefd04a744a8fc07ffb9602563, type: 3}
+  targetDynamicSound: {fileID: 0}
   time: 0
   onAttack: 0
   isPlayer: 1
@@ -31907,6 +31986,18 @@ Transform:
   m_Father: {fileID: 2018090612}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067327795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067327791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067974183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33528,11 +33619,68 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinOrLose
       objectReference: {fileID: 0}
+    - target: {fileID: 5020106235481736590, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5839120394999738212, guid: 2df3321b811e1834d998f6f2e1034b1a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5891910582541182469, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9012a59132512b642b98cebc18b1c02a,
+        type: 3}
+    - target: {fileID: 6071398936218433298, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 650
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071398936218433298, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071398936218433298, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024888029582011833, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: nextLv
+      value: 
+      objectReference: {fileID: 280341655}
+    - target: {fileID: 7535215086664291493, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535215086664291493, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535215086664291493, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535215086664291493, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634053984123484044, guid: 2df3321b811e1834d998f6f2e1034b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28089d63af710744c9f75b91014bf867,
+        type: 3}
     - target: {fileID: 8066795809946399179, guid: 2df3321b811e1834d998f6f2e1034b1a,
         type: 3}
       propertyPath: m_Pivot.x

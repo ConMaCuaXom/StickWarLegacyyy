@@ -9,6 +9,7 @@ public class Archer : BaseSoldier
 {
     public Character character;   
     public GameObject Arrow;
+    public TargetDynamicSound targetDynamicSound = null;
     private void Awake()
     {
         agent = GetComponent<Agent>();                       
@@ -18,6 +19,8 @@ public class Archer : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
         WhichBody(PlayerPrefs.GetString("ArcherBody"));
@@ -27,7 +30,7 @@ public class Archer : BaseSoldier
 
     private void Update()
     {
-        if (onDef == true)
+        if (onDef == true || isDead == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();
@@ -73,9 +76,9 @@ public class Archer : BaseSoldier
         {
             aab.target = targetP;
             aab.isPlayer = false;
-        }
-            
-        arrow.transform.position = transform.position;       
+        }          
+        arrow.transform.position = transform.position;
+        AttackSound();
     }
 
     public void RespawnArrowBase()
@@ -88,10 +91,83 @@ public class Archer : BaseSoldier
         if (agent.isEnemy)
             aab.isPlayer = false;
         arrow.transform.position = transform.position;
+        AttackSound();
+    }
+
+    public override void HowToAttackE(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetE = list[0];
+                distanceE = Vector3.Distance(transform.position, targetE.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull();
+            }
+            if (targetE != null && baseEnemy.currentHP > 0)
+            {
+                if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= Vector3.Distance(transform.position, targetE.transform.position))
+                {
+                    onAttack = false;
+                    AttackOnBaseEnemy();
+                }
+            } else
+            {
+                if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= attackRange)
+                    AttackOnBaseEnemy();
+            }          
+        }
+
+        if (list.Count == 0)
+        {
+            TargetIsNull();
+        }
+    }
+
+    public override void HowToAttackP(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetP = list[0];
+                distanceP = Vector3.Distance(transform.position, targetP.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull();
+            }
+            if (targetP != null)
+            {
+                if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= Vector3.Distance(transform.position, targetP.transform.position))
+                {
+                    onAttack = false;
+                    AttackOnBaseEnemy();
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= attackRange)
+                    AttackOnBaseEnemy();
+            }
+        }
+        if (list.Count == 0)
+        {
+            TargetIsNull();
+        }
     }
 
     public override void AttackOnBaseEnemy()
     {
+        if (baseEnemy.currentHP <= 0)
+            return;
         if (agent.isPlayer && onAttack == false)
         {
             if (Vector3.Distance(transform.position,agent.baseEnemy.transform.position) <= attackRange)
@@ -122,5 +198,30 @@ public class Archer : BaseSoldier
                 agent.AttackBase();
             }
         }
+    }
+
+    public override void TargetIsNull()
+    {
+        onAttack = false;
+        if (agent.isPlayer && Vector3.Distance(transform.position, agent.baseEnemy.transform.position) >= attackRange)
+            agent.agent.isStopped = false;
+        if (agent.isEnemy && Vector3.Distance(transform.position, agent.basePlayer.transform.position) >= attackRange)
+            agent.agent.isStopped = false;
+        agent.animator.SetBool("Attack", false);
+        if (agent.isEnemy)       
+            targetP = null;       
+        if (agent.isPlayer)
+            targetE = null;
+    }
+
+    public override void AttackingOff()
+    {
+        attacking = false;
+        if (agent.agent.enabled == true && attackOnBase == false)
+            agent.agent.isStopped = false;
+    }
+    public void AttackSound()
+    {
+        soundDynamic.PlayOneShot("Archer_shot");
     }
 }

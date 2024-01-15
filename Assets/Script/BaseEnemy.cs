@@ -18,11 +18,13 @@ public class BaseEnemy : MonoBehaviour
     public WinOrLose wl;
     public Image healthBar;
     public Text DisplayCurrentHP;
+    public BoxCollider boxCollider;
 
     private void Awake()
     {
         currentGold = totalGold;
         currentHP = HP;
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void Update()
@@ -54,6 +56,7 @@ public class BaseEnemy : MonoBehaviour
         if (currentHP <= 0)
         {
             wl.LoseOrWin();
+            boxCollider.enabled = false;
         }
     }
     private void OnDrawGizmos()

@@ -13,6 +13,10 @@ public class Boat : MonoBehaviour
     public Transform attackPoint;
     public Transform defensePoint;
     public GameObject Bolt;
+    public BasePlayer basePlayer => GameManager.Instance.basePlayer;
+    public BaseEnemy baseEnemy => GameManager.Instance.baseEnemy;
+    public TargetDynamicSound targetDynamicSound = null;
+    public SoundDynamic soundDynamic => AudioManager.Instance.dynamicSoundActive[transform];
     public float time;
     
     public bool onAttack;
@@ -26,10 +30,14 @@ public class Boat : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         onAttack = false;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
     }
 
     private void Update()
     {
+        if (baseEnemy.currentHP <= 0 || basePlayer.currentHP <= 0)
+            return;
         if (Vector3.Distance(transform.position,attackPoint.transform.position) < 0.5)
             Fire();
         
@@ -114,7 +122,7 @@ public class Boat : MonoBehaviour
             aab.target = targetE;
         if (isEnemy)
             aab.target = targetP;
-        
+        soundDynamic.PlayOneShot("Boat_Attack");
     }
 
     public void GoAttackPoint()

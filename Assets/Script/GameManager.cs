@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public RallyEnemy rallyEnemy;
     public BuyUnit buyUnit;
     public TestEnemy testEnemy;
-    public WinOrLose winOrLose;
+    public WinOrLose winOrLose;    
 
     public Transform defensePointP = null;
     public Transform defensePointE = null;

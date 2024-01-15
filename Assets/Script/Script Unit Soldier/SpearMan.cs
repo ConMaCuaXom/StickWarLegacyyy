@@ -6,22 +6,32 @@ using UnityEngine;
 public class SpearMan : BaseSoldier
 {
     public Character character;
+    public TargetDynamicSound targetDynamicSound = null;
+
+    public enum SoundAttack
+    {
+        SpearMan_Attack1,
+        SpearMan_Attack2, 
+        SpearMan_Attack3
+    }
     private void Awake()
     {
         agent = GetComponent<Agent>();                
         attackRange = character.attackRange;
         dangerRange = character.dangerRange;
-        damage = character.attackRange;
+        damage = character.attackDamage;
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
     }
 
     private void Update()
     {
-        if (onDef == true)
+        if (onDef == true || isDead == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();
@@ -49,5 +59,17 @@ public class SpearMan : BaseSoldier
             }
                 
         }
+    }
+    public override void AttackOnTarget()
+    {
+        base.AttackOnTarget();
+        SoundAttack rdSoundAttack = (SoundAttack)Random.Range(0, 3);
+        soundDynamic.PlayOneShot(rdSoundAttack.ToString());
+    }
+    public override void DamageForBase()
+    {
+        base.DamageForBase();
+        SoundAttack rdSoundAttack = (SoundAttack)Random.Range(0, 3);
+        soundDynamic.PlayOneShot(rdSoundAttack.ToString());
     }
 }

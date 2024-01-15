@@ -9934,6 +9934,7 @@ GameObject:
   - component: {fileID: -6100136437889913481}
   - component: {fileID: -3994140733207897566}
   - component: {fileID: -7286307024431433564}
+  - component: {fileID: -235869603735930256}
   m_Layer: 0
   m_Name: Super Titan
   m_TagString: Enemy
@@ -10125,7 +10126,22 @@ MonoBehaviour:
   attacking: 0
   onRally: 0
   nearBase: 0
+  head: []
+  body: []
+  weapon: []
   character: {fileID: 11400000, guid: c2930dd8297bf904cb42dbedebe300b5, type: 2}
+--- !u!114 &-235869603735930256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632483962094737284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc071c830ad0cd94286093fe7e95fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2632483962094737430
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,9 +7,19 @@ using UnityEngine;
 public class Miner : BaseSoldier
 {    
     public Character character;
-    public GoldInGoldMine goldMineGO;   
+    public GoldInGoldMine goldMineGO;
+    public TargetDynamicSound targetDynamicSound = null;
+    //public SoundDynamic soundDynamic = null;
     public int indexGoldMine = 0;
     public int indexGoldEnemy = 7;
+
+    public enum SoundCook
+    {
+        Miner_Cook,
+        Miner_Cook2
+    }
+    //public SoundCook soundCook;
+
     public int goldTake1time => character.goldTake1time;
     public float distanceToGoldMine;
     public float distanceToBase;
@@ -28,7 +38,10 @@ public class Miner : BaseSoldier
         canGoToBase = false;
         canGoToGoldMine = true;
         checkAddPerson = true;
-        agent = GetComponent<Agent>();       
+        agent = GetComponent<Agent>();  
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
+        //soundDynamic = AudioManager.Instance.dynamicSoundActive[transform];
         if (agent.isPlayer)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldMine];
         if (agent.isEnemy)
@@ -45,7 +58,7 @@ public class Miner : BaseSoldier
 
     private void Update()
     {
-        if (pushBack ||  onDef)
+        if (pushBack ||  onDef || isDead == true)
             return;
         GoToGoldMine();
         GoToBase();
@@ -110,6 +123,13 @@ public class Miner : BaseSoldier
     {
         goldMineGO.TakeGold(goldTake1time);
         goldInMinerCurrent += goldTake1time;
+        //soundDynamic.PlayOneShot("Miner_Cook");
+    }
+
+    public void SoundCookCook()
+    {
+        SoundCook rd = (SoundCook)Random.Range(0,2);
+        soundDynamic.PlayOneShot(rd.ToString());
     }
 
     public void AddPerson()
@@ -158,5 +178,39 @@ public class Miner : BaseSoldier
                 testEnemy.limitUnitCurrent--;
             }
         }               
-    }  
+    }
+    public override void WiOrLo()
+    {
+
+        if (wol.playerWin == true)
+        {
+            if (agent.isPlayer)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Victory", true);
+            }
+            if (agent.isEnemy)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("CookCook", false);
+            }
+
+        }
+        if (wol.playerLose == true)
+        {
+            if (agent.isEnemy)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Victory", true);
+            }
+            if (agent.isPlayer)
+            {
+                agent.agent.isStopped = true;
+                agent.animator.SetBool("Run", false);
+                agent.animator.SetBool("CookCook", false);
+            }
+
+        }
+    }
 }

@@ -14,7 +14,8 @@ public class MagicMan : BaseSoldier
     public Rally rally => GameManager.Instance.rally;
     public RallyEnemy rallyEnemy => GameManager.Instance.rallyEnemy;
     public Transform spawnPoint;
-    
+    public TargetDynamicSound targetDynamicSound = null;
+
     public float timeForSpawn;
     public int numberOfSoldier;
     public int maxTiny => character.maxTiny;
@@ -29,6 +30,8 @@ public class MagicMan : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
         numberOfSoldier = 0;
@@ -37,7 +40,7 @@ public class MagicMan : BaseSoldier
 
     private void Update()
     {
-        if (onDef == true || hulolo == true || pushBack == true)
+        if (onDef == true || hulolo == true || pushBack == true || isDead  == true)
             return;
         TargetOnWho();
         SpawnSoldier();
@@ -105,7 +108,8 @@ public class MagicMan : BaseSoldier
                     soldier.PushBack();
                 }
             }
-        }       
+        }
+        soundDynamic.PlayOneShot("MagicMan_Explosion");
     }
 
     
@@ -126,16 +130,16 @@ public class MagicMan : BaseSoldier
     public void HololoBegin()
     {       
         GameObject Soldier = Instantiate(soldierOfMe, spawnPoint.position, transform.rotation);
-        Tiny tiny = Soldier.GetComponent<Tiny>();       
-        tiny.WhichBody("Body0");
-        tiny.WhichHead("Head0");
-        tiny.WhichWeapon("Weapon0");
+        Tiny tiny = Soldier.GetComponent<Tiny>();              
         tiny.daddy = this;       
         numberOfSoldier++;       
         if (agent.isPlayer)
         {
             tiny.agent.isPlayer = true;
             tiny.agent.isEnemy = false;
+            tiny.WhichBody("Body1");
+            tiny.WhichHead("Head1");
+            tiny.WhichWeapon("Weapon1");
             rally.tinys.Add(tiny);            
             GameManager.Instance.player.Add(tiny);            
         }
@@ -143,9 +147,13 @@ public class MagicMan : BaseSoldier
         {
             tiny.agent.isPlayer = false;
             tiny.agent.isEnemy = true;
+            tiny.WhichBody("Body0");
+            tiny.WhichHead("Head0");
+            tiny.WhichWeapon("Weapon0");
             rallyEnemy.tinysE.Add(tiny);            
             GameManager.Instance.enemy.Add(tiny);            
-        }        
+        }
+        soundDynamic.PlayOneShot("MagicMan_SpawnTiny");
     }
 
     public void HololoFinish()
@@ -157,6 +165,8 @@ public class MagicMan : BaseSoldier
 
     public override void AttackOnBaseEnemy()
     {
+        if (baseEnemy.currentHP <= 0)
+            return;
         if (agent.isPlayer && onAttack == false)
         {
             if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= attackRange)
@@ -187,5 +197,101 @@ public class MagicMan : BaseSoldier
                 agent.AttackBase();
             }
         }
+    }
+    public override void TargetIsNull()
+    {
+        onAttack = false;
+        if (agent.isPlayer && Vector3.Distance(transform.position, agent.baseEnemy.transform.position) >= attackRange)
+            agent.agent.isStopped = false;
+        if (agent.isEnemy && Vector3.Distance(transform.position, agent.basePlayer.transform.position) >= attackRange)
+            agent.agent.isStopped = false;
+        agent.animator.SetBool("Attack", false);
+        if (agent.isEnemy)
+            targetP = null;
+        if (agent.isPlayer)
+            targetE = null;
+    }
+
+    public override void AttackingOff()
+    {
+        attacking = false;
+        if (agent.agent.enabled == true && attackOnBase == false)
+            agent.agent.isStopped = false;
+    }
+    public override void HowToAttackE(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetE = list[0];
+                distanceE = Vector3.Distance(transform.position, targetE.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull();
+            }
+            if (targetE != null && baseEnemy.currentHP > 0)
+            {
+                if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= Vector3.Distance(transform.position, targetE.transform.position))
+                {
+                    onAttack = false;
+                    AttackOnBaseEnemy();
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= attackRange)
+                    AttackOnBaseEnemy();
+            }
+        }
+
+        if (list.Count == 0)
+        {
+            TargetIsNull();
+        }
+    }
+
+    public override void HowToAttackP(List<BaseSoldier> list)
+    {
+        if (list.Count > 0)
+        {
+            if (Vector3.Distance(transform.position, list[0].transform.position) <= dangerRange)
+            {
+                onAttack = true;
+                targetP = list[0];
+                distanceP = Vector3.Distance(transform.position, targetP.transform.position);
+                InDangerZone();
+            }
+            else
+            {
+                TargetIsNull();
+            }
+            if (targetP != null)
+            {
+                if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= Vector3.Distance(transform.position, targetP.transform.position))
+                {
+                    onAttack = false;
+                    AttackOnBaseEnemy();
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= attackRange)
+                    AttackOnBaseEnemy();
+            }
+        }
+        if (list.Count == 0)
+        {
+            TargetIsNull();
+        }
+    }
+
+    public override void DamageForBase()
+    {
+        base.DamageForBase();
+        soundDynamic.PlayOneShot("MagicMan_Explosion");
     }
 }

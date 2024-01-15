@@ -163,7 +163,7 @@ public class TestEnemy : MonoBehaviour
 
     public void BuySuperTitan()
     {
-        GameObject Stitan = Instantiate(SuperTitan, GameManager.Instance.baseEnemy.transform.position, GameManager.Instance.baseEnemy.transform.rotation);
+        GameObject Stitan = Instantiate(SuperTitan, GameManager.Instance.baseEnemy.transform.position + Vector3.left, GameManager.Instance.baseEnemy.transform.rotation);
         SuperTitan stt = Stitan.GetComponent<SuperTitan>();
         GameManager.Instance.enemy.Add(stt);
     }

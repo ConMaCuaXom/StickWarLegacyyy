@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &19842382
 RectTransform:
   m_ObjectHideFlags: 0
@@ -974,6 +974,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 67251613}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &68276499
 GameObject:
@@ -992,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &68276500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3015,7 +3027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &284467625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4136,6 +4148,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 395448218}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &404316062
 GameObject:
@@ -4521,7 +4545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &441654717
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4730,6 +4754,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060495216}
         m_TargetAssemblyTypeName: MinerSkins, Assembly-CSharp
         m_MethodName: MinerW1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 443755904}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5141,6 +5177,18 @@ MonoBehaviour:
       - m_Target: {fileID: 357941115}
         m_TargetAssemblyTypeName: ArcherSkins, Assembly-CSharp
         m_MethodName: ArcherB3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 480011836}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6723,6 +6771,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 613182258}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!224 &613182257
 RectTransform:
@@ -7060,7 +7120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &645248561
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7373,6 +7433,18 @@ MonoBehaviour:
       - m_Target: {fileID: 357941115}
         m_TargetAssemblyTypeName: ArcherSkins, Assembly-CSharp
         m_MethodName: ArcherW1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 680885975}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8011,6 +8083,18 @@ MonoBehaviour:
       - m_Target: {fileID: 357941115}
         m_TargetAssemblyTypeName: ArcherSkins, Assembly-CSharp
         m_MethodName: ArcherW3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 733912916}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8909,6 +8993,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 788131404}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &788131406
 MonoBehaviour:
@@ -9795,7 +9891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &854870189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10456,7 +10552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &969196434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10674,6 +10770,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 986008229}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &986008231
 MonoBehaviour:
@@ -10730,7 +10838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &993620325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11955,6 +12063,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1158842739}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &1158842741
 MonoBehaviour:
@@ -12625,6 +12745,18 @@ MonoBehaviour:
       - m_Target: {fileID: 357941115}
         m_TargetAssemblyTypeName: ArcherSkins, Assembly-CSharp
         m_MethodName: ArcherH1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1226780758}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13839,7 +13971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1352418046
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16646,6 +16778,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1580451249}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &1580451251
 MonoBehaviour:
@@ -17186,7 +17330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1611455819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17395,6 +17539,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060495216}
         m_TargetAssemblyTypeName: MinerSkins, Assembly-CSharp
         m_MethodName: MinerH1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1621525901}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18206,7 +18362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1744370291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18552,7 +18708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1781172564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18681,6 +18837,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060495216}
         m_TargetAssemblyTypeName: MinerSkins, Assembly-CSharp
         m_MethodName: MinerH3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1850537993}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20050,6 +20218,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1986983938}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &1986983940
 MonoBehaviour:
@@ -21237,6 +21417,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2081016624}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &2097836442
 GameObject:
@@ -21523,6 +21715,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060495216}
         m_TargetAssemblyTypeName: MinerSkins, Assembly-CSharp
         m_MethodName: MinerH2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2108839175}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21955,6 +22159,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060495216}
         m_TargetAssemblyTypeName: MinerSkins, Assembly-CSharp
         m_MethodName: MinerB1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2136030135}
+        m_TargetAssemblyTypeName: BuyThis, Assembly-CSharp
+        m_MethodName: SelectOrNo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

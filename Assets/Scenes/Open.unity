@@ -839,7 +839,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1237,3 +1237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33843934fe8af624c9e17b68274b78e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  dynamicSoundAsset: {fileID: 6150614412177910587, guid: 11ec6038bacebf64e809674df86d2de7,
+    type: 3}
+  volumn: 1
+  dynamicSoundPool: []

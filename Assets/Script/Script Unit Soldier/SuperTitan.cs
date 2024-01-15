@@ -5,6 +5,7 @@ using UnityEngine;
 public class SuperTitan : BaseSoldier
 {
     public Character character;
+    public TargetDynamicSound targetDynamicSound = null;
     private void Awake()
     {
         agent = GetComponent<Agent>();
@@ -14,6 +15,8 @@ public class SuperTitan : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
     }
@@ -73,5 +76,9 @@ public class SuperTitan : BaseSoldier
                 agent.AttackBase();
             }
         }
+    }
+    public override void PushBack()
+    {
+
     }
 }

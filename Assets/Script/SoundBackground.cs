@@ -7,7 +7,7 @@ using UnityEngine;
 public class SoundBackground : MonoBehaviour
 {
     public string soundName;
-    
+
 
     private void Awake()
     {

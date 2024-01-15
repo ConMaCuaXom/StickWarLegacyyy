@@ -7,6 +7,7 @@ public class Titan : BaseSoldier
 {
     public Character character;
     public float aoePushBack => character.aoePushBack;
+    public TargetDynamicSound targetDynamicSound = null;
     private void Awake()
     {
         agent = GetComponent<Agent>();              
@@ -16,13 +17,15 @@ public class Titan : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        targetDynamicSound = GetComponent<TargetDynamicSound>();
+        targetDynamicSound.Initialized();
         isDead = false;
         onAttack = false;
     }
 
     private void Update()
     {
-        if (onDef == true)
+        if (onDef == true || isDead == true)
             return;
         TargetOnWho();
         WiOrLo();             
@@ -75,6 +78,16 @@ public class Titan : BaseSoldier
                     soldier.PushBack();
                 }
             }            
-        }            
+        }
+        soundDynamic.PlayOneShot("TitanMan_Attack");
+    }
+    public override void DamageForBase()
+    {
+        base.DamageForBase();
+        soundDynamic.PlayOneShot("TitanMan_Attack");
+    }
+    public override void PushBack()
+    {
+        
     }
 }

@@ -125,6 +125,8 @@ public class BuyUnit : MonoBehaviour
 
     public void BuyMiner()
     {
+        if (basePlayer.currentGold < minerPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= minerPrice && checkMiner == false)
         {
             basePlayer.currentGold -= minerPrice;
@@ -135,7 +137,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexMn.text = "";
             else
                 textIndexMn.text = (indexMiner).ToString();
-        }       
+        }        
     }
     public void BuyingMiner()
     {
@@ -156,6 +158,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexMn.text = (indexMiner).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_Soldier",1);
         });
     }
 
@@ -189,6 +192,8 @@ public class BuyUnit : MonoBehaviour
 
     public void BuySwordMan()
     {
+        if (basePlayer.currentGold < swordManPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= swordManPrice)
         {
             basePlayer.currentGold -= swordManPrice;
@@ -199,7 +204,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexSw.text = "";
             else
                 textIndexSw.text = (indexSwordMan).ToString();
-        }                                 
+        }       
     }
 
     public void BuyingSwordMan()
@@ -222,11 +227,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexSw.text = (indexSwordMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
         });
     }
 
     public void BuyArcher()
     {
+        if (basePlayer.currentGold < archerPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= archerPrice)
         {
             basePlayer.currentGold -= archerPrice;
@@ -237,7 +245,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexAr.text = "";
             else
                 textIndexAr.text = (indexArcher).ToString();
-        }       
+        }        
     }
 
     public void BuyingArcher()
@@ -260,11 +268,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexAr.text = (indexArcher).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
         });
     }
 
     public void BuySpearMan()
     {
+        if (basePlayer.currentGold < spearManPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit - 2 && basePlayer.currentGold >= spearManPrice)
         {
             basePlayer.currentGold -= spearManPrice;
@@ -275,7 +286,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexSp.text = "";
             else
                 textIndexSp.text = (indexSpearMan).ToString();
-        }       
+        }      
     }
 
     public void BuyingSpearMan()
@@ -298,11 +309,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexSp.text = (indexSpearMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
         });
     }
 
     public void BuyMagicMan()
     {
+        if (basePlayer.currentGold < magicManPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit - 4 && basePlayer.currentGold >= magicManPrice)
         {
             basePlayer.currentGold -= magicManPrice;
@@ -336,10 +350,13 @@ public class BuyUnit : MonoBehaviour
                 textIndexMg.text = (indexMagicMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
         });
     }
     public void BuyTitan()
     {
+        if (basePlayer.currentGold < titanManPrice)
+            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
         if (limitUnitCurrent < limitUnit - 2 && basePlayer.currentGold >= titanManPrice)
         {
             basePlayer.currentGold -= titanManPrice;
@@ -350,22 +367,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexTt.text = "";
             else
                 textIndexTt.text = (indexTitanMan).ToString();
-        }
-        if (limitUnitCurrent >= limitUnit - 2 || basePlayer.currentGold < titanManPrice || delayAll)
-            return;
-        delayAll = true;
-        loadingTitanMan.DOFillAmount(0, 0f);
-        loadingTitanManRed.DOFillAmount(1, 0f);                      
-        loadingTitanMan.DOFillAmount(1, delayTimeTitanMan);
-        loadingTitanManRed.DOFillAmount(0, delayTimeTitanMan);
-        this.DelayCall(delayTimeTitanMan, () =>
-        {
-            GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
-            Titan tt = titan.GetComponent<Titan>();
-            GameManager.Instance.player.Add(tt);
-            rally.titans.Add(tt);
-            delayAll = false;
-        });
+        }       
     }
 
     public void BuyingTitanMan()
@@ -388,6 +390,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexTt.text = (indexTitanMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
+            AudioManager.Instance.PlayOneShot("Buy_TitanMan", 1);
         });
     }
 }
