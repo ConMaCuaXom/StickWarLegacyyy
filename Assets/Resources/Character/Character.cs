@@ -16,6 +16,7 @@ public class Character : ScriptableObject
     public float timeForHololo;
     public float goldInMinerMax;
     public float aoePushBack;
+    public float moveSpeed;
 
     public int goldTake1time;
     public int maxTiny;

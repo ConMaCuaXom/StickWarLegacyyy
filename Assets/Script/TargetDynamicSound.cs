@@ -10,7 +10,7 @@ public class TargetDynamicSound : MonoBehaviour
     }
 
     public void OnDestroy()
-    {
+    {             
         AudioManager.Instance.AddToPoolAgain(transform);
     }
 }

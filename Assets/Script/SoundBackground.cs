@@ -10,7 +10,7 @@ public class SoundBackground : MonoBehaviour
 
 
     private void Awake()
-    {
+    {                 
         AudioManager.Instance.BackgroundSoundChange(soundName);
     }
 

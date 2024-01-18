@@ -118,6 +118,10 @@ public class BuyUnit : MonoBehaviour
             GameObject miner = Instantiate(Miner, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
             Miner mn = miner.GetComponent<Miner>();
             GameManager.Instance.player.Add(mn);
+            mn.WhichColor();
+            mn.hp = mn.character.hp + PlayerPrefs.GetFloat("MinerUpgradeMaxHP");
+            mn.currentHP = mn.hp;
+            mn.goldInMinermax = mn.character.goldInMinerMax + PlayerPrefs.GetFloat("MinerUpgradeMaxGoldTake");
             rally.miners.Add(mn);            
         }
         
@@ -126,7 +130,7 @@ public class BuyUnit : MonoBehaviour
     public void BuyMiner()
     {
         if (basePlayer.currentGold < minerPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= minerPrice && checkMiner == false)
         {
             basePlayer.currentGold -= minerPrice;
@@ -158,7 +162,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexMn.text = (indexMiner).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_Soldier",1);
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
 
@@ -193,7 +197,7 @@ public class BuyUnit : MonoBehaviour
     public void BuySwordMan()
     {
         if (basePlayer.currentGold < swordManPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= swordManPrice)
         {
             basePlayer.currentGold -= swordManPrice;
@@ -217,9 +221,14 @@ public class BuyUnit : MonoBehaviour
         this.DelayCall(delayTimeSwordMan, () =>
         {
             GameObject swordMan = Instantiate(Swordman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
-            SwordMan sw = swordMan.GetComponent<SwordMan>();
+            SwordMan sw = swordMan.GetComponent<SwordMan>();           
             rally.swords.Add(sw);
             GameManager.Instance.player.Add(sw);
+            sw.WhichColor();
+            sw.hp = sw.character.hp + PlayerPrefs.GetFloat("SwordManUpgradeMaxHP");
+            sw.currentHP = sw.hp;
+            sw.damage = sw.character.attackDamage + PlayerPrefs.GetFloat("SwordManUpgradeATK");
+            sw.agent.agent.speed = sw.agent.agent.speed + PlayerPrefs.GetFloat("SwordManUpgradeMoveSpeed");
             indexSwordMan--;
             if (indexSwordMan < 1)
                 textIndexSw.text = "";
@@ -227,14 +236,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexSw.text = (indexSwordMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
 
     public void BuyArcher()
     {
         if (basePlayer.currentGold < archerPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit && basePlayer.currentGold >= archerPrice)
         {
             basePlayer.currentGold -= archerPrice;
@@ -260,6 +269,12 @@ public class BuyUnit : MonoBehaviour
             GameObject archer = Instantiate(Archer, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
             Archer ar = archer.GetComponent<Archer>();
             GameManager.Instance.player.Add(ar);
+            ar.WhichColor();
+            ar.hp = ar.character.hp + PlayerPrefs.GetFloat("ArcherUpgradeMaxHP");
+            ar.currentHP = ar.hp;
+            ar.damage = ar.character.attackDamage + PlayerPrefs.GetFloat("ArcherUpgradeATK");
+            ar.dangerRange = ar.character.dangerRange + PlayerPrefs.GetFloat("ArcherUpgradeRange");
+            ar.attackRange = ar.character.attackRange + PlayerPrefs.GetFloat("ArcherUpgradeRange");
             rally.archers.Add(ar);
             indexArcher--;
             if (indexArcher < 1)
@@ -268,14 +283,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexAr.text = (indexArcher).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
 
     public void BuySpearMan()
     {
         if (basePlayer.currentGold < spearManPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit - 2 && basePlayer.currentGold >= spearManPrice)
         {
             basePlayer.currentGold -= spearManPrice;
@@ -301,6 +316,10 @@ public class BuyUnit : MonoBehaviour
             GameObject spearMan = Instantiate(Spearman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
             SpearMan sp = spearMan.GetComponent<SpearMan>();
             GameManager.Instance.player.Add(sp);
+            sp.WhichColor();
+            sp.hp = sp.character.hp + PlayerPrefs.GetFloat("SpearManUpgradeMaxHP");
+            sp.currentHP = sp.hp;
+            sp.damage = sp.character.attackDamage + PlayerPrefs.GetFloat("SpearManUpgradeATK");
             rally.spears.Add(sp);
             indexSpearMan--;
             if (indexSpearMan < 1)
@@ -309,14 +328,14 @@ public class BuyUnit : MonoBehaviour
                 textIndexSp.text = (indexSpearMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
 
     public void BuyMagicMan()
     {
         if (basePlayer.currentGold < magicManPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit - 4 && basePlayer.currentGold >= magicManPrice)
         {
             basePlayer.currentGold -= magicManPrice;
@@ -342,6 +361,11 @@ public class BuyUnit : MonoBehaviour
             GameObject magicman = Instantiate(Magicman, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
             MagicMan mg = magicman.GetComponent<MagicMan>();
             GameManager.Instance.player.Add(mg);
+            mg.WhichColor();
+            mg.hp = mg.character.hp + PlayerPrefs.GetFloat("MagicManUpgradeMaxHP");
+            mg.currentHP = mg.hp;
+            mg.agent.agent.speed = mg.agent.agent.speed + PlayerPrefs.GetFloat("MagicManUpgradeMoveSpeed");
+            mg.maxTiny = mg.character.maxTiny + PlayerPrefs.GetInt("MagicManUpgradeMaxTiny");
             rally.magics.Add(mg);
             indexMagicMan--;
             if (indexMagicMan < 1)
@@ -350,13 +374,13 @@ public class BuyUnit : MonoBehaviour
                 textIndexMg.text = (indexMagicMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_Soldier", 1);
+            AudioManager.Instance.PlayOneShot("Buy_Soldier", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
     public void BuyTitan()
     {
         if (basePlayer.currentGold < titanManPrice)
-            AudioManager.Instance.PlayOneShot("Gold_Please", 1);
+            AudioManager.Instance.PlayOneShot("Gold_Please", PlayerPrefs.GetInt("SoundVolumn"));
         if (limitUnitCurrent < limitUnit - 2 && basePlayer.currentGold >= titanManPrice)
         {
             basePlayer.currentGold -= titanManPrice;
@@ -382,6 +406,9 @@ public class BuyUnit : MonoBehaviour
             GameObject titan = Instantiate(TitanMan, GameManager.Instance.defensePointP.position, GameManager.Instance.defensePointP.rotation);
             Titan tt = titan.GetComponent<Titan>();
             GameManager.Instance.player.Add(tt);
+            tt.WhichColor();
+            tt.hp = tt.character.hp + PlayerPrefs.GetFloat("TitanManUpgradeMaxHP");
+            tt.currentHP = tt.hp;
             rally.titans.Add(tt);
             indexTitanMan--;
             if (indexTitanMan < 1)
@@ -390,7 +417,7 @@ public class BuyUnit : MonoBehaviour
                 textIndexTt.text = (indexTitanMan).ToString();
             stt.RemoveAt(0);
             delayAll = false;
-            AudioManager.Instance.PlayOneShot("Buy_TitanMan", 1);
+            AudioManager.Instance.PlayOneShot("Buy_TitanMan", PlayerPrefs.GetInt("SoundVolumn"));
         });
     }
 }

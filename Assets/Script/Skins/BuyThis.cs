@@ -48,7 +48,7 @@ public class BuyThis : MonoBehaviour
             gem.UpdateGem();
             PlayerPrefs.SetString(priceSkins.name.ToString(), "Paid");
             buy.enabled = true;
-            AudioManager.Instance.PlayOneShot("Buy_Skins",1);
+            AudioManager.Instance.PlayOneShot("Buy_Skins", PlayerPrefs.GetInt("SoundVolumn"));
         }       
     }
 
@@ -56,7 +56,7 @@ public class BuyThis : MonoBehaviour
     {       
         select.SetActive(true);
         PlayerPrefs.SetInt(priceSkins.name.ToString() + "S", 1);
-        AudioManager.Instance.PlayOneShot("Select_Skins",1);
+        AudioManager.Instance.PlayOneShot("Select_Skins", PlayerPrefs.GetInt("SoundVolumn"));
     }
 
     public void NoSelect()

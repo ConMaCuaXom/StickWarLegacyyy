@@ -22,5 +22,6 @@ MonoBehaviour:
   timeForHololo: 0
   goldInMinerMax: 0
   aoePushBack: 0
+  moveSpeed: 4
   goldTake1time: 0
   maxTiny: 0

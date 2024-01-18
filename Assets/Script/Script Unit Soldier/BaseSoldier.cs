@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class BaseSoldier : MonoBehaviour
@@ -16,6 +18,9 @@ public class BaseSoldier : MonoBehaviour
     public TestEnemy testEnemy => GameManager.Instance.testEnemy;
     public WinOrLose wol => GameManager.Instance.winOrLose;
     public SoundDynamic soundDynamic => AudioManager.Instance.dynamicSoundActive[transform];
+
+    public Image hpImage;
+    public Canvas canvas;
 
     public enum Death
     {
@@ -213,7 +218,9 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {        
-        currentHP -= dmg;                 
+        currentHP -= dmg;
+        float ratio = currentHP / hp;
+        hpImage.DOFillAmount(ratio,0.2f);
         if (currentHP <= 0 && isDead == false)
         {
             isDead = true;
@@ -501,4 +508,19 @@ public class BaseSoldier : MonoBehaviour
     //            fighting = false;
     //    }
     //}
+
+    public void HPinCamera()
+    {
+        hpImage.transform.forward = GameManager.Instance.mainCamera.transform.forward;
+    }
+
+    public void WhichColor()
+    {
+        if (agent.isEnemy)
+            hpImage.color = new Color(255f, 0f, 0f, 255f);
+        if (agent.isPlayer)
+            hpImage.color = new Color(0f, 255f, 176f, 255f);
+    }
+
+    
 }

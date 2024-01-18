@@ -9,9 +9,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance = null;
 
     public AudioSource audioSource = null;
-    public GameObject dynamicSoundAsset = null;
-    [Range(0, 1)]
-    public float volumn;
+    public GameObject dynamicSoundAsset = null;      
+    public float soundVolume;
 
     public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
     public Dictionary<Transform,SoundDynamic> dynamicSoundActive = new Dictionary<Transform,SoundDynamic>();
@@ -25,19 +24,30 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(Instance);
+        if (PlayerPrefs.GetString("FirstMusic") != "No")
+            PlayerPrefs.SetInt("MusicVolumn", 1);
+        if (PlayerPrefs.GetString("FirstSound") != "No")
+            PlayerPrefs.SetInt("SoundVolumn", 1);
+        if (PlayerPrefs.GetInt("MusicVolumn") == 1)
+            audioSource.volume = 1;
+        if (PlayerPrefs.GetInt("MusicVolumn") == 0)
+            audioSource.volume = 0;       
     }
 
-
+   
 
     public void BackgroundSoundChange(string soundName)
     {
+        
         if (!audioClips.ContainsKey(soundName))
         {
             AudioClip audio = Resources.Load<AudioClip>($"Audio/{soundName}");
             audioClips.Add(soundName, audio);
         }
+        if (audioSource.clip == audioClips[soundName])
+            return;
         audioSource.clip = audioClips[soundName];
-        audioSource.volume = volumn;
+        //audioSource.volume = musicVolumn;
         audioSource.Play();       
     }
 
@@ -74,8 +84,8 @@ public class AudioManager : MonoBehaviour
 
     public void AddToPoolAgain(Transform target)
     {
-        if (dynamicSoundActive.ContainsKey(target))
-        {
+        if (dynamicSoundActive.ContainsKey(target) && dynamicSoundActive[target] != null)
+        {            
             dynamicSoundPool.Add(dynamicSoundActive[target].gameObject);
             dynamicSoundActive.Remove(target);
         }

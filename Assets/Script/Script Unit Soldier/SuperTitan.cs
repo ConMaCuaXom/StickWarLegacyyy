@@ -26,6 +26,7 @@ public class SuperTitan : BaseSoldier
         AttackOnBaseEnemy();
         TargetOnWho();
         WiOrLo();
+        HPinCamera();
     }
     public override void TakeDamage(float dmg)
     {

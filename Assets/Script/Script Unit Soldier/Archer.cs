@@ -30,12 +30,13 @@ public class Archer : BaseSoldier
 
     private void Update()
     {
+        HPinCamera();
         if (onDef == true || isDead == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();
         
-        
+
     }
 
     public override void TakeDamage(float dmg)

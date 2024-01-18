@@ -22,5 +22,11 @@ MonoBehaviour:
   timeForHololo: 0
   goldInMinerMax: 120
   aoePushBack: 0
+  upgradeHP: 0
+  upgradeATK: 0
+  upgradeRange: 0
+  upgradeMoveSpeed: 0
+  upgradeGoldInMinerMax: 0
+  upgradeMaxTiny: 0
   goldTake1time: 30
   maxTiny: 0

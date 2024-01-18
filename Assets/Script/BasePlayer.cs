@@ -17,7 +17,7 @@ public class BasePlayer : MonoBehaviour
     public BuyUnit buyUnit;
     public WinOrLose wl;
     public Image healthBar;
-    public Text DisplayCurrentHP;
+    public Text DisplayCurrentHP;  
     
 
     private void Awake()
@@ -47,6 +47,8 @@ public class BasePlayer : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        if (currentHP == 0)
+            return;
         currentHP -= dmg;
         if (currentHP < 0)
             currentHP = 0;
@@ -55,7 +57,7 @@ public class BasePlayer : MonoBehaviour
         DisplayCurrentHP.text = currentHP.ToString();
         if (currentHP <= 0)
         {
-            wl.LoseOrWin();
+            wl.LoseOrWin();                      
         }
     }
 }

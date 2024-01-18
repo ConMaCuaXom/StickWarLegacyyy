@@ -1,5 +1,8 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +19,8 @@ public class WinOrLose : MonoBehaviour
     public bool playerWin;
     public bool playerLose;
     public AudioSource audioSource;
+    public Text currentGem;
+    public Text currentSkillPoint;
 
     private void Awake()
     {       
@@ -45,16 +50,27 @@ public class WinOrLose : MonoBehaviour
             {                
                 PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);               
             }
+            currentGem.text = PlayerPrefs.GetInt("Gem").ToString();
+            int gemNow = PlayerPrefs.GetInt("Gem");
             PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") + 10);
-            AudioManager.Instance.audioSource.Pause();
-            AudioManager.Instance.PlayOneShot("Base_Destroy", 1);
-            //AudioManager.Instance.PlayOneShot("Victory",1);
+            int gemNow2 = PlayerPrefs.GetInt("Gem");
+            DOVirtual.Int(gemNow, gemNow2, 1f, (x) =>
+            {
+                currentGem.text = x.ToString();
+            });
+            currentSkillPoint.text = PlayerPrefs.GetInt("SkillPoint").ToString();            
+            PlayerPrefs.SetInt("SkillPoint", PlayerPrefs.GetInt("SkillPoint") + 1);
+            currentSkillPoint.text = PlayerPrefs.GetInt("SkillPoint").ToString();
+
+
+            //AudioManager.Instance.PlayOneShot("Base_Destroy", PlayerPrefs.GetInt("SoundVolumn"));
+            AudioManager.Instance.audioSource.Pause();           
         }
         if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv == 10)
         {
             baseEnemy.currentHP = 0;
             finalBoss = true;
-            AudioManager.Instance.PlayOneShot("Base_Destroy", 1);
+            //AudioManager.Instance.PlayOneShot("Base_Destroy", PlayerPrefs.GetInt("SoundVolumn"));
         }
             
 
@@ -64,9 +80,9 @@ public class WinOrLose : MonoBehaviour
             basePlayer.currentHP = 0;
             lose.SetActive(true);
             playerLose = true;
+            
+            //AudioManager.Instance.PlayOneShot("Base_Destroy", PlayerPrefs.GetInt("SoundVolumn"));
             AudioManager.Instance.audioSource.Pause();
-            AudioManager.Instance.PlayOneShot("Base_Destroy",1);
-            //AudioManager.Instance.PlayOneShot("Lose", 1);
         }
     }
     public void CampaignComplete()
@@ -74,11 +90,19 @@ public class WinOrLose : MonoBehaviour
         win.SetActive(true);
         nextLv.gameObject.SetActive(true);
         playerWin = true;
+        currentGem.text = PlayerPrefs.GetInt("Gem").ToString();
+        int gemNow = PlayerPrefs.GetInt("Gem");
+        PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") + 10);
+        int gemNow2 = PlayerPrefs.GetInt("Gem");
+        DOVirtual.Int(gemNow, gemNow2, 2f, (x) =>
+        {
+            currentGem.text = x.ToString();
+        });
     }
 
     public void BackToLevelScene()
     {
         SceneManager.LoadScene("Level", LoadSceneMode.Single);
-        AudioManager.Instance.audioSource.Play();
-    }
+        //AudioManager.Instance.audioSource.Play();
+    }   
 }

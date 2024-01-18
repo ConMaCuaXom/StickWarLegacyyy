@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f62e60cc33b7248bea1152c576658f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundName: Open
+  soundName: BnS_1
 --- !u!82 &1120063342
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1240,5 +1240,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   dynamicSoundAsset: {fileID: 6150614412177910587, guid: 11ec6038bacebf64e809674df86d2de7,
     type: 3}
-  volumn: 1
+  musicVolumn: 0
+  soundVolume: 0
   dynamicSoundPool: []

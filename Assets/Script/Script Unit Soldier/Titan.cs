@@ -25,10 +25,12 @@ public class Titan : BaseSoldier
 
     private void Update()
     {
+        HPinCamera();
         if (onDef == true || isDead == true)
             return;
         TargetOnWho();
-        WiOrLo();             
+        WiOrLo();
+        
     }
 
     public override void TakeDamage(float dmg)

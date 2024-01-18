@@ -20,14 +20,15 @@ public class Miner : BaseSoldier
     }
     //public SoundCook soundCook;
 
-    public int goldTake1time => character.goldTake1time;
+    public int goldTake1time;
     public float distanceToGoldMine;
     public float distanceToBase;
     public float rangeToBase = 5;
     public float rangeToCook = 5;       
     public float time;
     public float goldInMinerCurrent;
-    public float goldInMinermax => character.goldInMinerMax;
+    public float goldInMinermax;
+    
    
     public bool canGoToBase = false;
     public bool canGoToGoldMine = true;
@@ -47,6 +48,8 @@ public class Miner : BaseSoldier
         if (agent.isEnemy)
             goldMineGO = GameManager.Instance.goldInGoldMine[indexGoldEnemy];                       
         hp = character.hp;
+        goldTake1time = character.goldTake1time;
+        goldInMinermax = character.goldInMinerMax;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         goldInMinerCurrent = 0;              
@@ -58,11 +61,13 @@ public class Miner : BaseSoldier
 
     private void Update()
     {
+        HPinCamera();
         if (pushBack ||  onDef || isDead == true)
             return;
         GoToGoldMine();
         GoToBase();
         WiOrLo();
+        
     }
 
     public void GoToGoldMine()

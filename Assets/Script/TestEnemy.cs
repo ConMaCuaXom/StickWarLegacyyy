@@ -65,6 +65,7 @@ public class TestEnemy : MonoBehaviour
         Miner mn = miner.GetComponent<Miner>();
         mn.agent.isPlayer = false;
         mn.agent.isEnemy = true;
+        mn.WhichColor();
         mn.goldMineGO = GameManager.Instance.goldInGoldMine[mn.indexGoldEnemy];
         mn.WhichBody("Body0");
         mn.WhichHead("Head0");
@@ -85,6 +86,7 @@ public class TestEnemy : MonoBehaviour
         SwordMan sw = swordMan.GetComponent<SwordMan>();
         sw.agent.isPlayer = false;
         sw.agent.isEnemy = true;
+        sw.WhichColor();
         sw.WhichBody("Body0");
         sw.WhichHead("Head0");
         sw.WhichWeapon("Weapon0");
@@ -102,6 +104,7 @@ public class TestEnemy : MonoBehaviour
         Archer ar = archer.GetComponent<Archer>();
         ar.agent.isPlayer = false;
         ar.agent.isEnemy = true;
+        ar.WhichColor();
         ar.WhichBody("Body0");
         ar.WhichHead("Head0");
         ar.WhichWeapon("Weapon0");
@@ -119,6 +122,7 @@ public class TestEnemy : MonoBehaviour
         SpearMan sp = spearMan.GetComponent<SpearMan>();
         sp.agent.isPlayer = false;
         sp.agent.isEnemy = true;
+        sp.WhichColor();
         sp.WhichBody("Body0");
         sp.WhichHead("Head0");
         sp.WhichWeapon("Weapon0");
@@ -136,6 +140,7 @@ public class TestEnemy : MonoBehaviour
         MagicMan mg = magicman.GetComponent<MagicMan>();
         mg.agent.isPlayer = false;
         mg.agent.isEnemy = true;
+        mg.WhichColor();
         mg.WhichBody("Body0");
         mg.WhichHead("Head0");
         mg.WhichWeapon("Weapon0");
@@ -153,6 +158,7 @@ public class TestEnemy : MonoBehaviour
         Titan tt = titan.GetComponent<Titan>();
         tt.agent.isPlayer = false;
         tt.agent.isEnemy = true;
+        tt.WhichColor();
         tt.WhichBody("Body0");
         tt.WhichHead("Head0");
         tt.WhichWeapon("Weapon0");

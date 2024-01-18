@@ -27,7 +27,6 @@ public class LevelScene : MonoBehaviour
     public void GoToScene1()
     {
         LevelManager.currentLv = level;
-        SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
-        
+        SceneManager.LoadScene("Scene1", LoadSceneMode.Single);       
     }
 }

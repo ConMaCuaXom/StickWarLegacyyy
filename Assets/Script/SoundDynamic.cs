@@ -14,7 +14,7 @@ public class SoundDynamic : MonoBehaviour
     private void Update()
     {
         if (target != null)
-            transform.position = target.position;             
+            transform.position = target.position;        
     }
 
     public void Initialize(Transform target)
@@ -36,6 +36,7 @@ public class SoundDynamic : MonoBehaviour
 
     public void PlayOneShot(string soundName)
     {
+        audioSource.volume = PlayerPrefs.GetInt("SoundVolumn");
         if (!AudioManager.Instance.audioClips.ContainsKey(soundName))
         {
             AudioClip audio = Resources.Load<AudioClip>($"Audio/{soundName}");

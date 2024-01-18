@@ -81,7 +81,7 @@ public class Rally : MonoBehaviour
         checkSoundAttack = false;
         if (checkSoundDefense == false)
         {
-            AudioManager.Instance.PlayOneShot("NoDongQuaChayThoi", 1);
+            AudioManager.Instance.PlayOneShot("NoDongQuaChayThoi", PlayerPrefs.GetInt("SoundVolumn"));
             checkSoundDefense = true;
         }
             
@@ -126,7 +126,7 @@ public class Rally : MonoBehaviour
         checkSoundDefense = false;
         if (checkSoundAttack == false)
         {           
-            AudioManager.Instance.PlayOneShot("XongLenDietHetChungNoDi", 1);
+            AudioManager.Instance.PlayOneShot("XongLenDietHetChungNoDi", PlayerPrefs.GetInt("SoundVolumn"));
             checkSoundAttack = true;
         }
         foreach (var soldier in dic.Values)

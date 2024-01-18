@@ -18,7 +18,7 @@ public class MagicMan : BaseSoldier
 
     public float timeForSpawn;
     public int numberOfSoldier;
-    public int maxTiny => character.maxTiny;
+    public int maxTiny;
     public float timeForHololo => character.timeForHololo;
     
     private void Awake()
@@ -30,6 +30,7 @@ public class MagicMan : BaseSoldier
         hp = character.hp;
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
+        maxTiny = character.maxTiny;
         targetDynamicSound = GetComponent<TargetDynamicSound>();
         targetDynamicSound.Initialized();
         isDead = false;
@@ -40,13 +41,14 @@ public class MagicMan : BaseSoldier
 
     private void Update()
     {
+        HPinCamera();
         if (onDef == true || hulolo == true || pushBack == true || isDead  == true)
             return;
         TargetOnWho();
         SpawnSoldier();
         WiOrLo();
         
-       
+
     }
 
     public override void TakeDamage(float dmg)
@@ -137,6 +139,7 @@ public class MagicMan : BaseSoldier
         {
             tiny.agent.isPlayer = true;
             tiny.agent.isEnemy = false;
+            tiny.WhichColor();
             tiny.WhichBody("Body1");
             tiny.WhichHead("Head1");
             tiny.WhichWeapon("Weapon1");
@@ -147,6 +150,7 @@ public class MagicMan : BaseSoldier
         {
             tiny.agent.isPlayer = false;
             tiny.agent.isEnemy = true;
+            tiny.WhichColor();
             tiny.WhichBody("Body0");
             tiny.WhichHead("Head0");
             tiny.WhichWeapon("Weapon0");

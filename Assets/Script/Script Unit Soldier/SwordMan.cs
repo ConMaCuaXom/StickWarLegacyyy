@@ -25,7 +25,7 @@ public class SwordMan : BaseSoldier
         timeToDestroy = character.timeToDestroy;
         currentHP = hp;
         targetDynamicSound = GetComponent<TargetDynamicSound>();
-        targetDynamicSound.Initialized();
+        targetDynamicSound.Initialized();        
         isDead = false;
         onAttack = false;
         onDef = false;
@@ -34,13 +34,12 @@ public class SwordMan : BaseSoldier
 
     private void Update()
     {
-        
+        HPinCamera();
         if (onDef == true || isDead == true || pushBack == true)
             return;
         TargetOnWho();
         WiOrLo();
-       
-       
+            
     }
 
     public override void TakeDamage(float dmg)

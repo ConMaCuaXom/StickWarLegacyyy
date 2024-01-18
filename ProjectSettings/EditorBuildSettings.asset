@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Skins.unity
     guid: 1bbf04acfb0bde548bef2cebfb0d2966
+  - enabled: 1
+    path: Assets/Scenes/Upgrade.unity
+    guid: c267a4943d2ef8245b15352b7a345928
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5046fcc25a2a2db478d710f14e3ee4fa,
       type: 2}

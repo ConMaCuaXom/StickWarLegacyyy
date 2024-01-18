@@ -21,4 +21,7 @@ MonoBehaviour:
   timeToDestroy: 10
   timeForHololo: 4
   goldInMinerMax: 0
+  aoePushBack: 0
+  moveSpeed: 2.75
+  goldTake1time: 0
   maxTiny: 2

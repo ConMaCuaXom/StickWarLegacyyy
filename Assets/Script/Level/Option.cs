@@ -19,4 +19,9 @@ public class Option : MonoBehaviour
     {
         SceneManager.LoadScene("Open", LoadSceneMode.Single);
     }
+
+    public void OpenUpgrade()
+    {
+        SceneManager.LoadScene("Upgrade", LoadSceneMode.Single);
+    }
 }
