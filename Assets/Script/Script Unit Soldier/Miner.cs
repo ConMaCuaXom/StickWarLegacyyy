@@ -199,6 +199,7 @@ public class Miner : BaseSoldier
                 agent.agent.isStopped = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("CookCook", false);
+                agent.animator.SetBool("Lose", true);
             }
 
         }
@@ -214,6 +215,7 @@ public class Miner : BaseSoldier
                 agent.agent.isStopped = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("CookCook", false);
+                agent.animator.SetBool("Lose", true);
             }
 
         }

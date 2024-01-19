@@ -57,15 +57,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  crossbowmanDefender: {fileID: 0}
+  boat: {fileID: 0}
   archer: {fileID: 0}
   baseEnemy: {fileID: 0}
   basePlayer: {fileID: 0}
-  damageAr: 5
-  damageBo: 10
-  timeToDestroy: 10
+  Bombom: {fileID: 0}
+  bomPS: {fileID: 0}
+  timeToDestroy: 1
   timeDur: 0
   timeTotal: 0.75
+  isPlayer: 0
 --- !u!23 &8223788041301246925
 MeshRenderer:
   m_ObjectHideFlags: 0

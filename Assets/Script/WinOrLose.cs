@@ -21,6 +21,7 @@ public class WinOrLose : MonoBehaviour
     public AudioSource audioSource;
     public Text currentGem;
     public Text currentSkillPoint;
+    public List<GameObject> hide;
 
     private void Awake()
     {       
@@ -48,7 +49,8 @@ public class WinOrLose : MonoBehaviour
             PlayerPrefs.SetString("FirstTime", "No");          
             if (LevelManager.currentLv == PlayerPrefs.GetInt("LvUnlock"))
             {                
-                PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);               
+                PlayerPrefs.SetInt("LvUnlock", LevelManager.currentLv + 1);
+                PlayerPrefs.SetInt("SkillPoint", PlayerPrefs.GetInt("SkillPoint") + 1);
             }
             currentGem.text = PlayerPrefs.GetInt("Gem").ToString();
             int gemNow = PlayerPrefs.GetInt("Gem");
@@ -57,14 +59,15 @@ public class WinOrLose : MonoBehaviour
             DOVirtual.Int(gemNow, gemNow2, 1f, (x) =>
             {
                 currentGem.text = x.ToString();
-            });
-            currentSkillPoint.text = PlayerPrefs.GetInt("SkillPoint").ToString();            
-            PlayerPrefs.SetInt("SkillPoint", PlayerPrefs.GetInt("SkillPoint") + 1);
+            });                                   
             currentSkillPoint.text = PlayerPrefs.GetInt("SkillPoint").ToString();
 
-
             //AudioManager.Instance.PlayOneShot("Base_Destroy", PlayerPrefs.GetInt("SoundVolumn"));
-            AudioManager.Instance.audioSource.Pause();           
+            AudioManager.Instance.audioSource.Stop();       
+            foreach (GameObject gameObject in hide)
+            {
+                gameObject.SetActive(false);
+            }
         }
         if (baseEnemy.currentHP <= 0 && playerLose == false && LevelManager.currentLv == 10)
         {
@@ -82,7 +85,11 @@ public class WinOrLose : MonoBehaviour
             playerLose = true;
             
             //AudioManager.Instance.PlayOneShot("Base_Destroy", PlayerPrefs.GetInt("SoundVolumn"));
-            AudioManager.Instance.audioSource.Pause();
+            AudioManager.Instance.audioSource.Stop();
+            foreach (GameObject gameObject in hide)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
     public void CampaignComplete()

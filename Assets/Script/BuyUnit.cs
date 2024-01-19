@@ -169,7 +169,7 @@ public class BuyUnit : MonoBehaviour
 
     public void HowToBuy()
     {
-        if (stt.Count == 0 || delayAll)
+        if (stt.Count == 0 || delayAll || GameManager.Instance.winOrLose.playerWin || GameManager.Instance.winOrLose.playerLose)
             return;
         switch (stt[0])
         {

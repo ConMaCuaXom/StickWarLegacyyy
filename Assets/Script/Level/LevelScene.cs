@@ -8,8 +8,7 @@ public class LevelScene : MonoBehaviour
 {
     public int level;
     public GameObject lockObj;
-    public Button button;
-
+    public Button button;    
     private void Awake()
     {        
         if (level > PlayerPrefs.GetInt("LvUnlock"))

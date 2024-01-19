@@ -484,12 +484,14 @@ MonoBehaviour:
   targetDynamicSound: {fileID: 0}
   indexGoldMine: 0
   indexGoldEnemy: 7
+  goldTake1time: 0
   distanceToGoldMine: 0
   distanceToBase: 0
   rangeToBase: 4
   rangeToCook: 2.5
   time: 0
   goldInMinerCurrent: 0
+  goldInMinermax: 0
   canGoToBase: 0
   canGoToGoldMine: 0
   checkAddPerson: 0
@@ -2111,7 +2113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &646541457665610267
 RectTransform:
   m_ObjectHideFlags: 0

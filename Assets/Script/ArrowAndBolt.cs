@@ -18,7 +18,7 @@ public class ArrowAndBolt : MonoBehaviour
 
     public float damageAr => archer.damage;
     public float damageBo => boat.damage;
-    public float timeToDestroy = 10f;
+    public float timeToDestroy = 2f;
     public float timeDur;
     public float timeTotal = 10f;
 

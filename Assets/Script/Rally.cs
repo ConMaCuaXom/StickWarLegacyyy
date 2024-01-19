@@ -58,9 +58,9 @@ public class Rally : MonoBehaviour
         dic.Add("Archer", archers);        
         dic.Add("Sword", swords);        
         dic.Add("Spear", spears);        
-        dic.Add("Magic", magics);       
-        dic.Add("Titan", titans);
+        dic.Add("Magic", magics);
         dic.Add("Tiny", tinys);
+        dic.Add("Titan", titans);        
     }
 
     public bool PlayerIsNear()

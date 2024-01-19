@@ -144,17 +144,19 @@ public class BaseSoldier : MonoBehaviour
     }
     public virtual void GoToEnemy(BaseSoldier target, float distanceToEnemy)
     {
-        if (pushBack)
+        if (pushBack || wol.playerLose || wol.playerWin)
             return;
             if (distanceToEnemy > attackRange && attacking == false && isDead == false)
-            {                              
-                agent.agent.isStopped = false;
+            {         
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = false;
                 agent.SetDestination(target.transform.position);
                 agent.animator.SetBool("Attack", false);
             }
             if (distanceToEnemy <= attackRange)
-            {             
-                agent.agent.isStopped = true;
+            {
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
                 agent.RotationOnTarget(target.transform.position - transform.position);                                                           
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", true);
@@ -166,15 +168,18 @@ public class BaseSoldier : MonoBehaviour
     public virtual void AttackingOff()
     {
         attacking = false;
-        if (agent.agent.enabled == true)
-            agent.agent.isStopped = false;   
+        //if (agent.agent.enabled == true)
+        //    agent.agent.isStopped = false;   
+        agent.agent.enabled = true;
     }
 
     public void AttackingOn()
     {
         attacking = true;
+        //if (agent.agent.enabled == true)
+        //    agent.agent.isStopped = true;
         if (agent.agent.enabled == true)
-            agent.agent.isStopped = true;
+            agent.agent.enabled = false;
     }
 
     
@@ -219,6 +224,7 @@ public class BaseSoldier : MonoBehaviour
     public virtual void TakeDamage(float dmg)
     {        
         currentHP -= dmg;
+        hpImage.gameObject.SetActive(true);
         float ratio = currentHP / hp;
         hpImage.DOFillAmount(ratio,0.2f);
         if (currentHP <= 0 && isDead == false)
@@ -243,7 +249,8 @@ public class BaseSoldier : MonoBehaviour
         currentHP = 0;
         isDead = true;
         RandomDeath();
-        agent.agent.isStopped = true;
+        if (agent.agent.enabled == true)
+            agent.agent.isStopped = true;
         GameManager.Instance.enemy.Remove(this);
         this.DelayCall(timeToDestroy, () =>
         {
@@ -254,7 +261,7 @@ public class BaseSoldier : MonoBehaviour
     public virtual void TargetIsNull()
     {             
         onAttack = false;
-        if (nearBase == false)
+        if (nearBase == false && agent.agent.enabled == true)
             agent.agent.isStopped = false;
         agent.animator.SetBool("Attack", false);
         if (agent.isEnemy)
@@ -303,13 +310,14 @@ public class BaseSoldier : MonoBehaviour
 
     public virtual void AttackOnBaseEnemy()
     {
-        if (pushBack || baseEnemy.currentHP <= 0)
+        if (pushBack || baseEnemy.currentHP <= 0 || agent.agent.enabled == false)
             return;
         if (agent.isPlayer && onAttack == false)
         {                  
             if (nearBase == true)
-            {               
-                agent.agent.isStopped = true;
+            {
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
                 attackOnBase = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
@@ -323,8 +331,9 @@ public class BaseSoldier : MonoBehaviour
         if (agent.isEnemy && onAttack == false)
         {
             if (nearBase)
-            {                
-                agent.agent.isStopped = true;
+            {            
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
                 attackOnBase = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
@@ -377,12 +386,12 @@ public class BaseSoldier : MonoBehaviour
         {
             if (agent.isPlayer)
             {
-                agent.agent.isStopped = true;
+                agent.agent.enabled = false;
                 agent.animator.SetBool("Victory", true);
             }
             if (agent.isEnemy)
             {
-                agent.agent.isStopped = true;
+                agent.agent.enabled = false;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", false);
             }
@@ -392,12 +401,12 @@ public class BaseSoldier : MonoBehaviour
         {
             if (agent.isEnemy)
             {
-                agent.agent.isStopped = true;
+                agent.agent.enabled = false;
                 agent.animator.SetBool("Victory", true);
             }
             if (agent.isPlayer)
             {
-                agent.agent.isStopped = true;
+                agent.agent.enabled = false;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("Attack", false);
             }

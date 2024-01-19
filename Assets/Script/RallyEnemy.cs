@@ -56,8 +56,9 @@ public class RallyEnemy : MonoBehaviour
         dicE.Add("Sword", swordsE);
         dicE.Add("Spear", spearsE);
         dicE.Add("Magic", magicsE);
-        dicE.Add("Titan", titansE);
         dicE.Add("Tiny", tinysE);
+        dicE.Add("Titan", titansE);
+        
     }     
 
     public void DefenseE()
@@ -87,6 +88,8 @@ public class RallyEnemy : MonoBehaviour
                 whichSoldier.agent.animator.SetBool("AttackOnBase", false);
                 whichSoldier.onDef = true;
                 whichSoldier.onAttack = false;
+                whichSoldier.onRally = false;
+                whichSoldier.agent.agent.isStopped = false;
             }
         }
         foreach (Boat b in boatsE)
@@ -175,7 +178,7 @@ public class RallyEnemy : MonoBehaviour
                 magicsE[i].onDef = false;
                 int mgPos = (magicsE.Count - 1) / 4 - (i / 4);
                 float distanceM = Vector3.Distance(magicsE[i].transform.position, arrayRallyE[i % 4, mgPos].position);
-                if (magicsE[i].onAttack == true || magicsE[i].hulolo == true || magicsE[i].isDead == true || magicsE[i].pushBack == true)
+                if (magicsE[i].onAttack == true || magicsE[i].hulolo == true || magicsE[i].isDead == true || magicsE[i].pushBack == true || magicsE[i].agent.agent.enabled == false)
                     return;
                 magicsE[i].agent.agent.isStopped = false;
                 if (distanceM > 0.2)
@@ -192,7 +195,7 @@ public class RallyEnemy : MonoBehaviour
                 archersE[i].onDef = false;
                 int arPos = (archersE.Count - 1) / 4 - (i / 4);
                 float distanceA = Vector3.Distance(archersE[i].transform.position, arrayRallyE[i % 4, arPos + mgPoint].position);
-                if (archersE[i].onAttack == false && archersE[i].isDead == false && archersE[i].pushBack == false)
+                if (archersE[i].onAttack == false && archersE[i].isDead == false && archersE[i].pushBack == false && archersE[i].agent.agent.enabled == true)
                 {
                     archersE[i].agent.agent.isStopped = false;
                     if (distanceA > 0.2)
@@ -210,7 +213,7 @@ public class RallyEnemy : MonoBehaviour
                 swordsE[i].onDef = false;
                 int swPos = (swordsE.Count - 1) / 4 - (i / 4);
                 float distanceSw = Vector3.Distance(swordsE[i].transform.position, arrayRallyE[i % 4, swPos + mgPoint + arPoint].position);
-                if (swordsE[i].onAttack == false && swordsE[i].isDead == false && swordsE[i].pushBack == false)
+                if (swordsE[i].onAttack == false && swordsE[i].isDead == false && swordsE[i].pushBack == false && swordsE[i].agent.agent.enabled == true)
                 {
                     swordsE[i].agent.agent.isStopped = false;
                     if (distanceSw > 0.2)
@@ -227,7 +230,7 @@ public class RallyEnemy : MonoBehaviour
             {
                 spearsE[i].onDef = false;
                 int spPos = (spearsE.Count - 1) / 4 - (i / 4);
-                if (spearsE[i].onAttack == true || spearsE[i].isDead == true || spearsE[i].pushBack == true)
+                if (spearsE[i].onAttack == true || spearsE[i].isDead == true || spearsE[i].pushBack == true || spearsE[i].agent.agent.enabled == false)
                     return;
                 spearsE[i].agent.agent.isStopped = false;
                 float distanceSp = Vector3.Distance(spearsE[i].transform.position, arrayRallyE[i % 4, spPos + mgPoint + arPoint + swPoint].position);
@@ -245,7 +248,7 @@ public class RallyEnemy : MonoBehaviour
                 tinysE[i].onDef = false;
                 int tnPos = (tinysE.Count - 1) / 4 - (i / 4);
                 float distanceTn = Vector3.Distance(tinysE[i].transform.position, arrayRallyE[i % 4, tnPos + mgPoint + arPoint + swPoint + spPoint].position);
-                if (tinysE[i].onAttack == false && tinysE[i].isDead == false && tinysE[i].pushBack == false)
+                if (tinysE[i].onAttack == false && tinysE[i].isDead == false && tinysE[i].pushBack == false && tinysE[i].agent.agent.enabled == true)
                 {
                     tinysE[i].agent.agent.isStopped = false;
                     if (distanceTn > 0.2)
@@ -263,7 +266,7 @@ public class RallyEnemy : MonoBehaviour
             {
                 titansE[i].onDef = false;
                 int ttPos = (titansE.Count - 1) / 2 - (i / 2);
-                if (titansE[i].onAttack == true || titansE[i].isDead == true)
+                if (titansE[i].onAttack == true || titansE[i].isDead == true || titansE[i].agent.agent.enabled == false)
                     return;
                 titansE[i].agent.agent.isStopped = false;
                 if (i % 2 == 0)

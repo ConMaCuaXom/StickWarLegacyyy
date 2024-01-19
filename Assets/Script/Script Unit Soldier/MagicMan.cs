@@ -169,13 +169,14 @@ public class MagicMan : BaseSoldier
 
     public override void AttackOnBaseEnemy()
     {
-        if (baseEnemy.currentHP <= 0)
+        if (baseEnemy.currentHP <= 0 || agent.agent.enabled == false)
             return;
         if (agent.isPlayer && onAttack == false)
         {
             if (Vector3.Distance(transform.position, agent.baseEnemy.transform.position) <= attackRange)
             {
-                agent.agent.isStopped = true;
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
                 attackOnBase = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
@@ -190,7 +191,8 @@ public class MagicMan : BaseSoldier
         {
             if (Vector3.Distance(transform.position, agent.basePlayer.transform.position) <= attackRange)
             {
-                agent.agent.isStopped = true;
+                if (agent.agent.enabled == true)
+                    agent.agent.isStopped = true;
                 attackOnBase = true;
                 agent.animator.SetBool("Run", false);
                 agent.animator.SetBool("AttackOnBase", true);
@@ -205,9 +207,9 @@ public class MagicMan : BaseSoldier
     public override void TargetIsNull()
     {
         onAttack = false;
-        if (agent.isPlayer && Vector3.Distance(transform.position, agent.baseEnemy.transform.position) >= attackRange)
+        if (agent.isPlayer && Vector3.Distance(transform.position, agent.baseEnemy.transform.position) >= attackRange && agent.agent.enabled == true)
             agent.agent.isStopped = false;
-        if (agent.isEnemy && Vector3.Distance(transform.position, agent.basePlayer.transform.position) >= attackRange)
+        if (agent.isEnemy && Vector3.Distance(transform.position, agent.basePlayer.transform.position) >= attackRange && agent.agent.enabled == true)
             agent.agent.isStopped = false;
         agent.animator.SetBool("Attack", false);
         if (agent.isEnemy)
@@ -219,8 +221,9 @@ public class MagicMan : BaseSoldier
     public override void AttackingOff()
     {
         attacking = false;
-        if (agent.agent.enabled == true && attackOnBase == false)
-            agent.agent.isStopped = false;
+        //if (agent.agent.enabled == true && attackOnBase == false)
+        //    agent.agent.isStopped = false;
+        agent.agent.enabled = true;
     }
     public override void HowToAttackE(List<BaseSoldier> list)
     {

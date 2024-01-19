@@ -28,6 +28,7 @@ public class Tiny : BaseSoldier
         isDead = false;
         onAttack = false;
         onDef = false;
+        nearBase = false;
     }
 
     private void Update()

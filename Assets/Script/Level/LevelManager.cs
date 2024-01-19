@@ -39,6 +39,10 @@ public class LevelManager : MonoBehaviour
     public bool goldFirst;
     public bool checkFinalBoss;
     public List<bool> tuto;
+
+    public Button goal;
+    public Button build;
+    public Button off;
     
 
     private void Awake()
@@ -103,6 +107,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level1()
     {
+        if (testMode.cheating)
+            return;
         if (time > 2f && tuto[0])
             tutorialLv1[0].SetActive(true);
         if (rally.miners.Count > 0 && tuto[1])
@@ -130,24 +136,7 @@ public class LevelManager : MonoBehaviour
         {
             tuto[2] = false;
             tutorialLv1[2].SetActive(false);
-            tutorialLv1[3].SetActive(true);
-            timeCheck += Time.deltaTime;
-            if (timeCheck > 2f && timeCheck < 4f)
-            {               
-                tutorialLv1[3].SetActive(false);
-                tutorialLv1[4].SetActive(true);
-            }
-            if (timeCheck >= 4f && timeCheck < 7f)
-            {
-                tutorialLv1[4].SetActive(false);
-                tutorialLv1[5].SetActive(true);
-            }
-            if (timeCheck > 7f)
-            {
-                tutorialLv1[5].SetActive(false);
-                tutorialLv1[3].SetActive(false);
-                tuto[3] = false;
-            }              
+            tutorialLv1[3].SetActive(true);                                              
         } 
 
         if (testMode.cheating == false)
@@ -185,6 +174,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level2()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {           
             buyUnit.buySpearMan.gameObject.SetActive(false);
@@ -234,6 +225,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level3()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buySpearMan.gameObject.SetActive(false);
@@ -272,6 +265,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level4()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buyTitanMan.gameObject.SetActive(false);
@@ -305,6 +300,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level5()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buyTitanMan.gameObject.SetActive(false);           
@@ -341,6 +338,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level6()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buyTitanMan.gameObject.SetActive(false);
@@ -379,6 +378,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level7()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buyTitanMan.gameObject.SetActive(false);
@@ -417,6 +418,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level8()
     {
+        if (testMode.cheating)
+            return;
         if (testMode.cheating == false)
         {
             buyUnit.buyTitanMan.gameObject.SetActive(false);
@@ -447,6 +450,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level9()
     {
+        if (testMode.cheating)
+            return;
         if (goldFirst)
         {
             basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
@@ -483,6 +488,8 @@ public class LevelManager : MonoBehaviour
     }
     public void Level10()
     {
+        if (testMode.cheating)
+            return;
         if (goldFirst)
         {
             basePlayer.currentGold = levelConfig[currentLv - 1].firstGoldForPlayer;
@@ -613,5 +620,23 @@ public class LevelManager : MonoBehaviour
             rallyEnemy.rallyingE.isOn = false;
             rallyEnemy.DefenseE();
         }
+    }
+
+    public void Show4()
+    {
+        tutorialLv1[3].SetActive(false);
+        tutorialLv1[4].SetActive(true);
+        tuto[3] = false;
+    }
+
+    public void Show5()
+    {
+        tutorialLv1[4].SetActive(false);
+        tutorialLv1[5].SetActive(true);
+    }
+    public void OffTutorial()
+    {      
+        tutorialLv1[5].SetActive(false);
+        
     }
 }

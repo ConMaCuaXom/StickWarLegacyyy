@@ -10,6 +10,8 @@ public class Option : MonoBehaviour
     public Button upgrade;
     public Button skins;
     public Button back;
+    public Button resetLV;
+    public Button unLockAllLV;
 
     public void OpenSkins()
     {
@@ -23,5 +25,15 @@ public class Option : MonoBehaviour
     public void OpenUpgrade()
     {
         SceneManager.LoadScene("Upgrade", LoadSceneMode.Single);
+    }
+
+    public void ResetLV()
+    {
+        PlayerPrefs.SetInt("LvUnlock", 1);
+    }
+
+    public void UnlockAllLV()
+    {
+        PlayerPrefs.SetInt("LvUnlock", 10);
     }
 }

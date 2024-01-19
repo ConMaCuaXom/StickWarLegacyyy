@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SuperTitan : BaseSoldier
@@ -31,11 +33,15 @@ public class SuperTitan : BaseSoldier
     public override void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        hpImage.gameObject.SetActive(true);
+        float ratio = currentHP / hp;       
+        hpImage.DOFillAmount(ratio, 0.2f);
         if (currentHP <= 0 && isDead == false)
         {            
             isDead = true;
             RandomDeath();
-            agent.agent.isStopped = true;          
+            if (agent.agent.enabled == true)
+                agent.agent.isStopped = true;          
             GameManager.Instance.enemy.Remove(this);
             wol.CampaignComplete();
             this.DelayCall(timeToDestroy, () =>

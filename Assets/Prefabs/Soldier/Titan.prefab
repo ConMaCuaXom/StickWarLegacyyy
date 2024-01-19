@@ -1119,6 +1119,7 @@ MonoBehaviour:
   targetE: {fileID: 0}
   targetP: {fileID: 0}
   hpImage: {fileID: 514067816013683915}
+  canvas: {fileID: 0}
   dangerRange: 0
   attackRange: 0
   damage: 0
@@ -1886,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7536013663370863608
 RectTransform:
   m_ObjectHideFlags: 0
