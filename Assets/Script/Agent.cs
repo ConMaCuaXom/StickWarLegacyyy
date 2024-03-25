@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -90,6 +91,6 @@ public class Agent : MonoBehaviour
         if (isPlayer == true)
         {
             SetDestination(basePlayer.transform.position);
-        }
+        }     
     }
 }
